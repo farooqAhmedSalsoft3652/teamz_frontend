@@ -1,0 +1,276 @@
+/************* Input Components Start ***********/
+
+form label,
+label,
+.form-label {
+  font-size: 15px;
+  color: var(--bs-black);
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+/************* Input Components End ***********/
+
+.form-control,
+textarea {
+  font-size: 15px;
+  background: transparent;
+  color: #000000;
+  font-weight: 400;
+  transition: all 0.6s ease 0s;
+  padding: 15px 20px 15px 20px;
+  line-height: 1.1;
+  width: 100%;
+  outline: none;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+  height: 55px;
+  border: 1px solid #cbcbcb;
+  border-radius: 50px;
+}
+
+textarea.form-control {
+  height: auto;
+  resize: none;
+  border-radius: 20px;
+  line-height: 1.5;
+}
+
+.form-control:focus,
+textarea:focus,
+.phone-input .react-tel-input .form-control:focus {
+  outline-offset: -2px;
+  -webkit-appearance: none;
+  box-shadow: 0px 0px 10px rgb(0 0 0 / 10%);
+  outline: none;
+  border: 1px solid var(--primaryColor);
+  color: var(--bs-black);
+  background-color: transparent;
+}
+
+.form-control:disabled {
+  opacity: 1;
+  background: transparent;
+  border: transparent;
+  color: var(--lightGray);
+  box-shadow: none;
+}
+
+.form-control[readonly] {
+  opacity: 1;
+  background: transparent;
+  border: transparent;
+  color: var(--bs-white);
+  box-shadow: none;
+}
+
+.passField-wrap,
+.inputField-wrap {
+  position: relative;
+}
+
+.passField-wrap .form-control {
+  padding-right: calc(50px + 0px);
+}
+
+.has-icon-left {
+  padding-left: 2.5rem !important;
+}
+
+.has-icon-right {
+  padding-right: 2.9rem !important;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 20px;
+}
+
+.icon-left {
+  left: 20px;
+}
+
+.icon-right {
+  right: 22px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  margin-right: -30px;
+  width: 20px;
+  opacity: 0;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  margin-right: -30px;
+  width: 20px;
+  opacity: 1;
+  background-color: #000;
+
+}
+
+.error-message {
+  font-size: 14px;
+}
+
+/***** Password Vissible Button *****/
+form button.view-btn {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  top: 50%;
+  right: 20px;
+  /*margin-top: -8px;*/
+  transform: translateY(-50%);
+  outline: none;
+  line-height: 1;
+}
+
+form button.view-btn svg {
+  position: initial;
+  transition: .3s ease-in-out;
+  color: #878888;
+  font-size: 16px;
+  margin-bottom: 0px;
+}
+
+form button.view-btn:hover svg {
+  color: var(--primaryColor);
+}
+
+form button.view-btn:focus {
+  background: transparent !important;
+}
+
+/***** Custom Check Box *****/
+.form-check {
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 0px;
+}
+
+.form-check label {
+  padding-left: 3px;
+  color: var(--bs-black);
+  font-weight: 400;
+  margin-bottom: 0px;
+}
+
+.form-check-label::selection {
+  background: none;
+}
+
+.form-check-input {
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: 1px solid var(--bs-black);
+  margin-top: .11em;
+}
+
+.form-check-input:focus {
+  border-color: var(--bs-black);
+  outline: 0;
+  box-shadow: none;
+}
+
+form .form-control.input-bottom {
+  border-radius: 0;
+  border-bottom-width: 1px;
+  border-width: 0px 0 1px 0px;
+  padding: 15px 0 5px 0px;
+}
+
+/* Check Box */
+.form-check-input[type="checkbox"] {
+  border-radius: 3px;
+  position: relative;
+}
+
+.form-check-input:checked[type="checkbox"] {
+  background-color: var(--primaryColor);
+  border: 1px solid var(--bs-black);
+  box-shadow: 0px 0px 0px 2px var(--primaryColor);
+  position: relative;
+  background-image: none;
+}
+
+.form-check input[type="checkbox"]:checked:after {
+  left: 0px;
+  top: 1px;
+  width: 6px;
+  height: 12px;
+  border: solid var(--bs-black);
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  right: 0;
+  margin: 0 auto;
+  position: absolute;
+  content: "";
+}
+
+/* Switch */
+.form-switch .form-check-input {
+  border-radius: 2rem;
+  /* background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%28247, 153, 34,1%29'/%3e%3c/svg%3e"); */
+}
+
+.form-switch .form-check-input:checked[type=checkbox] {
+  box-shadow: none;
+  border-color: var(--primaryColor);
+  background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27%23fff%27/%3e%3c/svg%3e");
+}
+
+.form-switch .form-check-input:checked::after {
+  display: none;
+}
+
+/* Radio */
+.form-check-input[type=radio] {
+  border-radius: 50%;
+}
+
+.form-check-input:checked[type=radio] {
+  background: #F79922;
+  border: 3px solid #fff;
+  box-shadow: 0px 0px 0px 1px #F79922;
+}
+
+
+/***** React Phont Input 2 *****/
+
+.phone-input .react-tel-input .form-control {
+  font-size: 15px;
+  background-color: transparent;
+  height: 100%;
+  color: #000000;
+  border-radius: 50px !important;
+  width: 100%;
+  padding-left: 75px;
+}
+
+.phone-input .react-tel-input .flag-dropdown {
+  border: none;
+  left: 20px;
+}
+
+.phone-input .react-tel-input .selected-flag {
+  padding: 0 0 0 0px;
+}
+
+.phone-input .react-tel-input .selected-flag .arrow {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #555;
+}
+
+
+.inline-form {
+  gap: 10px;
+  /* Add space between label and input */
+}
