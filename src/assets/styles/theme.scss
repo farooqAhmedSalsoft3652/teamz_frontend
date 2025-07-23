@@ -1,0 +1,19 @@
+// theme.scss
+
+
+// Load Bootstrap functions first
+@import "bootstrap/scss/functions";
+
+// @import "./theme-dark"; // or './_variables' or './theme-green'
+
+// 🔄 CHOOSE THE THEME TO APPLY HERE
+@import "./_variables";
+// Or swap to another theme:
+// @import "./_theme-green";
+// @import "./_theme-blue";
+// @import "./_theme-yellow";
+
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/bootstrap";
+
+@import "./_custom";

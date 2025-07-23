@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { IoCloseCircle, IoCloseOutline } from 'react-icons/io5';
 import { PulseLoader } from 'react-spinners';
-import CustomButton from '../CustomButton';
+import CustomButton from '../Common/CustomButton';
 import './style.css';
 import { BsCheckCircleFill, BsQuestionCircleFill } from 'react-icons/bs';
 
@@ -32,25 +32,25 @@ const CustomModal = ({
     switch (type) {
       case 'success':
         return (
-          <div className="modalImageWrapper rounded-circle beechMein">
+          <div className="rounded-circle d-flex justify-content-center">
             <BsCheckCircleFill size={100} color="#28AA72" />
           </div>
         );
       case 'error':
         return (
-          <div className="modalImageWrapper rounded-circle beechMein">
+          <div className="rounded-circle d-flex justify-content-center">
             <IoCloseCircle size={100} color="red" />
           </div>
         );
       case 'info':
         return (
-          <div className="modalImageWrapper rounded-circle beechMein">
+          <div className="rounded-circle d-flex justify-content-center">
             <BsQuestionCircleFill size={100} color="#fdc770" />
           </div>
         );
       default:
         return (
-          <div className="modalImageWrapper rounded-circle beechMein">
+          <div className="rounded-circle d-flex justify-content-center">
             <BsQuestionCircleFill size={100} color="#fdc770" />
           </div>
         );
@@ -108,9 +108,8 @@ const CustomModal = ({
                 }`}
               >
                 <CustomButton
-                  style={{ width: '100%' }}
                   type="button"
-                  className="modalPrimaryButton modal-btn"
+                  className="modal-btn"
                   text={btntext || 'Ok'}
                   onClick={action ? action : close}
                 />
@@ -122,7 +121,7 @@ const CustomModal = ({
                     <CustomButton
                       type="button"
                       text={btn1Text || 'Ok'}
-                      className="modalPrimaryButton modal-btn"
+                      className="modal-btn"
                       onClick={action ?? close}
                     />
                   </div>
@@ -133,14 +132,14 @@ const CustomModal = ({
                         <CustomButton
                           type="button"
                           text={btn1Text || 'Yes'}
-                          className="modalPrimaryButton modal-btn"
+                          className="modal-btn"
                           onClick={action}
                         />
                         <CustomButton
                           type="button"
                           text={btn2Text || 'No'}
                           variant={'secondaryButton'}
-                          className="modalSecondaryButton modal-btn text-black"
+                          className="modal-btn text-black"
                           onClick={close}
                         />
                       </>

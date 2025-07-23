@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { PulseLoader } from 'react-spinners';
-import CustomButton from '../../../Components/CustomButton';
+import CustomButton from '../../../Components/Common/CustomButton';
 import CustomSelect from '../../../Components/CustomSelect';
 import { usePageTitle } from '../../../Hooks/usePageTitle';
 import {

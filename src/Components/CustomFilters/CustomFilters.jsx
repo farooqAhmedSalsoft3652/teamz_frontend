@@ -7,7 +7,7 @@ import CustomSelect from '../CustomSelect';
 import './customFilters.css';
 import { capitilize, toSnakeCase } from '../../Utils/Utils';
 import CustomCheckbox from '../CustomCheckbox/CustomCheckbox';
-import CustomButton from '../CustomButton';
+import CustomButton from '../Common/CustomButton';
 
 const CustomFilters = ({
   filters,

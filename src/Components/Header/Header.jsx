@@ -9,7 +9,7 @@ import {
 } from 'react-icons/hi';
 import useUserStore from '../../Stores/UserStore';
 
-import CustomButton from '../CustomButton';
+import CustomButton from '../Common/CustomButton';
 import './Header.css';
 import TableActionDropDown from '../TableActionDropDown/TableActionDropDown';
 import { RiUserSettingsLine } from 'react-icons/ri';
@@ -92,8 +92,6 @@ const Header = ({ variant = 'default' }) => {
                     Support
                   </CustomButton>
                 )}
-
-       
 
                 {/* User Dropdown */}
                 <TableActionDropDown

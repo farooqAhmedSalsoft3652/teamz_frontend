@@ -8,14 +8,18 @@ label,
   font-weight: 500;
   margin-bottom: 0.3rem;
 }
+.label-padding-left{
+  padding-left: 20px;
+}
 
 /************* Input Components End ***********/
 
 .form-control,
 textarea {
   font-size: 15px;
-  background: transparent;
-  color: #000000;
+  background-color: transparent;
+  /* background: var(--bs-body-bg); */
+  color: var(--bs-body-color);;
   font-weight: 400;
   transition: all 0.6s ease 0s;
   padding: 15px 20px 15px 20px;
@@ -24,7 +28,7 @@ textarea {
   outline: none;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
   height: 55px;
-  border: 1px solid #cbcbcb;
+  border: var(--bs-border-width) solid var(--bs-border-color);
   border-radius: 50px;
 }
 

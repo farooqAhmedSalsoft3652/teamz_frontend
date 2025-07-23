@@ -1,3 +1,244 @@
+
+/* Start */
+/******
+Left Menu (Dark Theme)
+*****/
+
+
+/* .navbar-light .navbar-nav .nav-link {color: #999999 !important;}
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:focus {color: #999999;}
+.nav .dropdown-divider {margin: 0;}
+
+body.vertical-layout.vertical-menu .navbar .navbar-brand img {width:100%; max-width: 110px;}
+body.vertical-layout.vertical-menu.menu-collapsed .main-menu .navigation > li > a {
+    padding: 15px 0px 15px 14px;
+}
+
+*/
+  
+  
+
+
+.main-menu .main-menu-content{
+  padding-top: 50px;
+  padding-bottom: 50px;
+  height: 100%;
+  position: relative;
+}
+.main-menu {
+  color: #fff;
+  background: var(--sideNavBg);
+  border-right: 0px solid #1F1F4F;
+  box-shadow: 0px 4px 30px 0px rgba(208, 208, 208, 0.10);
+}
+.main-menu .navigation {
+  background: transparent;
+  padding-top: 0px;
+  overflow-y: scroll;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+.navigation::-webkit-scrollbar,
+.dropdown-notification .media-list::-webkit-scrollbar{
+  /* display: none;  */
+}
+
+.content.body-expanded .main-menu .navigation > li:hover > a > span{
+  opacity: 1;
+  visibility: visible;
+}
+
+.main-menu .navigation > li:hover > a > i path,
+.main-menu .navigation > li.active > a >i path { fill: #fff; }
+
+.main-menu .navigation li a {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  color: var(--bs-white);
+  font-size:15px;
+  font-weight:500;
+  line-height: 18px;
+  padding: 17px 0px 17px 10px;
+  text-transform: capitalize;
+  position: relative;
+  display: block;
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(215, 215, 215, 0.10);
+  background: linear-gradient(90deg, transparent, transparent) transparent;
+  transition: background-color 1s;
+
+  /* background: linear-gradient(55deg, var(--c1, #fe822400), var(--c2, #cf003000) 55%, var(--c1rgba(254, 130, 36, 0)24)) var(--x, 0)/ 200%; */
+  
+}
+
+.main-menu .navigation > li:hover > a,
+.main-menu .navigation li a.active {
+  color: var(--bs-white);
+  background: linear-gradient(90deg, #fe8224, #cf0030) #fe8224;
+  /* background-color: linear-gradient(90deg, #fe8224, #cf0030) #fe8224; */
+  
+  /* background: linear-gradient(55deg, var(--c1, #fe8224), var(--c2, #cf0030) 55%, var(--c1, #fe8224)) var(--x, 0)/ 200%; */
+}
+
+.main-menu .navigation > li:hover > a{
+
+  /* background: linear-gradient(90deg, #fe8224, #cf0030) #fe8224; */
+}
+
+
+.main-menu .navigation li a.active img,
+.main-menu .navigation > li:hover > img{}
+
+
+.main-menu .navigation li a .menu-title{
+  vertical-align: bottom;
+}
+
+.main-menu .navigation > li {
+  padding: 0;
+  border-left: 0px;
+  padding-right: 0px;
+}
+.main-menu .navigation > li > ul {
+  background: #DFB731;
+  padding: 10px 0;
+}
+.main-menu .navigation > li ul li {
+  background: #DFB731 !important;
+}
+.main-menu .navigation > li ul li > a {
+  padding: 15px 18px 15px 40px;
+  color: #ffffff !important;
+  font-weight: 500;
+}
+.main-menu .navigation > li > a i {
+  position: relative;
+  top: 0px; 
+  width: 25px;
+  vertical-align: middle;
+  margin-right: 5px;
+  display: inline-block;
+  text-align: left;
+}
+.main-menu .navigation > li.open > a {
+  background: #DFB731;
+  color:#fff;
+}
+.main-menu .navigation > li.open {
+  border: 0px;
+}
+.main-menu .navigation > li.open .hover > a,
+.main-menu .navigation .menu-content li.active > a{
+  background: transparent;
+  color: #fff;
+}
+.main-menu .navigation > li.has-sub.hover > a,
+.main-menu .navigation > li.has-sub.open> a {
+  background: #212121;
+}
+.main-menu .navigation > li > ul li a:hover{
+  color:#ffffff;
+  text-decoration: underline;
+}
+.main-menu .navigation > li > a > i path {
+  fill: #fff;
+}
+.main-menu .navigation > li.open .hover > a{
+  font-weight: 400;
+  color: #fff !important;
+}
+.main-menu .navigation .menu-content li.active > a{
+  font-weight: 500;
+  color: #fff !important;}
+
+.main-menu.menu-fixed {
+  width: 300px;
+  transition: 300ms ease all;
+  left: 0;
+  position: fixed;
+  top: 6.5rem;
+  height: calc(100% - 4rem);
+  z-index: 1;
+}
+
+.content.body-expanded .main-menu {
+  width: 60px;
+  transform: translateZ(-160px) translateX(-160px);
+  transform: translate3d(0, 0, 0);
+  transition: 300ms ease all; left: 0px;
+}
+
+.content.body-expanded .main-menu .navigation > li > a > span {
+visibility: hidden;
+opacity: 0;
+position: fixed;
+right: 0px;
+left: 100%;
+width: 300px;
+font-weight: 500;
+margin-top: -15px;
+color: var(--bs-white);
+text-align: left;
+background-color: var(--sideActiveBg);
+border-color: var(--sideActiveBg);
+padding: 19px 20px;
+
+}
+
+.content.body-expanded .main-menu .navigation > li > a {
+padding: 15px 0px 15px 5px;
+}
+
+
+
+@media (max-width: 991px) {
+.main-menu .navigation{ padding-top: 0;}
+}
+
+/* Sidebar Scroll */
+.main-menu .navigation::-webkit-scrollbar,
+.dropdown-notification .media-list::-webkit-scrollbar {
+  width: 5px;
+  height: 15px;
+}
+.main-menu .navigation::-webkit-scrollbar-track-piece,
+.dropdown-notification .media-list::-webkit-scrollbar-track-piece  {
+  background-color: #C2D2E4;
+  border-radius: 5px
+}
+.main-menu .navigation::-webkit-scrollbar-thumb:vertical,
+.dropdown-notification .media-list::-webkit-scrollbar-thumb:vertical {
+  height: 30px;
+  width: 10px;
+  background-color: #fe8224;
+  border-radius: 5px
+}
+.main-menu .navigation::-webkit-scrollbar-track,
+.dropdown-notification .media-list::-webkit-scrollbar-track  {
+  background-color: #c8c8c8;
+  border-radius: 5px
+}
+.main-menu .navigation::-webkit-scrollbar-thumb,
+.dropdown-notification .media-list::-webkit-scrollbar-thumb {
+  height: 30px;
+  width: 10px;
+  background-color: #fe8224;
+}
+
+
+@media (max-width: 767px) {
+  .content.body-expanded .main-menu{
+      margin-left: -60px;
+  }
+
+}
+
+/* End */
+
 .customHeader {
   background: var(--content-bg-color);
   position: fixed !important;
@@ -114,11 +355,12 @@
   outline: 0 !important;
   box-shadow: none !important;
 }
-.btn:first-child:active {
+
+/* .btn:first-child:active {
   color: #ffa412;
   box-shadow: none !important;
   border-color: none !important;
-}
+} */
 
 .notiMenu {
   width: 330px !important;

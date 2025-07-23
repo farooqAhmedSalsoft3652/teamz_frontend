@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import Dashboard from '../../assets/images/sidebar/dashboard.svg?react';
 import SubscriptionLogs from '../../assets/images/sidebar/subscriptionLog.svg?react';
 import SubscriptionManagement from '../../assets/images/sidebar/subscriptionManagement.svg?react';
@@ -12,6 +12,7 @@ import { HiLockOpen } from 'react-icons/hi2';
 import useUserStore from '../../Stores/UserStore';
 import { isNullOrEmpty } from '../../Utils/Utils';
 import Styles from './Sidebar.module.css';
+import { Nav } from 'react-bootstrap';
 
 const menuItems = [
   {
@@ -35,7 +36,6 @@ const menuItems = [
     link: '/admin/user-management',
     icon: User,
   },
- 
 ];
 
 const Sidebar = ({ sideBarClass, disable = false }) => {
@@ -75,118 +75,80 @@ const Sidebar = ({ sideBarClass, disable = false }) => {
       id="sidebar"
     >
       {disable && <div className={Styles.overlay}></div>}
-      <div className={Styles['sidebar-title-wrapper']}>
+      {/* <div className={Styles['sidebar-title-wrapper']}>
         {renderLink(
           '/dashboard',
           <h2 className={Styles['sidebar-title']}>
             M{!sideBarClass && 'ilestone'}
           </h2>
         )}
-      </div>
-      <div className={Styles['dropdown-container']}>
-        {menuItems.map((item) =>
-          item.roles.includes(role) ? (
-            <div key={item.id} className={Styles['menu-item-container']}>
-              {/* Button with no sub items */}
-              {item?.link && !item?.subItems?.length ? (
-                renderLink(
-                  item.link,
-                  <button
-                    className={`${Styles['menu-item']} ${
-                      location.pathname.includes(item.link) ? Styles.active : ''
-                    }`}
-                    onClick={() => toggleItem(item.id)}
-                    aria-expanded={openItem === item.id}
-                    aria-controls={`submenu-${item.id}`}
-                  >
-                    {item.icon && <item.icon className={Styles.icon} />}
-                    <p className="m-0">{item.label}</p>
-                    {item.subItems ? (
-                      <FaChevronDown
-                        className={`${Styles.chevron} ${
-                          openItem === item.id ? Styles.open : ''
-                        }`}
-                      />
-                    ) : (
-                      ''
-                    )}
-                  </button>
-                )
-              ) : (
-                <>
-                  {/* Button with sub items */}
-                  <button
-                    className={`${Styles['menu-item']} ${
-                      location.pathname.includes(item.link) ? Styles.active : ''
-                    }`}
-                    onClick={(e) => {
-                      if (disable) {
-                        e.preventDefault();
-                        return;
-                      }
-                      toggleItem(item.id);
-                    }}
-                    aria-expanded={openItem === item.id}
-                    aria-controls={`submenu-${item.id}`}
-                  >
-                    {item.icon && <item.icon className={Styles.icon} />}
-                    <p className="m-0">{item.label}</p>
-                    {item.subItems ? (
-                      <FaChevronDown
-                        className={`${Styles.chevron} ${
-                          openItem === item.id ? Styles.open : ''
-                        }`}
-                      />
-                    ) : (
-                      ''
-                    )}
-                  </button>
-                </>
-              )}
-              {!isNullOrEmpty(item.subItems) && (
-                <div
-                  id={`submenu-${item.id}`}
-                  className={`${Styles.submenu} ${
-                    openItem === item.id ? Styles.open : ''
-                  }`}
-                >
-                  {item.subItems.map((subItem, index) => {
-                    return subItem.link ? (
-                      <div key={subItem.link}>
-                        {renderLink(
-                          subItem.link,
-                          <div
-                            className={`${Styles['submenu-item']} ${
-                              index === item.subItems.length - 1
-                                ? Styles['last-item']
-                                : ''
-                            } ${
-                              location.pathname.includes(subItem.link)
-                                ? Styles.active
-                                : ''
-                            }`}
-                          >
-                            {subItem.name}
-                          </div>
-                        )}
-                      </div>
-                    ) : (
+      </div> */}
+        <div className="main-menu menu-fixed menu-light">
+          <div className="main-menu-content">
+            <Nav
+              activeKey="/home"
+              onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
+              as="ul"
+              className="navigation navigation-main d-block"
+            >
+              {menuItems.map((item) =>
+                item.roles.includes(role) ? (
+                  <>
+                    <Nav.Item as="li" key={item.id}>
+                      <NavLink to={item.link}>
+                        <i className="fa">
+                          {item.icon && <item.icon className={Styles.icon} />}
+                        </i>
+                        <span className="menu-title">{item.label}</span>
+                      </NavLink>
+                    </Nav.Item>
+
+                    {!isNullOrEmpty(item.subItems) && (
                       <div
-                        key={subItem.name}
-                        className={`${Styles['submenu-item']}`}
+                        id={`submenu-${item.id}`}
+                        className={`${Styles.submenu} ${
+                          openItem === item.id ? Styles.open : ''
+                        }`}
                       >
-                        <p className="mb-0 fw-bold fst-italic">
-                          {subItem.name}
-                        </p>
+                        {item.subItems.map((subItem, index) => {
+                          return subItem.link ? (
+                            <div key={subItem.link}>
+                              {renderLink(
+                                subItem.link,
+                                <div
+                                  className={`${Styles['submenu-item']} ${
+                                    index === item.subItems.length - 1
+                                      ? Styles['last-item']
+                                      : ''
+                                  } ${
+                                    location.pathname.includes(subItem.link)
+                                      ? Styles.active
+                                      : ''
+                                  }`}
+                                >
+                                  {subItem.name}
+                                </div>
+                              )}
+                            </div>
+                          ) : (
+                            <div
+                              key={subItem.name}
+                              className={`${Styles['submenu-item']}`}
+                            >
+                              <p className="mb-0 fw-bold fst-italic">
+                                {subItem.name}
+                              </p>
+                            </div>
+                          );
+                        })}
                       </div>
-                    );
-                  })}
-                </div>
+                    )}
+                  </>
+                ) : null
               )}
-            </div>
-          ) : null
-        )}
-      </div>
+            </Nav>
+          </div>
+        </div>
     </div>
   );
 };

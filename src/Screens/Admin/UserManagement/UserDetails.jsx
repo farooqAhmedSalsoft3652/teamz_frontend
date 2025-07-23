@@ -4,7 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
 import BackButton from '../../../Components/BackButton';
-import CustomButton from '../../../Components/CustomButton';
+import CustomButton from '../../../Components/Common/CustomButton';
 import CustomModal from '../../../Components/CustomModal';
 import CustomTable from '../../../Components/CustomTable/CustomTable';
 import StatusChip from '../../../Components/StatusChip/StatusChip';

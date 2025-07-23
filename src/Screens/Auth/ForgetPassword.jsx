@@ -2,14 +2,14 @@ import { useMutation } from '@tanstack/react-query';
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CustomButton from '../../Components/CustomButton';
+import CustomButton from '../../Components/Common/CustomButton';
 import CustomInput from '../../Components/CustomInput';
 import { showToast } from '../../Components/Toast/Toast';
 import { usePageTitle } from '../../Hooks/usePageTitle';
-import { AuthLayout } from '../../Layout/AuthLayout';
 import { sendVerificationCode } from '../../Services/Auth';
 import { isNullOrEmpty, showErrorToast } from '../../Utils/Utils';
 import { forgotEmail } from '../../Utils/Validations/ValidationSchemas';
+import { AuthLayout } from '../../Components/Layout/AdminLayout/Auth/AuthLayout';
 
 const ForgetPassword = () => {
   usePageTitle('Forget-Password');

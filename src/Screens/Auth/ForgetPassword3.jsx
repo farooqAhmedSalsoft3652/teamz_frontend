@@ -1,14 +1,15 @@
 import { useMutation } from '@tanstack/react-query';
 import { Form, Formik } from 'formik';
 import { useLocation, useNavigate } from 'react-router-dom';
-import CustomButton from '../../Components/CustomButton';
+import CustomButton from '../../Components/Common/CustomButton';
 import CustomInput from '../../Components/CustomInput';
 import { showToast } from '../../Components/Toast/Toast';
 import { usePageTitle } from '../../Hooks/usePageTitle';
-import { AuthLayout } from '../../Layout/AuthLayout';
+
 import { setNewPassword } from '../../Services/Auth';
 import { isNullOrEmpty } from '../../Utils/Utils';
 import { forgotPassword } from '../../Utils/Validations/ValidationSchemas';
+import { AuthLayout } from '../../Components/Layout/AdminLayout/Auth/AuthLayout';
 
 const ForgetPassword3 = () => {
   usePageTitle('Forget-Password');

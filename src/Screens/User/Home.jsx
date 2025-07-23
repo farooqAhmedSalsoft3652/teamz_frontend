@@ -9,7 +9,7 @@ import {
   HiOutlineDocumentText,
 } from 'react-icons/hi';
 import useUserStore from '../../Stores/UserStore';
-import CustomButton from '../../Components/CustomButton';
+import CustomButton from '../../Components/Common/CustomButton';
 
 const Home = () => {
   const { user, role = 'guest' } = useUserStore();
@@ -242,9 +242,7 @@ const Home = () => {
           </p>
           {isAuthenticated ? (
             <div className="d-inline-block">
-              <CustomButton
-                text="Explore Features"
-              />
+              <CustomButton text="Explore Features" />
             </div>
           ) : (
             <div className="d-flex flex-wrap gap-3 justify-content-center">

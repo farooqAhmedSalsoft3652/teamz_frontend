@@ -2,13 +2,14 @@ import { useMutation } from '@tanstack/react-query';
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CustomButton from '../../../Components/CustomButton';
+import CustomButton from '../../../Components/Common/CustomButton';
 import CustomInput from '../../../Components/CustomInput';
 import { usePageTitle } from '../../../Hooks/usePageTitle';
-import { AuthLayout } from '../../../Layout/AdminLayout/Auth/AuthLayout';
+import { AuthLayout } from '../../../Components/Layout/AdminLayout/Auth/AuthLayout';
 import { sendVerificationCode } from '../../../Services/Auth';
 import { showErrorToast } from '../../../Utils/Utils';
 import { forgotEmail } from '../../../Utils/Validations/ValidationSchemas';
+import TextInput from '../../../Components/Common/FormElements/TextInput';
 
 const ForgetPassword = () => {
   usePageTitle('Forget-Password');
@@ -24,15 +25,31 @@ const ForgetPassword = () => {
       showErrorToast(error);
     },
   });
-  const handleSubmit = (values) => {
-    setEmail(values.email);
-    getVerificationCode.mutate(values);
+
+  const handleSubmit = async (values, actions) => {
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+
+      // Mutation call
+      setEmail(values.email);
+      getVerificationCode.mutate(values);
+
+      // await loginMutation.mutateAsync(values);
+    } catch (error) {
+      console.error('Login failed:', error);
+    } finally {
+      actions.setSubmitting(false); // Very important!
+    }
   };
+
+  // const handleSubmit = (values) => {
+  //   setEmail(values.email);
+  //   getVerificationCode.mutate(values);
+  // };
 
   return (
     <AuthLayout
-      authTitle="Forgot Password 123"
-      isSubTitle
+      authTitle=""
       authParagraph="Enter your email address to receive a verification code."
       backOption={true}
       isAdminAuth={true}
@@ -42,26 +59,43 @@ const ForgetPassword = () => {
         validationSchema={forgotEmail}
         onSubmit={handleSubmit}
       >
-        {({ values, errors, touched, handleChange, handleBlur }) => (
-          <Form className="px-lg-5 mx-lg-5 px-2 mx-2">
-            <CustomInput
-              label="Email Address"
-              required
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          isSubmitting,
+        }) => (
+          <Form className="">
+            <TextInput
               id="email"
+              name="email"
+              label="Email Address"
               type="email"
               placeholder="Enter Your Email Address"
               value={values.email}
               onChange={handleChange}
               onBlur={handleBlur}
               error={touched.email && errors.email}
+              required
             />
             <div className="mt-4 beechMein">
               <CustomButton
                 type="submit"
+                onClick={handleSubmit}
+                loading={isSubmitting}
+                loadingText="Submitting..."
+                text="Submit"
+                className="w-100"
+              />
+
+              {/* <CustomButton
+                type="submit"
                 text="Continue"
                 loading={getVerificationCode.isPending}
                 disabled={getVerificationCode.isPending}
-              />
+              /> */}
             </div>
           </Form>
         )}

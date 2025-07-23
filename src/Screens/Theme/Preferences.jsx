@@ -5,7 +5,7 @@ import Theme2 from '../../assets/images/theme2.jpg';
 import Theme3 from '../../assets/images/theme3.jpg';
 import Theme4 from '../../assets/images/theme4.jpg';
 import Theme5 from '../../assets/images/theme5.jpg';
-import CustomButton from '../../Components/CustomButton';
+import CustomButton from '../../Components/Common/CustomButton';
 import useThemeStore from '../../Stores/ThemeStore';
 import { useNavigate } from 'react-router-dom';
 import { usePageTitle } from '../../Hooks/usePageTitle';

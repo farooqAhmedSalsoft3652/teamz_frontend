@@ -1,6 +1,6 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-// import "./base-theme.css";
-// import "./themes.css";
+// import 'bootstrap/dist/css/bootstrap.min.css';
+
+import './assets/styles/theme.scss';
 
 import { lazy, Suspense } from 'react';
 import 'react-phone-number-input/style.css';
@@ -9,8 +9,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import SkeletonLoader from './Components/SkeletonLoader/SkeletonLoader';
 import Toast from './Components/Toast/Toast';
-import AppLayout from './Layout/AppLayout';
-import UserLayout from './Layout/UserLayout';
+import DashboardLayout from './Components/Layout/AdminLayout/DashboardLayout';
+import UserLayout from './Components/Layout/UserLayout/UserLayout';
 import PublicRoutes from './Router/PublicRoutes';
 import Home from './Screens/User/Home';
 import useUserStore from './Stores/UserStore';
@@ -68,7 +68,7 @@ function App() {
           </Route>
 
           {/* Authenticated Routes Admin */}
-          <Route element={isAuthenticated ? <AppLayout /> : <Navigate to="/login" />}>
+          <Route element={isAuthenticated ? <DashboardLayout /> : <Navigate to="/login" />}>
             <Route path="admin/profile" element={<AdminProfile />} />
             <Route path="notifications" element={<Notifications />} />
             {/* Admin Routes - use the grouped component for admin routes */}

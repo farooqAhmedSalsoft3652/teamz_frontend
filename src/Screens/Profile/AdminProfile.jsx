@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
-import CustomButton from '../../Components/CustomButton';
+import CustomButton from '../../Components/Common/CustomButton';
 import CustomInput from '../../Components/CustomInput';
 import CustomModal from '../../Components/CustomModal';
 import useUserStore from '../../Stores/UserStore';

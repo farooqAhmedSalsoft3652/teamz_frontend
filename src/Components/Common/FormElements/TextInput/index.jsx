@@ -33,6 +33,7 @@ const TextInput = ({
   const handlePasswordToggle = () => {
     setPasswordShow(!passwordShow);
   };
+  // console.log(rest); // check if min and max are passed properly
 
   const inputProps = {
     id,

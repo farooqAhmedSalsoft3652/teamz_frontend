@@ -1,0 +1,38 @@
+// Add custom classes using Bootstrap's mixins
+.btn-black {
+  @include button-variant($black, $white);
+}
+
+.btn-green {
+  @include button-variant($green, $white);
+}
+
+.text-primary {
+  color: $primary !important;
+}
+
+
+body {
+  background-color: $body-bg;
+  color: $body-color;
+}
+
+
+.btn-primary {
+  // background-color: $primary-btn !important;
+  background-image: $primary-gradient !important;
+  border: none;
+  // border: 1px solid $primary-btn;
+  color: var(--bs-white);
+
+  &:hover {
+    filter: brightness(90%);
+  }
+}
+
+// .btn-primary {
+//   background: linear-gradient(45deg, $primary, darken($primary, 10%));
+//   border: none;
+// }
+
+

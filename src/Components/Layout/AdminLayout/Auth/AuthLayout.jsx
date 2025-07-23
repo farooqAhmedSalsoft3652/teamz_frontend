@@ -1,7 +1,7 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './styles.css';
-import { images } from '../../../assets';
+import { images } from '../../../../assets';
 
 export const AuthLayout = ({
   authTitle,
@@ -30,7 +30,7 @@ export const AuthLayout = ({
                 >
                   <div className="left px-xxl-5">
                     <div className="authForm">
-                      <div className="authFormHeader mb-sm-5 mb-3 text-center">
+                      <div className="authFormHeader mb-sm-5 mb-4 text-center">
                         <img
                           src={images.adminAuthLogo}
                           alt="authLogo"
@@ -40,8 +40,8 @@ export const AuthLayout = ({
                         {authTitle && (
                           <h2 className="authTitle">{authTitle}</h2>
                         )}
-                        {isSubTitle && (
-                          <p className="authPara">{authParagraph}</p>
+                        {isSubTitle && authParagraph && (
+                          <p className="authPara px-1 px-lg-3 px-xl-4">{authParagraph}</p>
                         )}
                       </div>
                       {children}
@@ -49,9 +49,9 @@ export const AuthLayout = ({
                         <div className="text-center mt-5">
                           <Link
                             to={isAdminAuth ? '/admin/login' : '/login'}
-                            className="fw-normal text-decoration-underline grayColor"
+                            className="fw-normal text-decoration-underline"
                           >
-                            <button className="notButton underlineOnHover fw-medium">
+                            <button className="fw-medium btn p-0 btn-link text-black">
                               <span className="lightGrayColor">Back To</span>{' '}
                               Login
                             </button>

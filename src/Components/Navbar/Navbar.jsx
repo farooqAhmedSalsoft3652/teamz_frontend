@@ -1,6 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
-import { Navbar as BootstrapNavbar, Dropdown } from 'react-bootstrap';
+import {
+  // Navbar as BootstrapNavbar,
+  Navbar,
+  Button,
+  Dropdown,
+  ListGroup,
+} from 'react-bootstrap';
 import { GoBell } from 'react-icons/go';
 import { HiMenu, HiOutlineColorSwatch } from 'react-icons/hi';
 import { LuLogOut } from 'react-icons/lu';
@@ -13,12 +19,21 @@ import {
 } from '../../Services/Admin/Notifications';
 import useUserStore from '../../Stores/UserStore';
 import { calculateTimePassed } from '../../Utils/Utils';
-import CustomButton from '../CustomButton';
+import CustomButton from '../Common/CustomButton';
 import CustomModal from '../CustomModal';
 import TableActionDropDown from '../TableActionDropDown/TableActionDropDown';
 import './navbar.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faBars,
+  faChevronDown,
+  faEllipsisV,
+  faRightFromBracket,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
+import { images } from '../../assets';
 
-const Navbar = ({ sideBarToggle, sideBarClass }) => {
+const Header = ({ sideBarToggle, sideBarClass }) => {
   let navigate = useNavigate();
   const { user, role } = useUserStore();
   const logoutMutation = useLogout();
@@ -69,7 +84,109 @@ const Navbar = ({ sideBarToggle, sideBarClass }) => {
 
   return (
     <>
-      <BootstrapNavbar className={`customHeader ${sideBarClass}`} expand="md">
+      <header id="header">
+        <Navbar className="header-navbar fixed-top" expand="md" variant="light">
+          <div className="navbar-wrapper w-100 d-md-flex">
+            <div className="navbar-header d-flex">
+              <ul className="nav navbar-nav flex-row flex-grow-1 d-flex">
+                <li className="nav-item d-md-none align-self-center ps-3">
+                  <Button
+                    className="menu-toggle"
+                    variant=""
+                    size=""
+                    // onClick={props.toggleSideNav}
+                  >
+                    <FontAwesomeIcon icon={faBars} />
+                  </Button>
+                </li>
+                <li className="nav-item align-self-center flex-grow-1 text-center">
+                  <Navbar.Brand as={Link} to="/admin/dashboard">
+                    <img
+                      src={images.adminLogo}
+                      className="brand-logo img-fluid"
+                      alt="admin logo"
+                    />
+                  </Navbar.Brand>
+                </li>
+                <li className="nav-item d-md-none align-self-center pe-3">
+                  <Navbar.Toggle
+                    aria-controls="navbar-mobile"
+                    className="menu-toggle"
+                  >
+                    <FontAwesomeIcon icon={faEllipsisV} />
+                  </Navbar.Toggle>
+                </li>
+              </ul>
+            </div>
+
+            <div className="navbar-container flex-grow-1 align-self-center">
+              <Navbar.Collapse>
+                <ListGroup
+                  bsPrefix="nav navbar-nav ms-auto justify-content-end d-flex flex-row"
+                  as="ul"
+                >
+                  <ListGroup.Item
+                    as="li"
+                    className="nav-item d-flex align-self-center me-4"
+                  >
+                    {/* <HeaderNotification
+                      notificationData={notificationData}
+                      getNotification={getNotification}
+                      setNotificationData={setNotificationData}
+                    /> */}
+                  </ListGroup.Item>
+                  <ListGroup.Item as="li" className="nav-item">
+                    <Dropdown className="dropdown-user">
+                      <Dropdown.Toggle
+                        className="after-none"
+                        variant=""
+                        id="dropdown-basic"
+                      >
+                        <span className="avatar avatar-online">
+                          <img src={user?.photo} alt="avatar" />
+                        </span>
+                        <span className="user-name fw-semibold">
+                          {user?.name}
+                        </span>
+                        <FontAwesomeIcon
+                          className="ms-2"
+                          icon={faChevronDown}
+                        ></FontAwesomeIcon>
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu align="end">
+                        <Dropdown.Item as={Link} to={`/${role}/profile`}>
+                          <FontAwesomeIcon icon={faUser} />
+                          My Profile
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={() => setShowModal(true)}>
+                          <FontAwesomeIcon icon={faRightFromBracket} />
+                          Logout
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </ListGroup.Item>
+                  <ListGroup.Item
+                    as="li"
+                    className="nav-item d-none d-md-block d-lg-none align-self-center ms-2"
+                  >
+                    <Button
+                      className="menu-toggle"
+                      variant=""
+                      size=""
+                      // onClick={props.toggleSideNav}
+                    >
+                      <FontAwesomeIcon icon={faBars} />
+                    </Button>
+                  </ListGroup.Item>
+                </ListGroup>
+              </Navbar.Collapse>
+            </div>
+          </div>
+        </Navbar>
+      </header>
+
+      <Navbar className={`customHeader ${sideBarClass}`} expand="md">
         <div className="d-flex gap-2 gap-sm-3">
           <div
             className={`toggleSidebarButton beechMein ${sideBarClass}`}
@@ -180,7 +297,7 @@ const Navbar = ({ sideBarToggle, sideBarClass }) => {
             </div>
           </TableActionDropDown>
         </div>
-      </BootstrapNavbar>
+      </Navbar>
       <CustomModal
         show={logoutModal}
         close={() => {
@@ -195,4 +312,4 @@ const Navbar = ({ sideBarToggle, sideBarClass }) => {
   );
 };
 
-export default Navbar;
+export default Header;

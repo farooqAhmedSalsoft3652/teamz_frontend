@@ -2,17 +2,18 @@ import { useMutation } from '@tanstack/react-query';
 import { Form, Formik } from 'formik';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import CustomButton from '../../../Components/CustomButton';
+import CustomButton from '../../../Components/Common/CustomButton';
 import CustomInput from '../../../Components/CustomInput';
 import { showToast } from '../../../Components/Toast/Toast';
 import { usePageTitle } from '../../../Hooks/usePageTitle';
-import { AuthLayout } from '../../../Layout/AdminLayout/Auth/AuthLayout';
+import { AuthLayout } from '../../../Components/Layout/AdminLayout/Auth/AuthLayout';
 import {
   sendVerificationCode,
   verifyVerificationCode,
 } from '../../../Services/Auth';
 import { showErrorToast } from '../../../Utils/Utils';
 import { forgotCode } from '../../../Utils/Validations/ValidationSchemas';
+import TextInput from '../../../Components/Common/FormElements/TextInput';
 
 const ForgetPassword2 = () => {
   const { state } = useLocation();
@@ -85,8 +86,7 @@ const ForgetPassword2 = () => {
 
   return (
     <AuthLayout
-      authTitle="Forgot Password"
-      authMain
+      authTitle=""
       authParagraph="An email has been sent to you with a verification code. Please enter it here."
       backOption={true}
       adminAuth={true}
@@ -96,26 +96,36 @@ const ForgetPassword2 = () => {
         validationSchema={forgotCode}
         onSubmit={handleSubmit}
       >
-        {({ values, errors, touched, handleBlur, setFieldValue }) => (
-          <Form className="px-lg-5 mx-lg-5 px-2 mx-2">
-            <CustomInput
-              label="Verification Code"
-              required
-              id="verificationCode"
-              type="text"
-              placeholder="Enter Verification Code"
-              value={values.verificationCode}
-              onChange={(e) => {
-                const numericValue = e.target.value
-                  .replace(/[^0-9]/g, '')
-                  .slice(0, 4);
-                setFieldValue('verificationCode', numericValue);
-              }}
-              onBlur={handleBlur}
-              error={touched.verificationCode && errors.verificationCode}
-            />
+        {({
+          values,
+          errors,
+          touched,
+          handleBlur,
+          setFieldValue,
+          isSubmitting,
+        }) => (
+          <Form className="mt-3">
+            <div className="mb-2">
+              <TextInput
+                label="Verification Code"
+                required
+                id="verificationCode"
+                type="text"
+                placeholder="Enter Verification Code"
+                value={values.verificationCode}
+                onChange={(e) => {
+                  const numericValue = e.target.value
+                    .replace(/[^0-9]/g, '')
+                    .slice(0, 4);
+                  setFieldValue('verificationCode', numericValue);
+                }}
+                onBlur={handleBlur}
+                error={touched.verificationCode && errors.verificationCode}
+                labelClassName="label-padding-left"
+              />
+            </div>
             <div
-              className={`d-flex align-items-center ${
+              className={`d-flex align-items-center mt-2 ${
                 isDisabled ? 'justify-content-between ' : 'justify-content-end '
               }`}
             >
@@ -128,7 +138,7 @@ const ForgetPassword2 = () => {
                 type="button"
                 onClick={handleResend}
                 disabled={isDisabled}
-                className="text-link text-decoration-underline"
+                className="p-0 btn btn-link text-decoration-underline"
                 style={{
                   color: isDisabled ? 'gray' : '#0075ff',
                   background: 'none',
@@ -142,10 +152,18 @@ const ForgetPassword2 = () => {
             <div className="mt-4 beechMein">
               <CustomButton
                 type="submit"
+                loading={isSubmitting}
+                loadingText="Submitting..."
+                text="Continue"
+                className="w-100"
+              />
+
+              {/* <CustomButton
+                type="submit"
                 text="Continue"
                 loading={submitVerificationCode.isPending}
                 disabled={submitVerificationCode.isPending}
-              />
+              /> */}
             </div>
           </Form>
         )}

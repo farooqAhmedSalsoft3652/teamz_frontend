@@ -1,12 +1,12 @@
 import { Form, Formik } from 'formik';
 import { Link } from 'react-router-dom';
-import CustomButton from '../../Components/CustomButton';
+import CustomButton from '../../Components/Common/CustomButton';
 import CustomInput from '../../Components/CustomInput';
 import { useLogin } from '../../Hooks/useLogin';
 import { usePageTitle } from '../../Hooks/usePageTitle';
-import { AuthLayout } from '../../Layout/AuthLayout';
 import { loginValidationSchema } from '../../Utils/Validations/ValidationSchemas';
 import './Auth.css';
+import { AuthLayout } from '../../Components/Layout/AdminLayout/Auth/AuthLayout';
 
 const LogIn = () => {
   const loginMutation = useLogin();
