@@ -84,7 +84,7 @@ const Header = ({ sideBarToggle, sideBarClass }) => {
 
   return (
     <>
-      <header id="header" className='fixed-top'>
+      <header id="header">
         <Navbar className="header-navbar" expand="md" variant="light">
           <div className="navbar-wrapper w-100 d-md-flex">
             <div className="navbar-header d-flex">
@@ -282,6 +282,119 @@ const Header = ({ sideBarToggle, sideBarClass }) => {
           </div>
         </Navbar>
       </header>
+
+      <Navbar className={`customHeader ${sideBarClass}`} expand="md">
+        <div className="d-flex gap-2 gap-sm-3">
+          <div
+            className={`toggleSidebarButton beechMein ${sideBarClass}`}
+            onClick={sideBarToggle}
+          >
+            <HiMenu size={26} />
+          </div>
+          <h4 className="screen-title-body header-branch-name mb-0">
+            {branch_name}
+          </h4>
+        </div>
+
+        <div className="d-flex gap-2 gap-sm-3">
+          {role !== 'admin' && (
+            <CustomButton onClick={() => navigate('support')}>
+              Support
+            </CustomButton>
+          )}
+
+          <Dropdown className="notiDropdown d-flex ">
+            <Dropdown.Toggle
+              variant="transparent"
+              className="position-relative notButton  p-0"
+            >
+              <GoBell className="notification-bell-icon" size={28} />
+              <span className="badge">
+                {notificationState.length > 9 ? '9+' : notificationState.length}
+              </span>
+            </Dropdown.Toggle>
+            <Dropdown.Menu className={`notiMenu`} align="end">
+              <div className="notificationsBody">
+                <div className="notificationsBodyHeader py-2">
+                  <p className="mb-0 fw-medium">Notifications</p>
+                  <div className="newNotificationCount">
+                    <p>{notificationState.length} new</p>
+                  </div>
+                </div>
+                <hr className="my-0" />
+                {notificationState?.map((notification, index) => (
+                  <div
+                    className={`singleNoti gap-2 ${
+                      notification.read_at ? 'read' : 'unread'
+                    }`}
+                    key={notification.id}
+                  >
+                    <div className="notificationBell">
+                      <GoBell size={18} />
+                    </div>
+                    <div className="singleNotiContent flex-grow-1 d-flex flex-column justify-content-between gap-2">
+                      <p className="notiTitle">{notification.data.body}</p>
+                      <div className="d-flex align-items-end justify-content-between">
+                        <div className="d-flex flex-wrap gap-0 gap-sm-2">
+                          <p className="notiDateTime d-flex gap-2">
+                            {calculateTimePassed(notification.created_at)}
+                          </p>
+                        </div>
+                        {!notification.read_at && (
+                          <button
+                            className={`notification-btn flex-shrink-0${
+                              notification.read ? 'read-btn' : ' unread-btn'
+                            }`}
+                            onClick={() => markAsRead(notification?.id)}
+                          >
+                            Mark As Read
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="notiFooter">
+                <Dropdown.Toggle
+                  variant="transparent"
+                  className="notButton notifi-btn p-0"
+                >
+                  <Link to={'/notifications'}>View All</Link>
+                </Dropdown.Toggle>
+              </div>
+            </Dropdown.Menu>
+          </Dropdown>
+
+          {/* <CustomButton onClick={() => toggleTheme()}>
+            Toggle Theme
+          </CustomButton> */}
+          <TableActionDropDown
+            actions={[
+              {
+                name: 'My Profile',
+                icon: RiUserSettingsLine,
+                onClick: () => {
+                  if (user?.role === 'admin') {
+                    navigate('/admin/profile');
+                  } else {
+                    navigate('/profile');
+                  }
+                },
+              },
+              {
+                name: 'Logout',
+                icon: LuLogOut,
+                onClick: handleLogoutClick,
+              },
+            ]}
+          >
+            <div className="userImage beechMein">
+              <h6>{getInitials(user?.user_name)}</h6>
+            </div>
+          </TableActionDropDown>
+        </div>
+      </Navbar>
       <CustomModal
         show={logoutModal}
         close={() => {

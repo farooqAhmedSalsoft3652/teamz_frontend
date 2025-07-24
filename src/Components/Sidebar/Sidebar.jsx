@@ -13,7 +13,8 @@ import useUserStore from '../../Stores/UserStore';
 import { isNullOrEmpty } from '../../Utils/Utils';
 import Styles from './Sidebar.module.css';
 import { Nav } from 'react-bootstrap';
-
+import "./styles.css";
+  
 const menuItems = [
   {
     roles: ['employee', 'user'],
@@ -69,10 +70,10 @@ const Sidebar = ({ sideBarClass, disable = false }) => {
 
   return (
     <div
-      className={`${Styles.sidebar} ${Styles[sideBarClass]} ${
+      className={`${
         disable ? Styles.disabled : ''
       }`}
-      id="sidebar"
+      id="admin-sidebar"
     >
       {disable && <div className={Styles.overlay}></div>}
       {/* <div className={Styles['sidebar-title-wrapper']}>
@@ -83,13 +84,13 @@ const Sidebar = ({ sideBarClass, disable = false }) => {
           </h2>
         )}
       </div> */}
-        <div className="main-menu menu-fixed menu-light">
-          <div className="main-menu-content">
+
+          <div className="side-nav-wrapper">
             <Nav
               activeKey="/home"
               onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
               as="ul"
-              className="navigation navigation-main d-block"
+              className="side-nav d-block"
             >
               {menuItems.map((item) =>
                 item.roles.includes(role) ? (
@@ -148,7 +149,6 @@ const Sidebar = ({ sideBarClass, disable = false }) => {
               )}
             </Nav>
           </div>
-        </div>
     </div>
   );
 };

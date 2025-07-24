@@ -73,6 +73,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+/* 
 :root {
   font-family: 'Poppins', system-ui, Helvetica, Arial, sans-serif;
   font-weight: 400;
@@ -88,18 +89,18 @@ input::-webkit-inner-spin-button {
   --content-bg-color: #ffffff;
   --border-color-light: #e6e6e6;
 
-  --dash-icon-color: #1f4047; /* Dashboard icons */
-  --dash-icon-wrapper-bg: #f4f7fe; /* Dashboard icon wrapper */
+  --dash-icon-color: #1f4047; 
+  --dash-icon-wrapper-bg: #f4f7fe; 
 
-  --pagination-bg-color: #1f4047; /* For table pagination */
+  --pagination-bg-color: #1f4047; 
   --pagination-text-color: #000;
   --pagination-hover-text-color: #000;
 
   --primary-text-color: #000;
-  --secondary-text-color: #646464; /* Placeholder and? */
-  --colored-heading: #1f4047; /* For headings matching primary color */
-  --contrast-text-color: #fff; /* For Sidebar text */
-  --detail-label-color: #646464; /* Details pages field label color */
+  --secondary-text-color: #646464;
+  --colored-heading: #1f4047; 
+  --contrast-text-color: #fff; 
+  --detail-label-color: #646464; 
   --table-td-color: #00000080;
 
   --input-bg-color: #fff;
@@ -269,4 +270,4 @@ input::-webkit-inner-spin-button {
   --btn-secondary-color: #2f4858;
   --btn-text-color: #000;
   --btn-text-hover-color: #fff;
-}
+} */

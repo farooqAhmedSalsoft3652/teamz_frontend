@@ -4,7 +4,7 @@ import AdminLogin from './Auth/AdminLogin';
 import ForgetPassword from './Auth/ForgetPassword';
 import ForgetPassword2 from './Auth/ForgetPassword2';
 import ForgetPassword3 from './Auth/ForgetPassword3';
-import Dashboard from './Dashboard';
+import Dashboard from './Dashboard/Dashboard';
 import Notifications from './Notifications/Notifications';
 import UserDetails from './UserManagement/UserDetails';
 import UserManagement from './UserManagement/UserManagement';
@@ -30,6 +30,5 @@ export {
   ForgetPassword3,
   Notifications,
   UserDetails,
-  UserManagement
+  UserManagement,
 };
-

@@ -22,15 +22,15 @@ const Preferences = () => {
       <div className="d-card py-45">
         <div className="d-flex flex-wrap gap-4">
           <div
-            className="select-item-box dark-teal"
-            onClick={() => setSelectedTheme('dark-teal')}
+            className="select-item-box dark"
+            onClick={() => setSelectedTheme('dark')}
           >
             <div className="theme-image-wrapper">
               <img src={Theme1} />
             </div>
             <div className="d-flex justify-content-between mt-2">
               <p className="m-0">Glow</p>
-              {selectedTheme === 'dark-teal' ? (
+              {selectedTheme === 'dark' ? (
                 <FaCheckCircle size={24} color="#5CD873" />
               ) : null}
             </div>
@@ -98,6 +98,7 @@ const Preferences = () => {
             text={'Set Preference'}
             className={'mt-45'}
             onClick={() => {
+              console.log("first")
               if (selectedTheme) {
                 setTheme(selectedTheme);
                 // navigate('/dashboard');
@@ -111,3 +112,31 @@ const Preferences = () => {
 };
 
 export default Preferences;
+
+
+// GPt Code
+// import React from 'react';
+// import useThemeStore from '../store/themeStore';
+
+// const themes = ['light', 'dark-teal', 'purple'];
+
+// const ThemeSwitcher = () => {
+//   const { theme, setTheme } = useThemeStore();
+
+//   return (
+//     <select
+//       value={theme}
+//       onChange={(e) => setTheme(e.target.value)}
+//       className="form-select w-auto"
+//     >
+//       {themes.map((thm) => (
+//         <option key={thm} value={thm}>
+//           {thm}
+//         </option>
+//       ))}
+//     </select>
+//   );
+// };
+
+// export default ThemeSwitcher;
+

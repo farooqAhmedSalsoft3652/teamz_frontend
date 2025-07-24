@@ -13,7 +13,7 @@ export const themeDictionary = {
   // 7: input-text
   // 8: input-focus-color
   // 9: body-bg-color (inputs disabled color)
-  'dark-teal': [
+  'dark': [
     '#1f4047',
     '#fdc770',
     '#B6C0C3',

@@ -1,6 +1,6 @@
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
-import './assets/styles/theme.scss';
+import './assets/styles/main.scss';
 
 import { lazy, Suspense } from 'react';
 import 'react-phone-number-input/style.css';

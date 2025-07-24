@@ -15,20 +15,20 @@ import {
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { useNavigate } from 'react-router-dom';
-import User from '../../assets/images/dash-user.svg?react';
-import Receivable from '../../assets/images/receivable.svg?react';
-import CustomSelect from '../../Components/CustomSelect';
-import withModal from '../../HOC/withModal';
-import { usePageTitle } from '../../Hooks/usePageTitle';
-import { lineGraphOptions } from '../../Mocks/MockData';
+import User from '../../../assets/images/dash-user.svg?react';
+import Receivable from '../../../assets/images/receivable.svg?react';
+import CustomSelect from '../../../Components/CustomSelect';
+import withModal from '../../../HOC/withModal';
+import { usePageTitle } from '../../../Hooks/usePageTitle';
+import { lineGraphOptions } from '../../../Mocks/MockData';
 import {
   getDashboardData,
   getEarningChart,
   getUserChart,
-} from '../../Services/Admin/Dashboard';
-import useThemeStore from '../../Stores/ThemeStore';
-import { themeDictionary } from '../../Utils/Constants/ColorConstants';
-import { dateRangeSelectOptions } from '../../Utils/Constants/SelectOptions';
+} from '../../../Services/Admin/Dashboard';
+import useThemeStore from '../../../Stores/ThemeStore';
+import { themeDictionary } from '../../../Utils/Constants/ColorConstants';
+import { dateRangeSelectOptions } from '../../../Utils/Constants/SelectOptions';
 
 ChartJS.register(
   ArcElement,
@@ -136,6 +136,7 @@ const Dashboard = ({ showModal }) => {
   return (
     <div>
       <h2 className="screen-title d-inline-block">Dashboard</h2>
+      <button className='btn btn-primary'>Testing Button </button>
       <div className="row">
         <div className="col-12 col-sm-6 col-xxl-3 mb-4 mb-xxl-0">
           <div className="d-card chart-padding">

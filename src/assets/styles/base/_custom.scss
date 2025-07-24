@@ -7,6 +7,7 @@
   @include button-variant($green, $white);
 }
 
+
 .text-primary {
   color: $primary !important;
 }
@@ -19,16 +20,19 @@ body {
 
 
 .btn-primary {
-  // background-color: $primary-btn !important;
-  background-image: $primary-gradient !important;
-  border: none;
-  // border: 1px solid $primary-btn;
-  color: var(--bs-white);
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+  color: #fff;
 
   &:hover {
-    filter: brightness(90%);
+    background-color: var(--bs-primary-hover, #c59e00) !important;
+    border-color: var(--bs-primary-hover, #c59e00) !important;
+    color: #ff0000;
   }
 }
+
+
+
 
 // .btn-primary {
 //   background: linear-gradient(45deg, $primary, darken($primary, 10%));
