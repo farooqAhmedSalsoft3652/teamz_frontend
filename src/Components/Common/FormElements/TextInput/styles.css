@@ -3,12 +3,13 @@
 form label,
 label,
 .form-label {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--bs-black);
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 0.3rem;
 }
-.label-padding-left{
+
+.label-padding-left {
   padding-left: 20px;
 }
 
@@ -19,7 +20,7 @@ textarea {
   font-size: 15px;
   background-color: transparent;
   /* background: var(--bs-body-bg); */
-  color: var(--bs-body-color);;
+  color: var(--bs-black);
   font-weight: 400;
   transition: all 0.6s ease 0s;
   padding: 15px 20px 15px 20px;
@@ -27,7 +28,7 @@ textarea {
   width: 100%;
   outline: none;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
-  height: 55px;
+  height: 51px;
   border: var(--bs-border-width) solid var(--bs-border-color);
   border-radius: 50px;
 }
@@ -46,7 +47,7 @@ textarea:focus,
   -webkit-appearance: none;
   box-shadow: 0px 0px 10px rgb(0 0 0 / 10%);
   outline: none;
-  border: 1px solid var(--primaryColor);
+  border: var(--bs-border-width) solid var(--bs-input-focus-border-color);
   color: var(--bs-black);
   background-color: transparent;
 }
@@ -100,24 +101,10 @@ textarea:focus,
   right: 22px;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  margin-right: -30px;
-  width: 20px;
-  opacity: 0;
-}
-
-input[type="time"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  margin-right: -30px;
-  width: 20px;
-  opacity: 1;
-  background-color: #000;
-
-}
-
 .error-message {
-  font-size: 14px;
+  font-size: 16px;
+  color: var(--bs-danger);
+  padding-left: 20px;
 }
 
 /***** Password Vissible Button *****/
@@ -277,4 +264,85 @@ form .form-control.input-bottom {
 .inline-form {
   gap: 10px;
   /* Add space between label and input */
+}
+
+
+/* Date Place Holder */
+.date-input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.date-placeholder,
+.time-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #959595;
+    pointer-events: none;
+}
+
+.selected-value{
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #959595;
+    pointer-events: none;
+}
+
+/* Hide the placeholder when the input is focused or has a value */
+
+.date-input:focus + .date-placeholder,
+.date-input:not(:focus):not(:empty) + .date-placeholder {
+    display: none;
+}
+
+.date-input:focus {
+    color: #000;
+    text-indent: -100px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    margin-right: 0px;
+    width: 100%;
+    opacity: 1;
+    background-position: right 0px top;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    margin-right: 0px;
+    width: 100%;
+    opacity: 1;
+    background-position: right 0px top;
+}
+
+.reset-time-btn {
+    position: absolute;
+    right: 55px;
+    /* Position before the time picker icon */
+    top: 55%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #ff0000;
+    font-size: 25px;
+    cursor: pointer;
+    z-index: 2;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.reset-time-btn:hover {
+    /* background-color: #ff0000; */
+    color: #000;
 }

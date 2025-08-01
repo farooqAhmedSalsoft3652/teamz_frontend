@@ -204,7 +204,6 @@ export const notificationsData = {
   },
 };
 
-
 export const sidebar = [
   {
     id: 1,
@@ -358,7 +357,7 @@ export const userDetail = {
 export const statsData = [
   {
     id: 1,
-    image: Stats1,
+    // image: Stats1,
     number: '178',
     text: 'total earning',
     change: '33',
@@ -369,7 +368,7 @@ export const statsData = [
   },
   {
     id: 2,
-    image: Stats2,
+    // image: Stats2,
     increase: true,
     arrowIcon: true,
     number: '20',
@@ -380,7 +379,7 @@ export const statsData = [
   },
   {
     id: 3,
-    image: Stats3,
+    // image: Stats3,
     number: '20',
     text: 'new  users',
     change: '33',
@@ -391,7 +390,7 @@ export const statsData = [
   },
   {
     id: 4,
-    image: Stats4,
+    // image: Stats4,
     number: '20',
     increase: false,
     arrowIcon: true,
@@ -410,52 +409,36 @@ export const userManagementData = {
       {
         id: 1,
         user_name: 'Toms',
-        first_name: 'Toms',
-        last_name: 'Eric',
-        relationship: 'father',
-        language: 'English',
-        subscription_type: 'monthly',
-        name: 'Darvesh Restuarant',
         email: 'darvesh@gmail.com',
-        phone: '03656558478',
-        date_of_birth: '12/12/2024',
-        lat: 36.3212167,
-        lng: 74.66940469,
         status: 1,
-        address: '8MCC+G3G, Karim Abad Road, Hunza, Karimabad',
         created_at: '2024-06-25T14:29:37.000000Z',
-        updated_at: '2024-07-05T08:21:31.000000Z',
-        deleted_at: null,
-        status_detail: '1',
-        phone_number: '+9258552465',
-        role: 'branch',
-        UserImage:
-          'https://upload.wikimedia.org/wikipedia/commons/b/be/Pep_2017_%28cropped%29.jpg',
+        type: 'Student',
+        subject: 'Inquiry about Customized Fitness Training Plans',
+        message:
+          'I hope this message finds you well. I am interested in improving my fitness levels and would like to inquire about the personalized fitness training plans you offer. Specifically, I am looking for guidance in the following areas',
       },
       {
         id: 2,
         user_name: 'Toms',
-        first_name: 'Toms',
-        last_name: 'Eric',
-        relationship: 'father',
-        language: 'English',
-        subscription_type: 'yearly',
-        name: 'Darvesh Restuarant',
+        email: 'darvesh@gmail.com',
+        status: 0,
+        created_at: '2024-06-25T14:29:37.000000Z',
+        type: 'Assistant Coach',
+        subject: 'Inquiry about Customized Fitness Training Plans',
+        message:
+          'I hope this message finds you well. I am interested in improving my fitness levels and would like to inquire about the personalized fitness training plans you offer. Specifically, I am looking for guidance in the following areas',
+      },
+      {
+        id: 2,
+        user_name: 'Toms',
         email: 'darvesh@gmail.com',
         phone: '03656558478',
-        date_of_birth: '11/12/2024',
-        lat: 36.3212167,
-        lng: 74.66940469,
         status: 0,
-        address: '8MCC+G3G, Karim Abad Road, Hunza, Karimabad',
         created_at: '2024-06-25T14:29:37.000000Z',
-        updated_at: '2024-07-05T08:21:31.000000Z',
-        deleted_at: null,
-        status_detail: '0',
-        phone_number: '+1958552465',
-        role: 'branch',
-        UserImage:
-          'https://upload.wikimedia.org/wikipedia/commons/b/be/Pep_2017_%28cropped%29.jpg',
+        type: 'Coach',
+        subject: 'Inquiry about Customized Fitness Training Plans',
+        message:
+          'I hope this message finds you well. I am interested in improving my fitness levels and would like to inquire about the personalized fitness training plans you offer. Specifically, I am looking for guidance in the following areas',
       },
     ],
     first_page_url: 'http://localhost/food_app/admin-api/branches?page=1',
@@ -486,6 +469,60 @@ export const userManagementData = {
     ],
     next_page_url: 'http://localhost/food_app/admin-api/branches?page=2',
     path: 'http://localhost/food_app/admin-api/branches',
+    per_page: 10,
+    prev_page_url: null,
+    to: 10,
+    total: 11,
+  },
+};
+
+export const promoManagementData = {
+  status: true,
+  message: "Appointment logs",
+  detail: {
+    current_page: 1,
+    data: [
+      {
+        id: "1",
+        promo_name: "Promo Abc 123",
+        promo_discount: "05",
+        date: "2024-06-25T14:29:37.000000Z",
+      },
+      {
+        id: "2",
+        promo_name: "Promo Abc",
+        promo_discount: "10",
+        date: "2024-06-25T14:29:37.000000Z",
+      },
+    ],
+    first_page_url: "http://localhost/food_app/admin-api/branches?page=1",
+    from: 1,
+    last_page: 2,
+    last_page_url: "http://localhost/food_app/admin-api/branches?page=2",
+    links: [
+      {
+        url: null,
+        label: "&laquo; Previous",
+        active: false,
+      },
+      {
+        url: "http://localhost/food_app/admin-api/branches?page=1",
+        label: "1",
+        active: true,
+      },
+      {
+        url: "http://localhost/food_app/admin-api/branches?page=2",
+        label: "2",
+        active: false,
+      },
+      {
+        url: "http://localhost/food_app/admin-api/branches?page=2",
+        label: "Next &raquo;",
+        active: false,
+      },
+    ],
+    next_page_url: "http://localhost/food_app/admin-api/branches?page=2",
+    path: "http://localhost/food_app/admin-api/branches",
     per_page: 10,
     prev_page_url: null,
     to: 10,

@@ -1,12 +1,15 @@
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
+import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
+import 'react-phone-number-input/style.css';
 import './assets/styles/main.scss';
+import './assets/css/fonts.css';
+import './assets/css/style.css';
 
 import { lazy, Suspense } from 'react';
-import 'react-phone-number-input/style.css';
 import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import 'react-toastify/dist/ReactToastify.css';
-import './App.css';
+
 import SkeletonLoader from './Components/SkeletonLoader/SkeletonLoader';
 import Toast from './Components/Toast/Toast';
 import DashboardLayout from './Components/Layout/AdminLayout/DashboardLayout';
@@ -35,7 +38,7 @@ function App() {
 
   return (
     <Suspense fallback={<SkeletonLoader />}>
-      <Router basename="/milestone-frontend">
+      <Router basename="/teamz-page">
         <Routes>
           {/* Public Routes */}
           <Route

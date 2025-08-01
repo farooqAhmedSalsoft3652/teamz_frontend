@@ -1,10 +1,79 @@
 :root {
-  --bs-body-bg: #ff0000;
+  --bs-body-bg: #3C5726;
   --bs-body-color: #000000;
   --bs-border-color: #cbcbcb;
-  // --bs-primary: #3C5726;
-  --bs-primary-hover:#ff0000;
-  // --bs-primary-gradient: linear-gradient(135deg, #91b871, #3C5726);
+  --bs-primary: #3C5726;
+
+
+
+
+  --bs-btn-gradient-1: #364e22;
+  --bs-btn-gradient-2: #69a13b;
+  --bs-primary-gradient: linear-gradient(
+    55deg,
+    var(--bs-btn-gradient-1),
+    var(--bs-btn-gradient-2) 55%,
+    var(--bs-btn-gradient-1)
+  );
+
+  --bs-input-focus-border-color: var(--bs-primary);
+
+
   --bs-header-bg: #D7E8D1;
-  --bs-table-border-color: rgba(215, 215, 215, 0.18);
+
+  /* Table */
+  --table-header-bg: var(--bs-header-bg);
+  --table-header-color: #000000;
+  --table-body-color: #000000;
+  --table-bg: transparent;
+  --table-color: #212529;
+  --table-border-color: rgba(102, 102, 102, 0.10);
+  --table-border-width: 1px;
+  --table-hover-bg: #f8f9fa;
+  
+
+  // linear-gradient(55deg, var(--c1, #cf0030), var(--c2, #fe8224) 55%, var(--c1, #cf0030)) var(--x, 0)/ 200%;
+
+  // --bs-primary-gradient: linear-gradient(
+  //   55deg,
+  //   $btn-gradient-1,
+  //   $btn-gradient-2 55%,
+  //   $btn-gradient-1);
+
+  // --bs-btn-gradient-1: #{$btn-gradient-1};
+  // --bs-btn-gradient-2: #{$btn-gradient-2};
+  // --bs-primary-gradient: linear-gradient(
+  //   55deg,
+  //   var(--bs-btn-gradient-1),
+  //   var(--bs-btn-gradient-2) 55%,
+  //   var(--bs-btn-gradient-1)
+  // );
+
+
+
+
+  // --bs-btn-gradient-1: #364e22;
+  // --bs-btn-gradient-2: #69a13b;
+  // --bs-primary-gradient: linear-gradient(
+  //   55deg,
+  //   var(--bs-btn-gradient-1),
+  //   var(--bs-btn-gradient-2) 55%,
+  //   var(--bs-btn-gradient-1)
+  // );
+
+
+
+
+
+
+  // --bs-primary: #0d6efd;
+  // --bs-secondary: #6c757d;
+  // --bs-success: #198754;
+  // --bs-danger: #dc3545;
+  // --bs-warning: #ffc107;
+  // --bs-info: #0dcaf0;
+  // --bs-light: #f8f9fa;
+  // --bs-dark: #212529;
 }
+
+

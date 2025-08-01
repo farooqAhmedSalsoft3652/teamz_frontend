@@ -13,8 +13,8 @@ import useUserStore from '../../Stores/UserStore';
 import { isNullOrEmpty } from '../../Utils/Utils';
 import Styles from './Sidebar.module.css';
 import { Nav } from 'react-bootstrap';
-import "./styles.css";
-  
+import './styles.css';
+
 const menuItems = [
   {
     roles: ['employee', 'user'],
@@ -32,9 +32,30 @@ const menuItems = [
   },
   {
     roles: ['admin'],
-    id: 'user-mgmt',
-    label: 'User Management',
-    link: '/admin/user-management',
+    id: 'head-coach-management',
+    label: 'Head Coach Management',
+    link: '/admin/head-coach-management',
+    icon: User,
+  },
+  {
+    roles: ['admin'],
+    id: 'subscription-mgmt',
+    label: 'Subscription Logs',
+    link: '/admin/subscription-logs',
+    icon: User,
+  },
+  {
+    roles: ['admin'],
+    id: 'query-mgmt',
+    label: 'Query Management',
+    link: '/admin/query-management',
+    icon: User,
+  },
+  {
+    roles: ['admin'],
+    id: 'promo-code',
+    label: 'Promo code',
+    link: '/admin/promo-code-Management',
     icon: User,
   },
 ];
@@ -69,12 +90,7 @@ const Sidebar = ({ sideBarClass, disable = false }) => {
   };
 
   return (
-    <div
-      className={`${
-        disable ? Styles.disabled : ''
-      }`}
-      id="admin-sidebar"
-    >
+    <div className={`${disable ? Styles.disabled : ''}`} id="admin-sidebar">
       {disable && <div className={Styles.overlay}></div>}
       {/* <div className={Styles['sidebar-title-wrapper']}>
         {renderLink(
@@ -85,70 +101,70 @@ const Sidebar = ({ sideBarClass, disable = false }) => {
         )}
       </div> */}
 
-          <div className="side-nav-wrapper">
-            <Nav
-              activeKey="/home"
-              onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-              as="ul"
-              className="side-nav d-block"
-            >
-              {menuItems.map((item) =>
-                item.roles.includes(role) ? (
-                  <>
-                    <Nav.Item as="li" key={item.id}>
-                      <NavLink to={item.link}>
-                        <i className="fa">
-                          {item.icon && <item.icon className={Styles.icon} />}
-                        </i>
-                        <span className="menu-title">{item.label}</span>
-                      </NavLink>
-                    </Nav.Item>
+      <div className="side-nav-wrapper">
+        <Nav
+          activeKey="/home"
+          onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
+          as="ul"
+          className="side-nav d-block"
+        >
+          {menuItems.map((item) =>
+            item.roles.includes(role) ? (
+              <>
+                <Nav.Item as="li" key={item.id}>
+                  <NavLink to={item.link}>
+                    <i className="fa">
+                      {item.icon && <item.icon className={Styles.icon} />}
+                    </i>
+                    <span className="menu-title">{item.label}</span>
+                  </NavLink>
+                </Nav.Item>
 
-                    {!isNullOrEmpty(item.subItems) && (
-                      <div
-                        id={`submenu-${item.id}`}
-                        className={`${Styles.submenu} ${
-                          openItem === item.id ? Styles.open : ''
-                        }`}
-                      >
-                        {item.subItems.map((subItem, index) => {
-                          return subItem.link ? (
-                            <div key={subItem.link}>
-                              {renderLink(
-                                subItem.link,
-                                <div
-                                  className={`${Styles['submenu-item']} ${
-                                    index === item.subItems.length - 1
-                                      ? Styles['last-item']
-                                      : ''
-                                  } ${
-                                    location.pathname.includes(subItem.link)
-                                      ? Styles.active
-                                      : ''
-                                  }`}
-                                >
-                                  {subItem.name}
-                                </div>
-                              )}
-                            </div>
-                          ) : (
+                {!isNullOrEmpty(item.subItems) && (
+                  <div
+                    id={`submenu-${item.id}`}
+                    className={`${Styles.submenu} ${
+                      openItem === item.id ? Styles.open : ''
+                    }`}
+                  >
+                    {item.subItems.map((subItem, index) => {
+                      return subItem.link ? (
+                        <div key={subItem.link}>
+                          {renderLink(
+                            subItem.link,
                             <div
-                              key={subItem.name}
-                              className={`${Styles['submenu-item']}`}
+                              className={`${Styles['submenu-item']} ${
+                                index === item.subItems.length - 1
+                                  ? Styles['last-item']
+                                  : ''
+                              } ${
+                                location.pathname.includes(subItem.link)
+                                  ? Styles.active
+                                  : ''
+                              }`}
                             >
-                              <p className="mb-0 fw-bold fst-italic">
-                                {subItem.name}
-                              </p>
+                              {subItem.name}
                             </div>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </>
-                ) : null
-              )}
-            </Nav>
-          </div>
+                          )}
+                        </div>
+                      ) : (
+                        <div
+                          key={subItem.name}
+                          className={`${Styles['submenu-item']}`}
+                        >
+                          <p className="mb-0 fw-bold fst-italic">
+                            {subItem.name}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </>
+            ) : null
+          )}
+        </Nav>
+      </div>
     </div>
   );
 };

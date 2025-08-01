@@ -55,6 +55,8 @@ const UserManagement = ({
   // Provide a default value for `userManagement`
   const userManagement = fetchedData?.data ?? [];
 
+  console.log(userManagement, 'Abc');
+
   if (isError) {
     showErrorToast(error);
   }

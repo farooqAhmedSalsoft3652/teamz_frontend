@@ -8,6 +8,12 @@ import './customFilters.css';
 import { capitilize, toSnakeCase } from '../../Utils/Utils';
 import CustomCheckbox from '../CustomCheckbox/CustomCheckbox';
 import CustomButton from '../Common/CustomButton';
+import { Dropdown } from 'react-bootstrap';
+import { BsSliders } from "react-icons/bs";
+
+import FilterBars from '../../assets/images/filter-bars.svg?react';
+
+
 
 const CustomFilters = ({
   filters,
@@ -73,8 +79,65 @@ const CustomFilters = ({
     handleChange(name, value);
   };
 
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+
+  const handleToggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
+
   return (
     <>
+      <div className="table-filters mb-2 mb-md-2 mb-lg-4 d-flex flex-column gap-3 flex-md-row justify-content-md-between align-items-md-center">
+        <div className="d-flex flex-column flex-md-row gap-2 align-items-md-center entries-length">
+          Show Entries
+        </div>
+        <div className="align-items-center d-md-flex justify-content-end order-xl-2 d-flex gap-2">
+          <div className="flex-grow-1">
+            <div className="search-wrap">Search</div>
+          </div>
+
+          <Dropdown
+            className="filters-dropdown"
+            align="end"
+            show={isDropdownOpen}
+            onToggle={handleToggleDropdown}
+          >
+            <Dropdown.Toggle
+              className="primery-color filter-btn"
+              id="dropdown-basic"
+            >
+              {/* <BiSliderAlt  size={24} /> */}
+              <FilterBars  size={24} />
+              {/* <img src={images.filterBars} alt="" /> */}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <div className="dropdown-header">
+                <h3 className="fw-bold title mb-0">Filters</h3>
+              </div>
+              <div className="dropdown-body">
+                <div className="filter-wrapper date-filter">
+                  {/* {props?.dateFilterTitle && ( */}
+                  <label className="w-100 mb-2">Filter By Date</label>
+                  {/* )} */}
+                  <div className="mb-3"></div>
+                  <div className="pb-2"></div>
+                </div>
+              </div>
+              <div className="dropdown-footer d-flex flex-column justify-content-center gap-3 gap-lg-3 mt-0 pt-0">
+                {/* <CustomButton onClick={handleApply} type="button"> */}
+                <CustomButton  type="button">
+                  Apply
+                </CustomButton>
+                {/* <CustomButton handleClear onClick={handleClear} type="button"> */}
+                <CustomButton type="button">
+                  Clear
+                </CustomButton>
+              </div>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+      </div>
+
       <div className="tableFilters mb-3">
         <div className="d-flex justify-content-end justify-content-sm-start align-items-end flex-wrap flex-sm-nowrap gap-2 gap-lg-4">
           <div className="filterWrapper d-flex flex-wrap align-items-end mb-0 gap-2 gap-lg-4 flex-grow-1">

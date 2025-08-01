@@ -1,11 +1,11 @@
-import axiosInstance from '../../Config/axiosConfig';
-import { buildFormData } from '../../Utils/Utils';
-import { userManagementData } from '../../Config/data.jsx';
+import axiosInstance from '../../Config/axiosConfig.js';
+import { buildFormData } from '../../Utils/Utils.jsx';
+import { promoManagementData } from '../../Config/data.jsx';
 
 // GET
-export const getUsersListing = async (params) => {
+export const getPromoListing = async (params) => {
   try {
-    const data  = userManagementData;
+    const data = promoManagementData;
     // const { data } = await axiosInstance.get('/admin-api/users', {
     //   params,
     // });
@@ -17,7 +17,7 @@ export const getUsersListing = async (params) => {
   }
 };
 
-export const updateStatus = async (id) => {
+export const updatePromo = async (id) => {
   try {
     const response = await axiosInstance.post(`/admin-api/users/${id}`);
     const {
@@ -32,15 +32,15 @@ export const updateStatus = async (id) => {
 };
 
 // DETAILS
-export const viewUser = async (id) => {
+export const viewPromo = async (id) => {
   try {
-    const data = userManagementData.detail.data.find(u => u.id === Number(id));
+    const data = promoManagementData.detail.data.find(
+      (u) => u.id === Number(id)
+    );
     return data;
-    
+
     // const { data } = await axiosInstance.get(`/admin-api/users/${id}`);
     // return data.detail; // Assume this returns success obj
-
-
   } catch (error) {
     throw error.response
       ? error.response.data
@@ -48,25 +48,15 @@ export const viewUser = async (id) => {
   }
 };
 
-// USER BRANCHES
-export const getUserBranches = async (id) => {
+export const deletePromo = async (id) => {
   try {
-    const { data } = await axiosInstance.get(`/admin-api/users/branches/${id}`);
-    return data.detail; // Assume this returns success obj
-  } catch (error) {
-    throw error.response
-      ? error.response.data
-      : { message: 'Unknown error occurred' };
-  }
-};
-
-// GET ACCOUNT TYPE
-export const getAccountType = async (type) => {
-  try {
-    const { data } = await axiosInstance.get(
-      `/user-api/beneficiary-register/type?type=${type}`
+    const data = promoManagementData.detail.data.find(
+      (u) => u.id === Number(id)
     );
-    return data.detail; // Assume this returns success obj
+    return data;
+
+    // const { data } = await axiosInstance.delete(`/admin-api/users/${id}`);
+    // return data.detail; // Assume this returns success obj
   } catch (error) {
     throw error.response
       ? error.response.data

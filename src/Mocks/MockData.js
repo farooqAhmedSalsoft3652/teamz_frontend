@@ -1,24 +1,3 @@
-export const loginCredentials = {
-  email: 'admin@gmail.com',
-  password: '123',
-  status: true,
-  role: 'admin',
-  message: 'login successfully',
-  token: '1164|ihHvE9J6cn1U3St4Sk6v6JKOdm2ARA87hXYbIdS63831040a',
-};
-export const loggedInUser = {
-  'user-id': 1,
-  'full-name': 'Arthur Morgan',
-  'first-name': 'Arthur',
-  'last-name': 'Morgan',
-  type: 'admin',
-  token: 'somerandomtokenwhichis38characterslong',
-  phone: '+190078601',
-  dialing_code: '+1',
-  email: 'arthurmorgan@rdr2.com',
-  'photo-path':
-    'https://static.wikia.nocookie.net/villains/images/8/8d/Red_Dead_2_Arthur_Morgan_Promotional_Portrait_1.png',
-};
 export const notifications = [
   {
     id: 1,
@@ -722,5 +701,3 @@ export const supportLogsData = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis',
   },
 ];
-
-

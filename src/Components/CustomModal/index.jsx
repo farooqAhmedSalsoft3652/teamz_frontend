@@ -33,7 +33,7 @@ const CustomModal = ({
       case 'success':
         return (
           <div className="rounded-circle d-flex justify-content-center">
-            <BsCheckCircleFill size={100} color="#28AA72" />
+            <BsCheckCircleFill size={100} color="#34B704" />
           </div>
         );
       case 'error':

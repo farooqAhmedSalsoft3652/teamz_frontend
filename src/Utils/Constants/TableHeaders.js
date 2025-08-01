@@ -129,28 +129,20 @@ export const salesmanHeaders = [
 
 export const attachmentsTableHeaders = ['S.No', 'File Name', 'Action'];
 
-export const documentRegisterHeaders = [
-  'Grp',
-  'Type',
-  'Description',
-  'Number',
-  'Issue Date',
-  'Due Date',
-  'User ID',
-  'Last Updated',
+export const promoCodeHeaders = [
+  'S. No.',
+  'Promocode Name',
+  'Promocode Percentage',
+  'Updated Date Date',
   'Action',
 ];
 
-export const userManagementHeaders = [
+export const queryManagementHeaders = [
   'S. No.',
-  'Business ID',
-  'Business Name',
-  'Contact Person',
-  'User ID',
-  'Phone No.',
+  'Full Name',
   'Email Address',
-  'Reg. Date',
-  'Status',
+  'Type',
+  'Received Date',
   'Action',
 ];
 

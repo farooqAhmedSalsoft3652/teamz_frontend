@@ -4,7 +4,7 @@
 }
 
 .btn-green {
-  @include button-variant($green, $white);
+  @include button-variant($blue, $white);
 }
 
 
@@ -17,26 +17,5 @@ body {
   background-color: $body-bg;
   color: $body-color;
 }
-
-
-.btn-primary {
-  background-color: var(--bs-primary);
-  border-color: var(--bs-primary);
-  color: #fff;
-
-  &:hover {
-    background-color: var(--bs-primary-hover, #c59e00) !important;
-    border-color: var(--bs-primary-hover, #c59e00) !important;
-    color: #ff0000;
-  }
-}
-
-
-
-
-// .btn-primary {
-//   background: linear-gradient(45deg, $primary, darken($primary, 10%));
-//   border: none;
-// }
 
 

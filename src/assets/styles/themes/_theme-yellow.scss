@@ -4,7 +4,29 @@
   --bs-body-bg: #000000;
   --bs-body-color: #ffffff;
   --bs-border-color: #444;
-  --primary-gradient: linear-gradient(135deg, #fec300, #e5b700);
+
+  // --primary-gradient: linear-gradient(135deg, #fec300, #e5b700);
+
   --bs-header-bg: #fce69d;
+
+
+  --bs-btn-gradient-1: #fdd835;
+  --bs-btn-gradient-2: #fbc02d;
+  --bs-primary-gradient: linear-gradient(
+    135deg,
+    var(--bs-btn-gradient-1),
+    var(--bs-btn-gradient-2)
+  );
+
+
+  /* Table */
+  --table-header-bg: var(--bs-header-bg);
+  --table-header-color: #000000;
+  --table-body-color: #000000;
+  --table-bg: transparent;
+  --table-color: #000;
+  --table-border-color: rgba(102, 102, 102, 0.10);
+  --table-border-width: 1px;
+  --table-hover-bg: #f8f9fa;
   
 }

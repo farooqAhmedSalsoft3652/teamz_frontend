@@ -14,7 +14,8 @@ const AdminLogin = () => {
   const loginMutation = useLogin('admin');
   usePageTitle('Admin Login');
 
-  const handleSubmit = async (values, actions) => {
+  const handleSubmit = async (values, actions, isSubmitting) => {
+    console.log("first")
     try {
       await new Promise((resolve) => setTimeout(resolve, 5000));
 
@@ -47,6 +48,7 @@ const AdminLogin = () => {
         }) => (
           <Form className="mt-3 login-form" onSubmit={handleSubmit}>
             <div className="mb-3">
+              {console.log(errors, "errors")}
               <TextInput
                 id="email"
                 name="email"
@@ -57,6 +59,7 @@ const AdminLogin = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 error={touched.email && errors.email}
+                touched={touched.email && errors.email}
                 labelClassName="label-padding-left"
                 required
               />

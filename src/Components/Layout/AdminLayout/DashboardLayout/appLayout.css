@@ -1,9 +1,8 @@
-
 .content .content-wrapper {
-  padding: 10rem 2rem 1.8rem 2rem;
+  padding: 8rem 2rem 1rem 2rem;
 }
 
-.content{
+.content {
   margin-left: 316px;
   padding: 0;
   position: relative;
@@ -11,7 +10,8 @@
   backface-visibility: hidden;
   min-height: calc(100% - 32px);
 }
-.content.body-expanded  {
+
+.content.body-expanded {
   margin-left: 60px;
 }
 
@@ -19,13 +19,15 @@
 
 @media (max-width: 767px) {
   .content.body-expanded {
-      margin-left: 0px;
+    margin-left: 0px;
   }
-  .content.body-expanded .main-menu{
-      margin-left: -60px;
+
+  .content.body-expanded .main-menu {
+    margin-left: -60px;
   }
-  .content{
-      margin-left: 0px;
+
+  .content {
+    margin-left: 0px;
   }
 }
 

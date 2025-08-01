@@ -77,7 +77,7 @@ export const editProfileSchema = Yup.object({
   user_name: Yup.string().required('User name is required'),
   phone: Yup.string().required('Phone Number is required'),
 });
-export const changePasswordSchema = Yup.object({
+export const changePassword = Yup.object({
   current_password: Yup.string().required('Current Password is required'),
   password: Yup.string().required('New Password is required'),
   password_confirmation: Yup.string()
@@ -85,4 +85,11 @@ export const changePasswordSchema = Yup.object({
     .required('Please re-enter your new password'),
 });
 
-
+export const promoCodeSchema = Yup.object().shape({
+  code_name: Yup.string().required('Promocode name is required'),
+  code_discount: Yup.number()
+    .typeError('Discount must be a number')
+    .required('Discount is required')
+    .min(1, 'Minimum 1%')
+    .max(100, 'Maximum 100%'),
+});

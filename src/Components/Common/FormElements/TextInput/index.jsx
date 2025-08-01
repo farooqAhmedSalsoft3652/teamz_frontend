@@ -1,5 +1,3 @@
-// Input.jsx
-
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -21,19 +19,28 @@ const TextInput = ({
   onChange,
   onBlur,
   autoComplete,
-  error,
-  touched = false,
+  error, // ✅ already includes touched logic
   inputIcon,
-  iconPosition = 'left', // 'left' or 'right'
-  inline = false, // inline prop
-  ...rest // ✅ support extra props.
+  iconPosition = 'left',
+  inline = false,
+  ...rest
 }) => {
   const [passwordShow, setPasswordShow] = React.useState(true);
 
-  const handlePasswordToggle = () => {
-    setPasswordShow(!passwordShow);
+  const handlePasswordToggle = () => setPasswordShow((prev) => !prev);
+
+  const handleResetTime = (e) => {
+    e.preventDefault();
+    if (onChange) {
+      const event = {
+        target: {
+          name: name || id,
+          value: '',
+        },
+      };
+      onChange(event);
+    }
   };
-  // console.log(rest); // check if min and max are passed properly
 
   const inputProps = {
     id,
@@ -47,43 +54,35 @@ const TextInput = ({
     value: value !== undefined ? value : '',
     className: `form-control ${className || ''} ${
       inputIcon ? `has-icon-${iconPosition}` : ''
-    } ${touched && error ? 'is-invalid' : ''}`,
+    } ${error ? 'is-invalid' : ''}`,
     type: type === 'password' ? (passwordShow ? 'password' : 'text') : type,
-    'aria-invalid': touched && !!error, // ✅ accessibility
+    'aria-invalid': !!error,
     ...(type === 'textarea' ? { rows } : {}),
-    ...rest, // ✅ extra props like maxLength, step, etc.
+    ...rest,
   };
 
   const labelText = label && (
-    <label
-      className={`form-label ${labelClassName || ''}`}
-      htmlFor={id || name}
-    >
+    <label className={`form-label ${labelClassName || ''}`} htmlFor={id || name}>
       {label}
       {required && <span className="text-danger">*</span>}
     </label>
   );
 
-  // const input =
-  //   type === "textarea" ? (
-  //     <textarea {...inputProps} />
-  //   ) : (
-  //     <input {...inputProps} />
-  //   );
-
   const inputElement =
-    type === 'textarea' ? (
-      <textarea {...inputProps} />
-    ) : (
-      <input {...inputProps} />
-    );
+    type === 'textarea' ? <textarea {...inputProps} /> : <input {...inputProps} />;
 
-  const iconElement = inputIcon && (
-    <FontAwesomeIcon
-      className={`input-icon icon-${iconPosition}`}
-      icon={inputIcon}
-    />
-  );
+  const iconElement =
+    inputIcon &&
+    (typeof inputIcon === 'function'
+      ? React.createElement(inputIcon, {
+          className: `input-icon icon-${iconPosition}`,
+        })
+      : (
+        <FontAwesomeIcon
+          className={`input-icon icon-${iconPosition}`}
+          icon={inputIcon}
+        />
+      ));
 
   const passwordToggleButton = type === 'password' && (
     <button
@@ -95,25 +94,17 @@ const TextInput = ({
     </button>
   );
 
-  // const searchIconElement = type === 'search' && searchIcon && (
-  //   <FontAwesomeIcon className="left-icon" icon={faSearch} />
-  // );
+  const resetTimeButton = type === 'time' && value && (
+    <button
+      type="button"
+      className="reset-time-btn position-absolute"
+      onClick={handleResetTime}
+    >
+      ×
+    </button>
+  );
 
-  // const iconElement = inputIcon && (
-  //   <FontAwesomeIcon
-  //     className={`input-icon icon-${iconPosition}`}
-  //     icon={inputIcon}
-  //   />
-  // );
-
-  const wrapperClass =
-    type === 'password' ? 'passField-wrap' : 'inputField-wrap';
-
-  // const wrapperClass = type === 'password'
-  //   ? 'passField-wrap'
-  //   : type === 'search'
-  //   ? 'search-wrap'
-  //   : 'inputField-wrap';
+  const wrapperClass = type === 'password' ? 'passField-wrap' : 'inputField-wrap';
 
   const dateOrTimePlaceholder =
     (type === 'date' || type === 'time') &&
@@ -122,18 +113,19 @@ const TextInput = ({
         {placeholder || `Select a ${type}`}
       </span>
     ) : (
-      <span className="selected-date">{value}</span>
+      <span className="selected-value">{value}</span>
     ));
 
   const inlineForm = (
     <div className="d-flex align-items-center inline-form">
       {labelText}
-      <div className={wrapperClass}>
+      <div className={`${wrapperClass} position-relative`}>
         {iconPosition === 'left' && iconElement}
         {inputElement}
         {dateOrTimePlaceholder}
         {iconPosition === 'right' && iconElement}
         {passwordToggleButton}
+        {resetTimeButton}
       </div>
     </div>
   );
@@ -145,20 +137,17 @@ const TextInput = ({
       ) : (
         <>
           {labelText}
-          <div className={wrapperClass}>
+          <div className={`${wrapperClass} position-relative`}>
             {iconPosition === 'left' && iconElement}
             {inputElement}
             {dateOrTimePlaceholder}
             {iconPosition === 'right' && iconElement}
             {passwordToggleButton}
-
-            {/* {searchIconElement}
-            {input}
-            {passwordButton} */}
+            {resetTimeButton}
           </div>
         </>
       )}
-      {touched && error && (
+      {error && (
         <div className="error-message text-danger fw-light ps-3 pt-1">
           {error}
         </div>
@@ -168,24 +157,3 @@ const TextInput = ({
 };
 
 export default TextInput;
-
-// Apply Component Example
-/*
-<Input
-  id="full_name"
-  label="Full Name"
-  name="full_name"
-  type="text"
-  placeholder="Enter Full Name"
-  value={values.full_name}
-  onChange={handleChange}
-  onBlur={handleBlur}
-  labelClassName="ps-3"
-  error={touched.full_name && errors.full_name}
-  touched={touched.full_name}
-  required
-  inputIcon={faSearch}
-  iconPosition="left" // or "right"
-  maxLength={100} // ✅ extra prop
-/>
-*/

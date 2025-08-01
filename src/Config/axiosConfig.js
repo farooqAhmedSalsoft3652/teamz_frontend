@@ -43,7 +43,7 @@ axiosInstance.interceptors.response.use(
       clearUser();
 
       // Redirect to login page
-      window.location.href = '/milestone-frontend/login'; // Update path as per your routing setup
+      window.location.href = '/teamz-page/login'; // Update path as per your routing setup
     }
 
     // Return the error to be handled elsewhere if needed

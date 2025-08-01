@@ -1,4 +1,4 @@
-@import url('./assets/fonts/stylesheet.css');
+/* @import url('./assets/fonts/stylesheet.css'); */
 
 /*
   1. Use a more-intuitive box-sizing model.
@@ -20,11 +20,9 @@
   4. Improve text rendering
 */
 body {
-  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  /* font-family: "Inter", system-ui, Helvetica, Arial, sans-serif; */
-  min-width: 320px;
+  font-family: Calibri, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 /*
   5. Improve media defaults

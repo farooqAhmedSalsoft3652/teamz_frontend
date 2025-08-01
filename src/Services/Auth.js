@@ -251,16 +251,23 @@ export const loginAdmin = async (credentials) => {
 
 export const logoutAdmin = async () => {
   // Clear mock authentication data
+  
+  // Working with Moke Data
   localStorage.removeItem('token');
   localStorage.removeItem('user');
   sessionStorage.removeItem('token');
   sessionStorage.removeItem('user');
   try {
-    // const response = await axiosInstance.post('/admin-api/auth/logout');
+    /*
+    //  working With Api
+    const response = await axiosInstance.post('/admin-api/auth/logout');
 
-    // if (!response.data.status) {
-    //   throw new Error('Error logging out', response);
-    // }
+    if (!response.data.status) {
+      throw new Error('Error logging out', response);
+    }
+      */
+
+    // Working with Moke Data
     return {
       token: null,
       role: null,
