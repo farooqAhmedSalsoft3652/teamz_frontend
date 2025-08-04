@@ -59,7 +59,7 @@ const withModal = (WrappedComponent) => {
           title={modalState.title}
           description={modalState.description}
           variant={modalState.variant}
-          btnText={'Submit'}
+          btntext={'OK'} // Changed from btnText to btntext
           errorMessage={modalState.errorMessage}
         />
       </>

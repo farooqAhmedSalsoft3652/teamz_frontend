@@ -41,7 +41,9 @@
   }
 }
 
-
+.btn-link{
+  color: var(--bs-primary);
+}
 /****** Button Primary ******/
 
 .btn-primary:hover,

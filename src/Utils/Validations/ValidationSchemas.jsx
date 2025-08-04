@@ -69,15 +69,10 @@ export const adminLoginValidationSchema = Yup.object().shape({
 export const editAdminProfileSchema = Yup.object({
   first_name: Yup.string().required('First name is required'),
   last_name: Yup.string().required('Last name is required'),
-  country_code: Yup.string().required('Country Code is required'),
-  phone: Yup.string().required('Phone Number is required'),
+  email: Yup.string().required('Email is required'),
 });
-export const editProfileSchema = Yup.object({
-  business_name: Yup.string().required('Business name is required'),
-  user_name: Yup.string().required('User name is required'),
-  phone: Yup.string().required('Phone Number is required'),
-});
-export const changePassword = Yup.object({
+
+export const changePasswordSchema = Yup.object({
   current_password: Yup.string().required('Current Password is required'),
   password: Yup.string().required('New Password is required'),
   password_confirmation: Yup.string()

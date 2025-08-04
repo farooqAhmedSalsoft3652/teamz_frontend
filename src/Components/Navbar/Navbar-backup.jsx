@@ -225,9 +225,10 @@ const Header = ({ sideBarToggle, sideBarClass }) => {
                     >
                       <div className="user-avatar">
                         <div className="user-image">
-                          <img src={user?.photo || images.placeholder} alt="avatar" />
+                          
+                          <img src={user?.["photo-path"] || images.placeholder} alt="avatar" />
                         </div>
-                        {/* <h6>{getInitials(user?.user_name || "Hello")}</h6> */}
+                        <h6>{getInitials(user?.user_name || "Hello")}</h6>
                         <h6>Hello!</h6>
                       </div>
                     </TableActionDropDown>

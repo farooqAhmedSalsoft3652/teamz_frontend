@@ -28,10 +28,13 @@ const AdminAuthScreens = lazy(() => import('./Screens/Admin/Auth/index'));
 
 // Admin screens should be loaded separately from admin auth screens
 const AdminScreens = lazy(() => import('./Screens/Admin/index'));
-const AdminProfile = lazy(() => import('./Screens/Profile/AdminProfile'));
+const AdminProfile = lazy(() => import('./Screens/Profile/index'));
+const EditProfile = lazy(() => import('./Screens/Profile/EditProfile'));
+const ChangePassword = lazy(() => import('./Screens/Profile/ChangePassword'));
 const Profile = lazy(() => import('./Screens/Profile/Profile'));
 const Notifications = lazy(() => import('./Screens/Admin/Notifications/Notifications'));
 const Preferences = lazy(() => import('./Screens/Theme/Preferences'));
+
 function App() {
   const { user, role = 'guest' } = useUserStore();
   const isAuthenticated = !!user; // Checks if user is logged in
@@ -73,6 +76,8 @@ function App() {
           {/* Authenticated Routes Admin */}
           <Route element={isAuthenticated ? <DashboardLayout /> : <Navigate to="/login" />}>
             <Route path="admin/profile" element={<AdminProfile />} />
+            <Route path="admin/profile/edit-profile" element={<EditProfile />} />
+            <Route path="admin/profile/change-password" element={<ChangePassword />} />
             <Route path="notifications" element={<Notifications />} />
             {/* Admin Routes - use the grouped component for admin routes */}
             {role === 'admin' && (

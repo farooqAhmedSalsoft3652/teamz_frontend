@@ -12,7 +12,7 @@ export const loginCredentials = [
     full_name: 'John Wick',
     first_name: 'John',
     last_name: 'Wick',
-    // 'photo-path': images.UserImage,
+    'photo-path': 'https://upload.wikimedia.org/wikipedia/commons/b/be/Pep_2017_%28cropped%29.jpg',
     'user-id': 1,
   },
   {

@@ -53,21 +53,3 @@ export const passwordUpdate = async (credentials) => {
       : { message: 'Unknown error occurred' };
   }
 };
-
-// Business / Users
-export const userPasswordUpdate = async (credentials) => {
-  try {
-    const response = await axiosInstance.post(
-      '/user-api/account/change-password',
-      credentials
-    );
-    const {
-      data: { message, status },
-    } = response;
-    return { message, status }; // Assume this returns the user object
-  } catch (error) {
-    throw error.response
-      ? error.response.data
-      : { message: 'Unknown error occurred' };
-  }
-};

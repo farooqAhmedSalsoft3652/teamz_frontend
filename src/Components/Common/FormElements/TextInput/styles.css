@@ -64,7 +64,7 @@ textarea:focus,
   opacity: 1;
   background: transparent;
   border: transparent;
-  color: var(--bs-white);
+  color: var(--bs-black);
   box-shadow: none;
 }
 

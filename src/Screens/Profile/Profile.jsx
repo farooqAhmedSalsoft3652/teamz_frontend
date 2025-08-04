@@ -84,7 +84,9 @@ const Profile = () => {
 
   return (
     <>
-      <h2 className="screen-title">Profile</h2>
+      
+
+      <h2 className="screen-title"></h2>
       <div className="d-card py-45 d-flex justify-content-between">
         <div className="row flex-grow-1">
           <div className="col-12 col-lg-10 col-xl-9 col-xxl-7 mb-4">

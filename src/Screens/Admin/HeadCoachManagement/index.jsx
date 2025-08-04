@@ -20,7 +20,7 @@ import { branchLogHeaders } from '../../../Utils/Constants/TableHeaders';
 import { formatDate } from '../../../Utils/Utils';
 import './styles.css';
 
-const UserDetails = ({ showModal, closeModal, updatePagination }) => {
+const HeadCoachManagement = ({ showModal, closeModal, updatePagination }) => {
   usePageTitle('User Detils');
   const [changeStatusModal, setChangeStatusModal] = useState(false);
   const { id } = useParams();
@@ -212,4 +212,4 @@ const UserDetails = ({ showModal, closeModal, updatePagination }) => {
   );
 };
 
-export default UserDetails;
+export default HeadCoachManagement;

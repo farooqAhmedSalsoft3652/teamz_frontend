@@ -329,31 +329,7 @@ export const dashboardChartDatafour = {
 
   data: [10, 30, 20, 40, 50, 60, 20, 80, 90, 50, 40, 120],
 };
-export const userDetail = {
-  status: true,
-  message: 'user data',
-  detail: {
-    id: 7,
-    first_name: 'john',
-    last_name: 'Admin',
-    email: 'admin@gmail.com',
-    phone: '+1561555768',
-    status: 1,
-    created_at: '2024-05-27T11:50:43.000000Z',
-    updated_at: '2024-06-14T07:47:49.000000Z',
-    deleted_at: null,
-    status_detail: 'Active',
-    role: 'admin',
-    file: {
-      id: 1425,
-      fileable_type: 'AppModelsBranch',
-      fileable_id: 7,
-      path: 'tmT299v0z6IphNMUlFk1evTI6rKBTA7auVIa449d.png',
-      file_url:
-        'https://upload.wikimedia.org/wikipedia/commons/b/be/Pep_2017_%28cropped%29.jpg',
-    },
-  },
-};
+
 export const statsData = [
   {
     id: 1,

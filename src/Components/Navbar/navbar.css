@@ -458,11 +458,11 @@
   cursor: pointer;
 }
 
-.notification-bell-icon {
+.dropdown-toggle {
   min-width: 26px;
 
-  path {
-    fill: var(--primary-text-color);
+  svg path {
+    fill: var(--bs-black);
     transition: all 0.15s ease-out;
   }
 }
@@ -773,16 +773,16 @@
 }
 
 .notiDropdown:hover .notification-bell-icon {
-  path {
+  svg path {
     fill: var(--secondary-color);
     transition: all 0.15s ease-out;
   }
 }
 
 .notiDropdown span.badge {
-  background: white;
+  background: var(--bs-black);
   border: 1px solid var(--secondary-color);
-  color: var(--dash-icon-color);
+  color: var(--bs-white);
   height: 18px;
   width: 18px;
   padding: 3px;
