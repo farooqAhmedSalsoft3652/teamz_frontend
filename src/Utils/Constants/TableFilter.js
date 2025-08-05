@@ -24,6 +24,26 @@ export const notificationFilterOptions = [
   { value: '1', label: 'Unread' },
 ];
 
+// Subscription Management
+export const subscriptionStatusFilters = [
+  { value: '', label: 'All' },
+  { value: 'Active', label: 'Active' },
+  { value: 'Inactive', label: 'Inactive' },
+];
+
+export const subscriptionTypeFilters = [
+  { value: '', label: 'All' },
+  { value: 'Basic', label: 'Basic' },
+  { value: 'Premium', label: 'Premium' },
+];
+
+export const paymentStatusFilters = [
+  { value: '', label: 'All' },
+  { value: 'Paid', label: 'Paid' },
+  { value: 'Pending', label: 'Pending' },
+  { value: 'Failed', label: 'Failed' },
+];
+
 //////      BUSINESS     //////
 export const unlockRequestFilterOptions = [
   { value: '', label: 'All' },

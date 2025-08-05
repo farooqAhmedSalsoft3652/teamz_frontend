@@ -1,79 +1,81 @@
 :root {
-  --bs-body-bg: #3C5726;
-  --bs-body-color: #000000;
-  --bs-border-color: #cbcbcb;
+  // Bootstrap Standard Colors
   --bs-primary: #3C5726;
+  --bs-secondary: #6c757d;
+  --bs-success: #28a745;
+  --bs-danger: #dc3545;
+  --bs-warning: #ffc107;
+  --bs-info: #17a2b8;
+  --bs-light: #f8f9fa;
+  --bs-dark: #343a40;
+  --bs-white: #ffffff;
+  --bs-black: #000000;
 
+  // Bootstrap Body & Border Colors
+  --bs-body-bg: #3C5726;
+  --bs-body-color: #212529;
+  --bs-border-color: #cbcbcb;
 
+  // Bootstrap Text Colors
+  --bs-primary-text-color: var(--primary-text-color);
+  --bs-secondary-text-color: #646464;
 
-
+  // Bootstrap Button Gradients
   --bs-btn-gradient-1: #364e22;
   --bs-btn-gradient-2: #69a13b;
-  --bs-primary-gradient: linear-gradient(
-    55deg,
-    var(--bs-btn-gradient-1),
-    var(--bs-btn-gradient-2) 55%,
-    var(--bs-btn-gradient-1)
-  );
+  --bs-primary-gradient: linear-gradient(55deg,
+      var(--bs-btn-gradient-1),
+      var(--bs-btn-gradient-2) 55%,
+      var(--bs-btn-gradient-1));
 
+  // Bootstrap Input Focus
   --bs-input-focus-border-color: var(--bs-primary);
 
-
+  // Bootstrap Header
   --bs-header-bg: #D7E8D1;
 
-  /* Table */
+  // Your Existing Theme Colors
+  // --primary-color: #3C5726;
+  // --secondary-color: #6c757d;
+  // --body-bg-color: #f8f9fa;
+  // --content-bg-color: #ffffff;
+
+  // Dashboard Colors
+  --dash-icon-color: #3C5726;
+  --dash-icon-wrapper-bg: #f8f9fa;
+
+  // Pagination Colors
+  --pagination-bg-color: #3C5726;
+  --pagination-text-color: #fff;
+  --pagination-hover-text-color: #000;
+
+  // Text Colors
+  --primary-text-color: #212529;
+  --secondary-text-color: #6c757d;
+  --colored-heading: #3C5726;
+  --contrast-text-color: #ffffff;
+
+  --detail-label-color: #6c757d;
+  --table-td-color: #212529;
+
+  // Input Colors
+  --input-bg-color: #fff;
+  --input-label-color: #495057;
+  --input-focus-color: #3C5726;
+
+  // Button Colors
+  --btn-primary-color: #3C5726;
+  --btn-secondary-color: #6c757d;
+  --btn-text-color: #fff;
+  --btn-text-hover-color: #000;
+
+  // Table Colors
   --table-header-bg: var(--bs-header-bg);
   --table-header-color: #000000;
   --table-body-color: #000000;
   --table-bg: transparent;
-  --table-color: #212529;
+  --table-color: #000;
   --table-border-color: rgba(102, 102, 102, 0.10);
   --table-border-width: 1px;
   --table-hover-bg: #f8f9fa;
-  
-
-  // linear-gradient(55deg, var(--c1, #cf0030), var(--c2, #fe8224) 55%, var(--c1, #cf0030)) var(--x, 0)/ 200%;
-
-  // --bs-primary-gradient: linear-gradient(
-  //   55deg,
-  //   $btn-gradient-1,
-  //   $btn-gradient-2 55%,
-  //   $btn-gradient-1);
-
-  // --bs-btn-gradient-1: #{$btn-gradient-1};
-  // --bs-btn-gradient-2: #{$btn-gradient-2};
-  // --bs-primary-gradient: linear-gradient(
-  //   55deg,
-  //   var(--bs-btn-gradient-1),
-  //   var(--bs-btn-gradient-2) 55%,
-  //   var(--bs-btn-gradient-1)
-  // );
-
-
-
-
-  // --bs-btn-gradient-1: #364e22;
-  // --bs-btn-gradient-2: #69a13b;
-  // --bs-primary-gradient: linear-gradient(
-  //   55deg,
-  //   var(--bs-btn-gradient-1),
-  //   var(--bs-btn-gradient-2) 55%,
-  //   var(--bs-btn-gradient-1)
-  // );
-
-
-
-
-
-
-  // --bs-primary: #0d6efd;
-  // --bs-secondary: #6c757d;
-  // --bs-success: #198754;
-  // --bs-danger: #dc3545;
-  // --bs-warning: #ffc107;
-  // --bs-info: #0dcaf0;
-  // --bs-light: #f8f9fa;
-  // --bs-dark: #212529;
 }
-
-

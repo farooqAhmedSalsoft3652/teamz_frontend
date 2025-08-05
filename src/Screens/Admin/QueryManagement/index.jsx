@@ -32,7 +32,7 @@ const QueryManagement = ({
   pagination,
   updatePagination,
 }) => {
-  usePageTitle('User Management');
+  usePageTitle('Query Management');
   const navigate = useNavigate();
   const [changeStatusModal, setChangeStatusModal] = useState(false);
   const [selectedObj, setSelectedObj] = useState(null);
@@ -106,6 +106,7 @@ const QueryManagement = ({
                 headers={queryManagementHeaders}
                 pagination={pagination}
                 isLoading={isLoading}
+                centerLastHeader={true}
                 selectOptions={[
                   {
                     title: 'status',

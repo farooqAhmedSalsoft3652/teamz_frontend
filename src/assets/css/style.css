@@ -1,11 +1,40 @@
 /*******************
 	Pages General Calsses Start   
 ***********************************/
+
+
+/* Bootstrap text color utilities */
+.text-primary { color: var(--bs-primary) !important; }
+.text-secondary { color: var(--bs-secondary) !important; }
+.text-success { color: var(--bs-success) !important; }
+.text-danger { color: var(--bs-danger) !important; }
+.text-warning { color: var(--bs-warning) !important; }
+.text-info { color: var(--bs-info) !important; }
+.text-light { color: var(--bs-light) !important; }
+.text-dark { color: var(--bs-dark) !important; }
+.text-white { color: var(--bs-white) !important; }
+.text-muted { color: var(--bs-secondary) !important; }
+
+/* Background Colors */
+.bg-primary {
+  background-color: var(--bs-primary);
+}
+.bg-secondary {
+  background-color: var(--bs-secondary);
+}
+
+/* Text Colors */
+.text-primary {
+  color: var(--bs-primary-text-color);
+}
+.text-secondary {
+  color: var(--bs-secondary-text-color);
+}
+
 /* Shadow */
 .shadow-none {
   box-shadow: none !important;
 }
-
 .shadow-sm {
   box-shadow: 0 10px 40px 0 rgb(62 57 107 / 7%), 0 2px 9px 0 rgb(62 57 107 / 6%) !important;
 }
@@ -30,10 +59,12 @@
   h2 {
     color: var(--bs-black);
     text-transform: capitalize;
+    font-family: "Georgia", sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
-    font-family: 'Calibri', sans-serif;
+    /* font-family: 'Calibri', sans-serif; */
     margin-bottom: 0px;
+    letter-spacing: 1px;
   }
 
   .page-back {

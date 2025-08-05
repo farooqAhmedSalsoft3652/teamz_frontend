@@ -11,6 +11,7 @@ import { usePageTitle } from '../../Hooks/usePageTitle';
 import { Col, Row } from 'react-bootstrap';
 import TextInput from '../../Components/Common/FormElements/TextInput';
 import withModal from '../../HOC/withModal';
+import BackButton from '../../Components/BackButton';
 
 const ChangePassword = ({showModal}) => {
   usePageTitle('Change Password');
@@ -47,6 +48,7 @@ const ChangePassword = ({showModal}) => {
   return (
     <section className="profile-management">
       <div className="admin-content-header mb-4 d-flex gap-2">
+        <BackButton />
         <h2 className="screen-title mb-0">Change Password</h2>
       </div>
       
@@ -74,6 +76,7 @@ const ChangePassword = ({showModal}) => {
                           label={'Current Password'}
                           placeholder={'Enter Current Password'}
                           value={values.current_password}
+                          labelClassName={`label-padding-left`}
                           onChange={handleChange}
                           onBlur={handleBlur}
                           error={touched.current_password && errors.current_password}
@@ -87,6 +90,7 @@ const ChangePassword = ({showModal}) => {
                           label={'New Password'}
                           placeholder={'Enter New Password'}
                           value={values.password}
+                          labelClassName={`label-padding-left`}
                           onChange={handleChange}
                           onBlur={handleBlur}
                           error={touched.password && errors.password}
@@ -100,6 +104,7 @@ const ChangePassword = ({showModal}) => {
                           label={'Confirm Password'}
                           placeholder={'Re-Enter New Password'}
                           value={values.password_confirmation}
+                          labelClassName={`label-padding-left`}
                           onChange={handleChange}
                           onBlur={handleBlur}
                           error={

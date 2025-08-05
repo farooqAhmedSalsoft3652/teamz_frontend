@@ -15,6 +15,7 @@ import TextInput from '../../Components/Common/FormElements/TextInput';
 import withModal from '../../HOC/withModal';
 
 import { MdOutlineCameraAlt } from "react-icons/md";
+import BackButton from '../../Components/BackButton';
 
 
 
@@ -99,9 +100,10 @@ const EditProfile = ({showModal}) => {
   return (
     <section className="profile-management">
       <div className="admin-content-header mb-4 d-flex gap-2">
+        <BackButton />
         <h2 className="screen-title mb-0">Edit Profile</h2>
       </div>
-      
+
       <div className="admin-content-body rounded-20 p-4 p-lg-4 p-xxl-4 mb-4">
         <Row>
           <Col md={10} lg={8} xl={6} xxl={5}>
@@ -132,8 +134,7 @@ const EditProfile = ({showModal}) => {
                 </div>
               </Col>
             </Row>
-
-            <div className="edit-profile-form">
+          
               <Formik
                 initialValues={{ ...user }}
                 validationSchema={editAdminProfileSchema}
@@ -162,6 +163,7 @@ const EditProfile = ({showModal}) => {
                           onChange={handleChange}
                           onBlur={handleBlur}
                           error={touched.first_name && errors.first_name}
+                          labelClassName={`label-padding-left`}
                         />
                       </Col>
                       <Col xs={12} className="mb-3 mb-lg-4 mb-xxl-4">
@@ -175,6 +177,7 @@ const EditProfile = ({showModal}) => {
                           onChange={handleChange}
                           onBlur={handleBlur}
                           error={touched.last_name && errors.last_name}
+                          labelClassName={`label-padding-left`}
                         />
                       </Col>
                       <Col xs={12} className="mb-3 mb-lg-4 mb-xxl-4">
@@ -188,7 +191,7 @@ const EditProfile = ({showModal}) => {
                           onChange={handleChange}
                           onBlur={handleBlur}
                           error={touched.email && errors.email}
-                          className={`px-0`}
+                          labelClassName={`label-padding-left`}
                           readOnly
                         />
                       </Col>
@@ -208,7 +211,6 @@ const EditProfile = ({showModal}) => {
                   </Form>
                 )}
               </Formik>
-            </div>
           </Col>
         </Row>
       </div>

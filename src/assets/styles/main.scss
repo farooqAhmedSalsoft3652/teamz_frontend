@@ -6,9 +6,9 @@
 // @import "base/mixins";     // Your custom mixins
 
 // 3. Theme overrides (based on [data-theme])
+@import "themes/theme-primary";
 @import "themes/theme-dark";
 @import "themes/theme-yellow";
-@import "themes/theme-primary";
 // @import "themes/theme-purple";
 
 // 4. Bootstrap variable overrides

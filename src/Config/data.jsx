@@ -505,3 +505,151 @@ export const promoManagementData = {
     total: 11,
   },
 };
+// Mock data for subscription logs
+export const subscriptionLogsData = {
+  detail: {
+    data: [
+      {
+        id: 1,
+        user_name: 'John Doe 1',
+        email: 'john@example.com',
+        school: 'School 1',
+        school_name: 'School 1',
+        type: 'Coach',
+        duration: '1 Month',
+        status: 'Active',
+        status_detail: 'Active',
+        created_at: '2024-01-15T10:30:00Z',
+        expire_at: '2025-01-15T10:30:00Z',
+        subscription_plan: 'Monthly',
+        amount: '$29.99',
+        payment_status: 'Paid'
+      },
+      {
+        id: 2,
+        user_name: 'Jane Smith',
+        email: 'jane@example.com',
+        school: 'School 2',
+        school_name: 'School 2',
+        type: 'Assistant Coach',
+        duration: '1 Year',
+        status: 'Inactive',
+        status_detail: 'Inactive',
+        created_at: '2024-01-14T15:45:00Z',
+        expire_at: '2025-01-14T15:45:00Z',
+        subscription_plan: 'Yearly',
+        amount: '$99.99',
+        payment_status: 'Pending'
+      },
+      {
+        id: 3,
+        user_name: 'Mike Johnson',
+        email: 'mike@example.com',
+        school: 'School 3',
+        school_name: 'School 3',
+        type: 'coach',
+        duration: '1 Year',
+        status: 'Active',
+        status_detail: 'Active',
+        created_at: '2024-01-13T09:20:00Z',
+        expire_at: '2025-01-13T09:20:00Z',
+        subscription_plan: 'Yearly',
+        amount: '$29.99',
+        payment_status: 'Paid'
+      },
+      {
+        id: 4,
+        user_name: 'Sarah Wilson',
+        email: 'sarah@example.com',
+        school: 'School 4',
+        school_name: 'School 4',
+        type: 'Assistant Coach',
+        duration: '1 Year',
+        status: 'Active',
+        status_detail: 'Active',
+        created_at: '2024-01-12T14:10:00Z',
+        expire_at: '2025-01-12T14:10:00Z',
+        subscription_plan: 'Yearly',
+        amount: '$19.99',
+        payment_status: 'Paid'
+      },
+      {
+        id: 5,
+        user_name: 'David Brown',
+        email: 'david@example.com',
+        school: 'School 5',
+        school_name: 'School 5',
+        type: 'Premium',
+        duration: '1 Year',
+        status: 'Inactive',
+        status_detail: 'Inactive',
+        created_at: '2024-01-11T11:55:00Z',
+        expire_at: '2025-01-11T11:55:00Z',
+        subscription_plan: 'Yearly',
+        amount: '$299.99',
+        payment_status: 'Failed'
+      }
+    ],
+    total: 5,
+    per_page: 10,
+    current_page: 1,
+    last_page: 1
+  }
+};
+
+// Mock data for subscription plans
+export const subscriptionPlansData = {
+  detail: {
+    data: [
+      {
+        id: 1,
+        name: 'Monthly',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, numquam quis! Consequuntur id quis, doloremque accusamus voluptatibus ullam neque aperiam eligendi voluptatem esse ducimus minus voluptate? Cupiditate quisquam doloribus laudantium.',
+        amount: 29.99,
+        duration: '1 Month',
+        status: 'Active',
+        features: ['Feature 1', 'Feature 2', 'Feature 3'],
+        created_at: '2024-01-15T10:30:00Z',
+        updated_at: '2024-01-15T10:30:00Z'
+        
+      },
+      {
+        id: 2,
+        name: 'Yearly',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, numquam quis! Consequuntur id quis, doloremque accusamus voluptatibus ullam neque aperiam eligendi voluptatem esse ducimus minus voluptate? Cupiditate quisquam doloribus laudantium.',
+        amount: 49.99,
+        duration: '1 Year',
+        status: 'Active',
+        features: ['All Basic Features', 'Premium Feature 1', 'Premium Feature 2'],
+        created_at: '2024-01-14T15:45:00Z',
+        updated_at: '2024-01-15T10:30:00Z'
+      },
+      {
+        id: 3,
+        name: 'Monthly',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, numquam quis! Consequuntur id quis, doloremque accusamus voluptatibus ullam neque aperiam eligendi voluptatem esse ducimus minus voluptate? Cupiditate quisquam doloribus laudantium.',
+        amount: 299.99,
+        duration: '1 Month',
+        status: 'Inactive',
+        features: ['Feature 1', 'Feature 2', 'Feature 3'],
+        created_at: '2024-01-13T09:20:00Z',
+        updated_at: '2024-01-15T10:30:00Z'
+      },
+      {
+        id: 4,
+        name: 'Yearly',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, numquam quis! Consequuntur id quis, doloremque accusamus voluptatibus ullam neque aperiam eligendi voluptatem esse ducimus minus voluptate? Cupiditate quisquam doloribus laudantium.',
+        amount: 499.99,
+        duration: '1 Year',
+        status: 'Active',
+        features: ['All Basic Features', 'Premium Feature 1', 'Premium Feature 2'],
+        created_at: '2024-01-12T14:10:00Z',
+        updated_at: '2024-01-15T10:30:00Z'
+      }
+    ],
+    total: 4,
+    per_page: 10,
+    current_page: 1,
+    last_page: 1
+  }
+};

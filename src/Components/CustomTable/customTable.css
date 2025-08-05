@@ -78,14 +78,15 @@ table.dataTable thead th:first-child {
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
   padding-left: 1.2rem;
-  /* border-left: 2px solid var(--table-border-color, var(--bs-border-color, #dee2e6)); */
+  border-left: 1px solid var(--table-border-color, var(--bs-border-color, #dee2e6));
 }
 
 
 
 table.dataTable thead th {
-  font-weight: 700;
-  padding: 1.3rem 1.2rem 1.3rem 1.2rem;
+  font-family: "Georgia", sans-serif;
+  font-weight: 600;
+  padding: 1.2rem 1rem 1.2rem 1rem;
   color: var(--table-color, var(--bs-body-color, #212529));
   line-height: 1.1;
   text-transform: capitalize;
@@ -97,12 +98,13 @@ table.dataTable thead th {
 table.dataTable thead th:first-child {
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
-  padding-left: 2.5rem;
+  padding-left: 1.5rem;
 }
 
 table.dataTable thead th:last-child {
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
+  padding-right: 1.5rem;
 }
 
 table.dataTable td {
@@ -127,7 +129,7 @@ table.dataTable tbody td:last-child,
 table.dataTable thead th:last-child {
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
-  border-right: 2px solid var(--table-border-color, var(--bs-border-color, #dee2e6));
+  border-right: 1px solid var(--table-border-color, var(--bs-border-color, #dee2e6));
 }
 
 /* .table.dataTable td a {

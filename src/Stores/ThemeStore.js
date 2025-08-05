@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 
 // Define theme options
 // const themeOptions = ['dark', 'purple', 'teal', 'blue', 'yellow'];
-const themeOptions = ['dark', 'yellow'];
+const themeOptions = ['primary', 'dark', 'yellow'];
 
 const useThemeStore = create(
   persist(

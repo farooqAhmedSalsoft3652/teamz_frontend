@@ -84,7 +84,7 @@ const CustomFilters = ({
   const handleToggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
-
+  // console.log(filters , 'filters');
   return (
     <>
       <div className="table-filters mb-2 mb-md-2 mb-lg-4 d-flex flex-column gap-3 flex-md-row justify-content-md-between align-items-md-center">
@@ -106,9 +106,7 @@ const CustomFilters = ({
               className="primery-color filter-btn"
               id="dropdown-basic"
             >
-              {/* <BiSliderAlt  size={24} /> */}
               <FilterBars  size={24} />
-              {/* <img src={images.filterBars} alt="" /> */}
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <div className="dropdown-header">

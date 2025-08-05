@@ -231,6 +231,7 @@ const PromoCodeManagement = ({
                 headers={promoCodeHeaders}
                 pagination={pagination}
                 isLoading={isLoading}
+                centerLastHeader={true}
                 selectOptions={[
                   {
                     title: 'status',

@@ -2,50 +2,118 @@ import React, { forwardRef } from 'react';
 import Form from 'react-bootstrap/Form';
 import Styles from './style.module.css';
 
-const CustomSelect = (
-  { size = '', options = [], name, onChange, defaultValue, value, className, fullWidth, halfWidth, required, label, firstIsLabel, onBlur },
-  ref
-) => {
+const CustomSelect = forwardRef(({
+  // Basic props
+  name,
+  id,
+  label,
+  value,
+  onChange,
+  onBlur,
+  options = [],
+  required = false,
+  placeholder,
+  
+  // Styling props
+  size = '',
+  className = '',
+  selectClass = '',
+  labelClassName = '',
+  fullWidth = false,
+  halfWidth = false,
+  
+  // Functionality props
+  firstIsLabel = false,
+  disabled = false,
+  error,
+  touched = false,
+  
+  // Additional props
+  defaultValue,
+  ...props
+}, ref) => {
+  
   const handleSelectChange = (event) => {
     if (onChange) {
-      onChange(event);
+      // Support both direct value and event object
+      if (typeof onChange === 'function') {
+        onChange(event.target.value);
+      }
     }
   };
 
-  // Adjust options for firstIsLabel
-  const selectOptions = firstIsLabel ? [{ value: '', label: options[0]?.label, disabled: true }, ...options.slice(1)] : options;
+  // Process options for firstIsLabel functionality
+  const selectOptions = firstIsLabel 
+    ? [{ value: '', label: options[0]?.label || placeholder, disabled: true }, ...options.slice(1)] 
+    : options;
 
   return (
     <div className={`${Styles.customSelect} ${fullWidth && Styles.fullWidth} ${halfWidth && Styles.halfWidth}`}>
+      {/* Label */}
       {label && (
-        <label htmlFor={name}>
-          {label}
-          {required && <span className="text-danger">*</span>}
+        <label 
+          className={`form-label ${labelClassName}`} 
+          htmlFor={id || name}
+        >
+          {label} {required && <span className="text-danger">*</span>}
         </label>
       )}
+
+      {/* Select Dropdown */}
       <Form.Select
         ref={ref}
         name={name}
+        id={id || name}
+        value={value ?? ""}
         defaultValue={defaultValue}
-        value={value}
         onChange={handleSelectChange}
-        size={size}
-        className={Styles[className]}
         onBlur={onBlur}
+        size={size}
+        disabled={disabled}
+        className={`${Styles[className]} ${selectClass} ${touched && error ? "is-invalid" : ""}`}
+        aria-invalid={touched && error ? true : false}
+        {...props}
       >
-        {selectOptions.map(({ value, label, disabled }, index) => (
-          <option
-            key={`${name}-${index}`}
-            value={value}
-            disabled={disabled}
-            className={label?.toLowerCase().startsWith('add new') ? 'text-center secondary-color' : ''}
-          >
-            {label}
+        {/* Placeholder */}
+        {placeholder && !firstIsLabel && (
+          <option value="" disabled>
+            {placeholder}
           </option>
-        ))}
+        )}
+        
+        {/* Options */}
+        {selectOptions.map((option, index) => {
+          const optionValue = option.value || option;
+          const optionLabel = option.text || option.label || option;
+          const isDisabled = option.disabled || false;
+          
+          return (
+            <option
+              key={`${name}-${index}`}
+              value={optionValue}
+              disabled={isDisabled}
+              className={
+                optionLabel?.toLowerCase().startsWith('add new') 
+                  ? 'text-center secondary-color' 
+                  : ''
+              }
+            >
+              {optionLabel}
+            </option>
+          );
+        })}
       </Form.Select>
+
+      {/* Error Message */}
+      {touched && error && (
+        <div className="error-message text-danger fw-light ps-3 pt-2">
+          {error}
+        </div>
+      )}
     </div>
   );
-};
+});
 
-export default forwardRef(CustomSelect);
+CustomSelect.displayName = 'CustomSelect';
+
+export default CustomSelect;

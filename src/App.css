@@ -33,15 +33,8 @@
 .contrast-text-color {
   color: var(--contrast-text-color);
 }
-.primary-color {
-  background-color: var(--primary-color);
-}
-.primary-color-text {
-  color: var(--primary-color);
-}
-.secondary-color {
-  background-color: var(--secondary-color);
-}
+
+
 .primary-text-color {
   color: var(--primary-text-color);
 }

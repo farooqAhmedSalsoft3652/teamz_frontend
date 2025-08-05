@@ -4,8 +4,8 @@
 .btn {
   color: var(--bs-white);
   padding: 15px 40px;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 400;
   transition: all .6s ease 0s;
   text-transform: capitalize;
   line-height: normal;
@@ -13,6 +13,8 @@
   text-align: center;
   display: inline-block;
   border: 1px solid transparent;
+  font-family: "Georgia", sans-serif;
+  letter-spacing: 1px;
 
   &.disabled,
   &:disabled,

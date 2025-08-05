@@ -29,6 +29,7 @@ const CustomTable = ({
   displayCard = false,
   renderAtEnd,
   useApplyButton = false,
+  centerLastHeader = false,
 }) => {
   return (
     <>
@@ -56,8 +57,15 @@ const CustomTable = ({
           <thead>
             <tr>
               {headers.map((header, index) => {
+                const isLastChild = index === headers.length - 1;
+                const centerClass = centerLastHeader && isLastChild ? 'text-center' : '';
+                
                 if (typeof header === 'string' || React.isValidElement(header))
-                  return <th key={index}>{header}</th>;
+                  return (
+                    <th key={index} className={centerClass}>
+                      {header}
+                    </th>
+                  );
                 else {
                   return (
                     <th
@@ -65,7 +73,7 @@ const CustomTable = ({
                       onClick={() => handleSort(header.key)}
                       className={`cp ${
                         sortKey === header.key ? sortOrder : 'sorting'
-                      }`}
+                      } ${centerClass}`}
                     >
                       <span className="d-inline">
                         {header.title}{' '}
