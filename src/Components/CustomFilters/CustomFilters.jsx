@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 import { sortingOptions } from '../../Utils/Constants/SelectOptions';
 import CustomInput from '../CustomInput';
-import CustomSelect from '../CustomSelect';
+import CustomSelect from '../Common/FormElements/SelectInput';
 import './customFilters.css';
 import { capitilize, toSnakeCase } from '../../Utils/Utils';
 import CustomCheckbox from '../CustomCheckbox/CustomCheckbox';

@@ -1,215 +1,330 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import Skeleton from 'react-loading-skeleton';
-import { useParams } from 'react-router-dom';
-import BackButton from '../../../Components/BackButton';
-import CustomButton from '../../../Components/Common/CustomButton';
+import {
+  HiOutlineCheckCircle,
+  HiOutlineEye,
+  HiOutlineXCircle,
+} from 'react-icons/hi2';
+import { useNavigate } from 'react-router-dom';
 import CustomModal from '../../../Components/CustomModal';
 import CustomTable from '../../../Components/CustomTable/CustomTable';
-import StatusChip from '../../../Components/StatusChip/StatusChip';
+import TableActionDropDown from '../../../Components/TableActionDropDown/TableActionDropDown';
 import { showToast } from '../../../Components/Toast/Toast';
+import withFilters from '../../../HOC/withFilters ';
+import withModal from '../../../HOC/withModal';
 import { usePageTitle } from '../../../Hooks/usePageTitle';
+import { useFetchTableData } from '../../../Hooks/useTable';
 import {
-  getUserBranches,
+  getHeadCoachListing,
   updateStatus,
-  viewUser,
-} from '../../../Services/Admin/UserManagement';
+} from '../../../Services/Admin/HeadCoachManagement';
 import { statusClassMap } from '../../../Utils/Constants/SelectOptions';
-import { branchLogHeaders } from '../../../Utils/Constants/TableHeaders';
-import { formatDate } from '../../../Utils/Utils';
+import { userStatus, userStatusFilters } from '../../../Utils/Constants/TableFilter';
+import { headCoachHeaders } from '../../../Utils/Constants/TableHeaders';
+import { formatDate, serialNum, showErrorToast } from '../../../Utils/Utils';
+import CustomSelect from '../../../Components/Common/FormElements/SelectInput';
 import './styles.css';
 
-const HeadCoachManagement = ({ showModal, closeModal, updatePagination }) => {
-  usePageTitle('User Detils');
+
+const HeadCoachManagement = ({
+  showModal,
+  closeModal,
+  filters,
+  setFilters,
+  pagination,
+  updatePagination,
+}) => {
+  usePageTitle('User Management');
+  const navigate = useNavigate();
   const [changeStatusModal, setChangeStatusModal] = useState(false);
-  const { id } = useParams();
+  const [selectedObj, setSelectedObj] = useState(null);
+  const [selectValue, setSelectValue] = useState({});
   let queryClient = useQueryClient();
 
-  // Mutation for updating status
-  const { mutate: updateStatusMutation, isPending: isStatusUpdating } =
-    useMutation({
-      mutationFn: async () => await updateStatus(id),
-      onSuccess: (data) => {
-        showToast('Status updated successfully', 'success');
-        setChangeStatusModal(false);
-        queryClient.invalidateQueries(['userDetails', id]);
-      },
-      onError: (error) => {
-        showToast('Failed to update status', 'error');
-        console.error('Error updating status:', error);
-      },
-    });
-
-  const handleStatusChange = () => {
-    const newStatus = user?.status_detail === 'Active' ? 'Inactive' : 'Active';
-    updateStatusMutation(newStatus);
-  };
-
-  // User Details
+  //GET USERS
   const {
-    data: user,
+    data: fetchedData, // Renamed to avoid confusion with the derived `userManagement`
     isLoading,
     isError,
     error,
-  } = useQuery({
-    queryKey: ['userDetails', id],
-    queryFn: () => viewUser(id),
-    refetchOnWindowFocus: false,
-    retry: 1,
-  });
+    refetch,
+  } = useFetchTableData(
+    'userListing',
+    filters,
+    updatePagination,
+    getHeadCoachListing
+  );
 
-  // User Branches
-  const {
-    data: branches = [],
-    isLoading: isLoadingBranchLogs,
-    isError: isErrorBranchLogs,
-    error: errorBranchLogs,
-  } = useQuery({
-    queryKey: ['branches', id],
-    queryFn: () => getUserBranches(id),
-    refetchOnWindowFocus: false,
-    retry: 1,
-  });
+  // Provide a default value for `userManagement`
+  const userManagement = fetchedData?.data ?? [];
 
-  const branchLogs = branches?.data ?? [];
+  console.log(userManagement, 'Abc');
 
-  if (isLoading && isLoadingBranchLogs) {
-    return (
-      <>
-        <div className="d-card ">
-          <div className="row">
-            <div className="col-12 col-lg-10 col-xl-9 col-xxl-7">
-              <div className="row mb-4">
-                {Array.from({ length: 19 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="col-12 col-sm-6 mb-3  align-items-center"
-                    style={{ height: 56 }}
-                  >
-                    <Skeleton
-                      style={{ marginTop: 28 }}
-                      duration={1}
-                      width={'50%'}
-                      baseColor="#ddd"
-                      height={22}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
-    );
+  if (isError) {
+    showErrorToast(error);
   }
 
-  if (isError && isErrorBranchLogs) {
-    return (
-      <>
-        <div className="d-card">
-          <p className="text-danger">{error.message}</p>
-        </div>
-      </>
-    );
-  }
+  const isStatusActive = (item) => {
+    // Simple logic based on item?.status
+    const status = item?.status;
+    console.log(`Item ${item.id}: status="${status}"`);
+    
+    // If status is 1, return true (active), if 0, return false (inactive)
+    return status === 1 || status === '1';
+  };
+
+  // Initialize selectValue when userManagement changes
+  useEffect(() => {
+    if (userManagement.length > 0) {
+      const initialValues = {};
+      userManagement.forEach((item) => {
+        // Simple mapping: 1 = active, 0 = inactive
+        const isActive = isStatusActive(item);
+        initialValues[item.id] = isActive ? '1' : '0';
+        console.log(`Item ${item.id}: status=${item?.status}, isActive=${isActive}, selectValue=${isActive ? '1' : '0'}`);
+      });
+      setSelectValue(initialValues);
+    }
+  }, [userManagement]);
+
+  //UPDATE STATUS
+  // const handleStatusChange = (itemId, event) => {
+  //   const newStatus = event.target.value;
+  //   const statusText = newStatus === '1' ? 'Active' : 'Inactive';
+    
+  //   // Update local state immediately for better UX
+  //   setSelectValue(prev => ({
+  //     ...prev,
+  //     [itemId]: newStatus
+  //   }));
+
+  //   // Show confirmation modal
+  //   setSelectedObj({ id: itemId, status: newStatus, statusText });
+  //   setChangeStatusModal(true);
+  // };
+
+  // Mutation for updating status
+  // const { mutate: updateStatusMutation, isPending: isStatusUpdating } =
+  //   useMutation({
+  //     mutationFn: async (id) => await updateStatus(id),
+  //     onSuccess: (data) => {
+  //       showToast('Status updated successfully', 'success');
+  //       setChangeStatusModal(false);
+  //       queryClient.invalidateQueries(['userListing', filters]);
+  //     },
+  //     onError: (error) => {
+  //       console.error('Error updating status:', error);
+  //       showToast('Failed to update status', 'error');
+  //       // Revert the local state change on error
+  //       if (selectedObj) {
+  //         setSelectValue(prev => ({
+  //           ...prev,
+  //           [selectedObj.id]: selectedObj.status === '1' ? '0' : '1'
+  //         }));
+  //       }
+  //     },
+  //   });
+
+  // Confirm status change
+  const confirmStatusChange = () => {
+    if (selectedObj) {
+      updateStatusMutation(selectedObj.id);
+    }
+  };
+
+
 
   return (
-    <div>
-      <div className="d-flex align-items-start mb-4 justify-content-between flex-wrap">
-        <div className="d-flex flex-column gap-2">
-          <BackButton />
-          <h2 className="screen-title m-0 d-inline">User Profile</h2>
+    <>
+      <section className="head-coach-management">
+      <div className="admin-content-header mb-4 d-flex gap-2">
+          <h2 className="screen-title mb-0">Head Coach Management</h2>
         </div>
-      </div>
-      <div className="d-card py-45 mb-45">
-        <div className="d-flex justify-content-between flex-wrap-reverse">
-          <div>
-            <p className="text-label">Business ID</p>
-            <p className="text-data">{user?.id}</p>
-          </div>
-          <div className="d-flex flex-column align-items-center gap-1 ms-auto mb-3 mb-md-0">
-            <p className="text-label">
-              Status:{' '}
-              <span
-                className={`status ${statusClassMap[user?.status_detail]}`} // change with user status
-              >
-                {user?.status_detail}
-              </span>
-            </p>
-            <CustomButton
-              onClick={() => setChangeStatusModal(true)}
-              text={
-                user?.status_detail === 'Active' ? 'Deactivate' : 'Activate'
-              }
-            />
-          </div>
+        <div className="admin-content-body rounded-20 p-4 p-lg-4 p-xxl-4 mb-4">
+        <Row>
+          <Col xs={12}>
+            <CustomTable
+              filters={filters}
+              setFilters={setFilters}
+              headers={headCoachHeaders}
+              pagination={pagination}
+              isLoading={isLoading}
+              centerLastHeader={true}
+              selectOptions={[
+                {
+                  title: 'status',
+                  options: userStatusFilters,
+                },
+              ]}
+              dateFilters={[
+                { title: 'Registration Date', from: 'from', to: 'to' },
+              ]}
+            >
+              {(userManagement?.length || isError) && (
+                <tbody>
+                  {isError && (
+                    <tr>
+                      <td colSpan={headCoachHeaders.length}>
+                        <p className="text-danger mb-0">
+                          Unable to fetch data at this time
+                        </p>
+                      </td>
+                    </tr>
+                  )}
+                  {userManagement?.map((item, index) => (
+                    <tr key={item.id}>
+                      <td>
+                        {serialNum(
+                          (filters?.page - 1) * filters?.per_page + index + 1
+                        )}
+                      </td>
+                      <td>{item?.coach_name}</td>
+                      <td>{item?.school}</td>
+                      <td>{item?.email}</td>
+                      <td>
+                        <CustomSelect
+                          options={userStatus}
+                          value={selectValue[item.id]}
+                          className={`status-select ${selectValue[item.id] === '1' ? 'status-active' : 'status-inactive'}`}
+                          onChange={(event) => handleStatusChange(item.id, event)}
+                        />
+                      </td>
+                      <td>{item?.subscription_title}</td>
+                      <td>{formatDate(item?.created_at)}</td>
+                      <td>
+                        <TableActionDropDown
+                          actions={[
+                            {
+                              name: 'View',
+                              icon: HiOutlineEye,
+                              onClick: () => navigate(`${item.id}`),
+                              className: 'view',
+                            },
+                          ]}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              )}
+            </CustomTable>
+          </Col>
+        </Row>
+
         </div>
-        <div className="d-flex gap-3 mt-3 detailsWrapper">
-          <div className="detailItem">
-            <p className="text-label">Business Name</p>
-            <p className="text-data">{user?.business_name}</p>
-          </div>
-          <div className="detailItem">
-            <p className="text-label">Contact Person</p>
-            <p className="text-data">{user?.user_name}</p>
-          </div>
-          <div className="detailItem">
-            <p className="text-label">User ID</p>
-            <p className="text-data">{user?.user_id}</p>
-          </div>
-          <div className="detailItem">
-            <p className="text-label">Phone No.</p>
-            <p className="text-data">{user?.phone_number}</p>
-          </div>
-          <div className="detailItem">
-            <p className="text-label">Email Address</p>
-            <p className="text-data">{user?.email}</p>
-          </div>
-          <div className="detailItem">
-            <p className="text-label">Reg. Date</p>
-            <p className="text-data">{formatDate(user?.created_at)}</p>
-          </div>
-        </div>
-      </div>
-      <h2 className="screen-title">Branch Logs</h2>
-      <Row>
-        <Col xs={12}>
-          <CustomTable
-            hasFilters={false}
-            isPaginated={false}
-            headers={branchLogHeaders}
-          >
-            <tbody>
-              {branchLogs?.map((item, index) => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>{item.name}</td>
-                  <td>{item.address}</td>
-                  <td>{item?.manager?.user_name}</td>
-                  <td>{item?.supervisor?.user_name}</td>
-                  <td>{item?.currency?.currency}</td>
-                  <td>
-                    <StatusChip status={item.status} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </CustomTable>
-        </Col>
-      </Row>
-      <CustomModal
+      </section>
+
+      {/* <CustomModal
         show={changeStatusModal}
         close={() => setChangeStatusModal(false)}
-        action={handleStatusChange}
-        disableClick={isStatusUpdating}
-        title={user?.status_detail === 'Active' ? 'Deactivate' : 'Activate'}
+        disableClick={isStatusUpdating} // Disable action button during mutation
+        action={confirmStatusChange} // Perform status change on confirm
+        title={selectedObj?.statusText === 'Active' ? 'Activate' : 'Deactivate'}
         description={`Are you sure you want to ${
-          user?.status_detail === 'Active' ? 'deactivate' : 'activate'
+          selectedObj?.statusText === 'Active' ? 'activate' : 'deactivate'
         } this user?`}
-      />
-    </div>
+      /> */}
+
+</>
+
+// <div>
+    //   <div className="d-flex align-items-start mb-4 justify-content-between flex-wrap">
+    //     <div className="d-flex flex-column gap-2">
+
+    //       <h2 className="screen-title m-0 d-inline">View Details</h2>
+    //     </div>
+    //   </div>
+    //   <div className="d-card py-45 mb-45">
+    //     <div className="d-flex justify-content-between flex-wrap-reverse">
+    //       <div>
+    //         <p className="text-label">Business ID</p>
+    //         <p className="text-data">{user?.id}</p>
+    //       </div>
+    //       <div className="d-flex flex-column align-items-center gap-1 ms-auto mb-3 mb-md-0">
+    //         <p className="text-label">
+    //           Status:{' '}
+    //           <span
+    //             className={`status ${statusClassMap[user?.status_detail]}`} // change with user status
+    //           >
+    //             {user?.status_detail}
+    //           </span>
+    //         </p>
+    //         <CustomButton
+    //           onClick={() => setChangeStatusModal(true)}
+    //           text={
+    //             user?.status_detail === 'Active' ? 'Deactivate' : 'Activate'
+    //           }
+    //         />
+    //       </div>
+    //     </div>
+    //     <div className="d-flex gap-3 mt-3 detailsWrapper">
+    //       <div className="detailItem">
+    //         <p className="text-label">Business Name</p>
+    //         <p className="text-data">{user?.business_name}</p>
+    //       </div>
+    //       <div className="detailItem">
+    //         <p className="text-label">Contact Person</p>
+    //         <p className="text-data">{user?.user_name}</p>
+    //       </div>
+    //       <div className="detailItem">
+    //         <p className="text-label">User ID</p>
+    //         <p className="text-data">{user?.user_id}</p>
+    //       </div>
+    //       <div className="detailItem">
+    //         <p className="text-label">Phone No.</p>
+    //         <p className="text-data">{user?.phone_number}</p>
+    //       </div>
+    //       <div className="detailItem">
+    //         <p className="text-label">Email Address</p>
+    //         <p className="text-data">{user?.email}</p>
+    //       </div>
+    //       <div className="detailItem">
+    //         <p className="text-label">Reg. Date</p>
+    //         <p className="text-data">{formatDate(user?.created_at)}</p>
+    //       </div>
+    //     </div>
+    //   </div>
+    //   <h2 className="screen-title">Branch Logs</h2>
+    //   <Row>
+    //     <Col xs={12}>
+    //       <CustomTable
+    //         hasFilters={false}
+    //         isPaginated={false}
+    //         headers={branchLogHeaders}
+    //       >
+    //         <tbody>
+    //           {branchLogs?.map((item, index) => (
+    //             <tr key={item.id}>
+    //               <td>{item.id}</td>
+    //               <td>{item.name}</td>
+    //               <td>{item.address}</td>
+    //               <td>{item?.manager?.user_name}</td>
+    //               <td>{item?.supervisor?.user_name}</td>
+    //               <td>{item?.currency?.currency}</td>
+    //               <td>
+    //                 <StatusChip status={item.status} />
+    //               </td>
+    //             </tr>
+    //           ))}
+    //         </tbody>
+    //       </CustomTable>
+    //     </Col>
+    //   </Row>
+    //   <CustomModal
+    //     show={changeStatusModal}
+    //     close={() => setChangeStatusModal(false)}
+    //     action={handleStatusChange}
+    //     disableClick={isStatusUpdating}
+    //     title={user?.status_detail === 'Active' ? 'Deactivate' : 'Activate'}
+    //     description={`Are you sure you want to ${
+    //       user?.status_detail === 'Active' ? 'deactivate' : 'activate'
+    //     } this user?`}
+    //   />
+    // </div>
+
+    
   );
 };
 
-export default HeadCoachManagement;
+export default withModal(withFilters(HeadCoachManagement));

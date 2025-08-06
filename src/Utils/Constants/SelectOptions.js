@@ -1,6 +1,8 @@
 export const statusClassMap = {
-  Active: 'success',
-  active: 'success',
+  Active: 'success-tag',
+  active: 'success-tag',
+  Inactive: 'danger-tag',
+  inactive: 'danger-tag',
   unblock: 'success',
   unblocked: 'success',
   approve: 'success',
@@ -21,8 +23,7 @@ export const statusClassMap = {
   Disapproved: 'danger',
   disapproved: 'danger',
   unapproved: 'danger',
-  Inactive: 'danger',
-  inactive: 'danger',
+  
   block: 'danger',
   expired: 'danger',
   blocked: 'danger',
@@ -157,10 +158,15 @@ export const transactionLogsUserOptions = [
   { value: '2', label: 'User 2' },
 ];
 
-export const transactionLogsActionOptions = [
-  { value: '', label: 'All' },
-  { value: '1', label: 'Edited' },
-  { value: '2', label: 'Deleted' },
+export const durationOptions = [
+  { value:  '1_month', label: '1 Month' },
+  { value: '3 Months', label: '3 Months' },
+  { value: '6 Months', label: '6 Months' },
+  { value: '1_year', label: '1 Year' },
+];
+export const subscriptionTypeOptions = [
+  { value: 'coach', label: 'Coach' },
+  { value: 'assistant_coach', label: 'Assistant Coach' },
 ];
 
 export const PDCProcessOpenTypeOptions = [

@@ -4,7 +4,7 @@ form label,
 label,
 .form-label {
   font-size: 16px;
-  color: var(--bs-black);
+  color: var(--input-label-color);
   font-weight: 600;
   margin-bottom: 0.3rem;
 }
@@ -18,9 +18,8 @@ label,
 .form-control,
 textarea {
   font-size: 15px;
-  background-color: transparent;
-  /* background: var(--bs-body-bg); */
-  color: var(--bs-black);
+  background-color: var(--input-bg-color);
+  color: var(--input-text-color);
   font-weight: 400;
   transition: all 0.6s ease 0s;
   padding: 15px 20px 15px 20px;

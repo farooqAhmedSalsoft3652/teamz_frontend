@@ -17,7 +17,7 @@ import { Line } from 'react-chartjs-2';
 import { useNavigate } from 'react-router-dom';
 import User from '../../../assets/images/dash-user.svg?react';
 import Receivable from '../../../assets/images/receivable.svg?react';
-import CustomSelect from '../../../Components/CustomSelect';
+import CustomSelect from '../../../Components/Common/FormElements/SelectInput';
 import withModal from '../../../HOC/withModal';
 import { usePageTitle } from '../../../Hooks/usePageTitle';
 import { lineGraphOptions } from '../../../Mocks/MockData';

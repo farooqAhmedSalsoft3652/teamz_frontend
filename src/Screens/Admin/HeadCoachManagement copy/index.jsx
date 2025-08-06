@@ -18,13 +18,13 @@ import { useFetchTableData } from '../../../Hooks/useTable';
 import {
   getUsersListing,
   updateStatus,
-} from '../../../Services/Admin/UserManagement';
+} from '../../../Services/Admin/HeadCoachManagement';
 import { statusClassMap } from '../../../Utils/Constants/SelectOptions';
 import { userStatusFilters } from '../../../Utils/Constants/TableFilter';
 import { userManagementHeaders } from '../../../Utils/Constants/TableHeaders';
 import { formatDate, serialNum, showErrorToast } from '../../../Utils/Utils';
 
-const UserManagement = ({
+const HeadCoachManagement = ({
   showModal,
   closeModal,
   filters,
@@ -91,11 +91,13 @@ const UserManagement = ({
     }
   };
 
+  console.log(userManagement, 'Abc');
+
   return (
     <>
       <section>
         <div className="d-flex justify-content-between flex-wrap mb-3">
-          <h2 className="screen-title mb-0">User Management</h2>
+          <h2 className="screen-title mb-0">Head Coach Management</h2>
         </div>
         <Row>
           <Col xs={12}>
@@ -196,4 +198,4 @@ const UserManagement = ({
   );
 };
 
-export default withModal(withFilters(UserManagement));
+export default withModal(withFilters(HeadCoachManagement));

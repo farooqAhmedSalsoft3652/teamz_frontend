@@ -18,6 +18,7 @@
 .mainInput::placeholder {
   color: var(--secondary-text-color) !important;
 }
+
 .mainInput,
 .form-control.mainInput {
   width: 100% !important;

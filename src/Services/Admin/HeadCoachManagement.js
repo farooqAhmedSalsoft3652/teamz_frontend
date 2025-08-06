@@ -1,11 +1,11 @@
-import axiosInstance from '../../Config/axiosConfig';
-import { buildFormData } from '../../Utils/Utils';
-import { userManagementData } from '../../Config/data.jsx';
+import axiosInstance from '../../Config/axiosConfig.js';
+import { buildFormData } from '../../Utils/Utils.jsx';
+import { headCoachManagementData } from '../../Config/data.jsx';
 
 // GET
-export const getUsersListing = async (params) => {
+export const getHeadCoachListing = async (params) => {
   try {
-    const data  = userManagementData;
+    const data  = headCoachManagementData;
     // const { data } = await axiosInstance.get('/admin-api/users', {
     //   params,
     // });

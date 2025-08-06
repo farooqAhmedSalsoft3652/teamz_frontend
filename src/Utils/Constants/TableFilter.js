@@ -1,5 +1,10 @@
 //////      ADMIN     //////
 // User Management
+export const userStatus = [
+  { value: '1', label: 'Active' },
+  { value: '0', label: 'Inactive' },
+];
+
 export const statusFiltersConfig = [
   { value: '', label: 'All' },
   { value: 'active', label: 'Active' },

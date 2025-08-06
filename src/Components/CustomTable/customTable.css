@@ -4,6 +4,7 @@
 .table-responsive::-webkit-scrollbar {
   width: 8px;
   height: 5px;
+  border-radius: 2px;
 }
 
 /* Track */
@@ -16,12 +17,12 @@
 /* Handle */
 .table-responsive::-webkit-scrollbar-thumb {
   background: var(--bs-primary);
-  border-radius: 0px;
+  border-radius: 2px;
 }
 
 /* Handle on hover */
 .table-responsive::-webkit-scrollbar-thumb:hover {
-  background: var(--bs-danger, #dc3545);
+  background: var(--bs-black, #D5D5d5);
 }
 
 /******

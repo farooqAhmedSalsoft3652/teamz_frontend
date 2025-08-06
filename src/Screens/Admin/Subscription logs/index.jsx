@@ -22,6 +22,7 @@ import { statusClassMap } from '../../../Utils/Constants/SelectOptions';
 import { subscriptionStatusFilters, subscriptionTypeFilters } from '../../../Utils/Constants/TableFilter';
 import { subscriptionLogsHeaders } from '../../../Utils/Constants/TableHeaders';
 import { formatDate, serialNum, showErrorToast } from '../../../Utils/Utils';
+import StatusChip from '../../../Components/StatusChip/StatusChip';
 
 const SubscriptionLogs = ({
   filters,
@@ -113,10 +114,16 @@ const SubscriptionLogs = ({
                         <td>{item?.user_name}</td>
                         <td>{item?.email}</td>
                         <td>{item?.school}</td>
-                        <td>{item?.duration}</td>
                         <td>{item?.type}</td>
                         <td>{item?.subscription_plan}</td>
-                        <td>{item?.status}</td>
+                        <td>{item?.duration}</td>
+                        <td>
+                          <span
+                            className={`status-tag ${statusClassMap[item?.status_detail]}`}
+                          >
+                            {item?.status_detail}
+                          </span>
+                        </td>
                         <td>{item?.amount}</td>
                         <td>{formatDate(item?.created_at)}</td>
                         <td>{formatDate(item?.expire_at)}</td>

@@ -1,5 +1,16 @@
 export const attachmentsTableHeaders = ['S.No', 'File Name', 'Action'];
 
+export const headCoachHeaders = [
+  'S. No.',
+  'Coach Name',
+  'School',
+  'Email Address',
+  'Status',
+  'Subscription Title',
+  'Registration Date',
+  'Action',
+];
+
 export const subscriptionLogsHeaders = [
   'S. No.',
   'User Name',
@@ -41,14 +52,5 @@ export const promoCodeHeaders = [
 ];
 
 
-export const branchLogHeaders = [
-  'S. No.',
-  'Name',
-  'Address',
-  'Manager',
-  'Supervisor',
-  'Base Currency',
-  'Status',
-];
 
 

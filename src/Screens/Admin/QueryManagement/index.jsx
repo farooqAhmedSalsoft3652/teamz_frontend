@@ -15,11 +15,7 @@ import withFilters from '../../../HOC/withFilters ';
 import withModal from '../../../HOC/withModal';
 import { usePageTitle } from '../../../Hooks/usePageTitle';
 import { useFetchTableData } from '../../../Hooks/useTable';
-import {
-  getUsersListing,
-  updateStatus,
-} from '../../../Services/Admin/UserManagement';
-import { statusClassMap } from '../../../Utils/Constants/SelectOptions';
+import { getQueryManagementListing } from '../../../Services/Admin/queryManagement';
 import { userStatusFilters } from '../../../Utils/Constants/TableFilter';
 import { queryManagementHeaders } from '../../../Utils/Constants/TableHeaders';
 import { formatDate, serialNum, showErrorToast } from '../../../Utils/Utils';
@@ -34,8 +30,7 @@ const QueryManagement = ({
 }) => {
   usePageTitle('Query Management');
   const navigate = useNavigate();
-  const [changeStatusModal, setChangeStatusModal] = useState(false);
-  const [selectedObj, setSelectedObj] = useState(null);
+
   let queryClient = useQueryClient();
 
   //GET USERS
@@ -46,10 +41,10 @@ const QueryManagement = ({
     error,
     refetch,
   } = useFetchTableData(
-    'userListing',
+    'queryManagementListing',
     filters,
     updatePagination,
-    getUsersListing
+    getQueryManagementListing
   );
 
   // Provide a default value for `userManagement`
@@ -60,36 +55,37 @@ const QueryManagement = ({
   if (isError) {
     showErrorToast(error);
   }
-  const isStatusActive = (item) => {
-    return item?.status_detail === 'Active';
-  };
 
-  //UPDATE STATUS
-  const handleStatusChange = (item) => {
-    setSelectedObj(item);
-    setChangeStatusModal(true);
-  };
+  // const isStatusActive = (item) => {
+  //   return item?.status_detail === 'Active';
+  // };
 
-  // Mutation for updating status
-  const { mutate: updateStatusMutation, isPending: isStatusUpdating } =
-    useMutation({
-      mutationFn: async (id) => await updateStatus(id),
-      onSuccess: (data) => {
-        showToast('Status updated successfully', 'success');
-        setChangeStatusModal(false);
-        queryClient.invalidateQueries(['userListing', filters]);
-      },
-      onError: (error) => {
-        console.error('Error updating status:', error);
-      },
-    });
+  // //UPDATE STATUS
+  // const handleStatusChange = (item) => {
+  //   setSelectedObj(item);
+  //   setChangeStatusModal(true);
+  // };
 
-  // Confirm status change
-  const confirmStatusChange = () => {
-    if (selectedObj) {
-      updateStatusMutation(selectedObj.id);
-    }
-  };
+  // // Mutation for updating status
+  // const { mutate: updateStatusMutation, isPending: isStatusUpdating } =
+  //   useMutation({
+  //     mutationFn: async (id) => await updateStatus(id),
+  //     onSuccess: (data) => {
+  //       showToast('Status updated successfully', 'success');
+  //       setChangeStatusModal(false);
+  //       queryClient.invalidateQueries(['userListing', filters]);
+  //     },
+  //     onError: (error) => {
+  //       console.error('Error updating status:', error);
+  //     },
+  //   });
+
+  // // Confirm status change
+  // const confirmStatusChange = () => {
+  //   if (selectedObj) {
+  //     updateStatusMutation(selectedObj.id);
+  //   }
+  // };
 
   return (
     <>
@@ -148,18 +144,18 @@ const QueryManagement = ({
                                 onClick: () => navigate(`${item.id}`),
                                 className: 'view',
                               },
-                              {
-                                name: isStatusActive(item)
-                                  ? 'Deactivate'
-                                  : 'Activate',
-                                icon: isStatusActive(item)
-                                  ? HiOutlineXCircle
-                                  : HiOutlineCheckCircle,
-                                onClick: () => handleStatusChange(item),
-                                className: isStatusActive(item)
-                                  ? 'delete with-color'
-                                  : 'view with-color',
-                              },
+                              // {
+                              //   name: isStatusActive(item)
+                              //     ? 'Deactivate'
+                              //     : 'Activate',
+                              //   icon: isStatusActive(item)
+                              //     ? HiOutlineXCircle
+                              //     : HiOutlineCheckCircle,
+                              //   onClick: () => handleStatusChange(item),
+                              //   className: isStatusActive(item)
+                              //     ? 'delete with-color'
+                              //     : 'view with-color',
+                              // },
                             ]}
                           />
                         </td>
@@ -173,7 +169,7 @@ const QueryManagement = ({
         </div>
       </section>
 
-      <CustomModal
+      {/* <CustomModal
         show={changeStatusModal}
         close={() => setChangeStatusModal(false)}
         disableClick={isStatusUpdating} // Disable action button during mutation
@@ -182,7 +178,7 @@ const QueryManagement = ({
         description={`Are you sure you want to ${
           isStatusActive(selectedObj) ? 'deactivate' : 'activate'
         } this user?`}
-      />
+      /> */}
     </>
   );
 };

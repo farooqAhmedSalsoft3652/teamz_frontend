@@ -6,7 +6,7 @@ const StatusChip = ({ status = '', className = '', onClick = () => {} }) => {
   return (
     <span
       onClick={onClick}
-      className={`chip ${statusClassMap[status?.toLowerCase()]} ${className} ${onClick ? 'cp' : ''}`}
+      className={`status-tag-bg ${statusClassMap[status?.toLowerCase()]} ${className} ${onClick ? 'cp' : ''}`}
     >
       {status?.charAt(0)?.toUpperCase() + status?.slice(1)}
     </span>

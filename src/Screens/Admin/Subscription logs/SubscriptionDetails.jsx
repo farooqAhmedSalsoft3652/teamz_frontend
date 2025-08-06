@@ -19,7 +19,7 @@ import {
   viewSubscriptionPlan,
 } from '../../../Services/Admin/SubscriptionManagement';
 
-import { formatDate, showErrorToast } from '../../../Utils/Utils';
+import { formatDate, replaceUnderscoreWithSpace, showErrorToast } from '../../../Utils/Utils';
 import BackButton from '../../../Components/BackButton';
 
 const SubscriptionDetails = ({
@@ -54,7 +54,7 @@ const SubscriptionDetails = ({
   if (isError) {
     showErrorToast(error);
   }
-  const subscriptionData = fetchedData?.data ?? [];
+  const subscriptionData = fetchedData ?? {};
 
   console.log(subscriptionData, 'subscriptionData');
 
@@ -71,19 +71,19 @@ const SubscriptionDetails = ({
               <Row>
                 <Col xs={12} md={6} lg={6} className="mb-4 mb-md-4 mb-xxl-5 detail-box">
                   <h5 className="mb-2">Subscription Title</h5>
-                  <p className="fw-medium">{subscriptionData?.name}</p>
+                  <p className="fw-medium">{subscriptionData?.subscription_title}</p>
                 </Col>
                 <Col xs={12} md={6} lg={6} className="mb-4 mb-md-4 mb-xxl-5 detail-box">
                   <h5 className="mb-2">Duration</h5>
-                  <p className="fw-medium">{subscriptionData?.duration}</p>
+                  <p className="fw-medium">{replaceUnderscoreWithSpace(subscriptionData?.duration)}</p>
                 </Col>
                 <Col xs={12} md={6} lg={6} className="mb-4 mb-md-4 mb-xxl-5 detail-box">
                   <h5 className="mb-2">Amount</h5>
                   <p className="fw-medium">${subscriptionData?.amount}</p>
                 </Col>
                 <Col xs={12} md={6} lg={6} className="mb-4 mb-md-4 mb-xxl-5 detail-box">
-                  <h5 className="mb-2">Status</h5>
-                  <p className="fw-medium">{subscriptionData?.status}</p>
+                  <h5 className="mb-2">Type</h5>
+                  <p className="fw-medium">{replaceUnderscoreWithSpace(subscriptionData?.type)}</p>
                 </Col>
                 <Col xs={12} xxl={9} className="mb-4 mb-md-4 mb-xxl-5 detail-box">
                   <h5 className="mb-2">Description</h5>

@@ -147,6 +147,49 @@
 }
 
 
+/* Status Tags START */
+
+/* Text Tags */
+.status-tag {
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.success-tag {
+  color: var(--success-tag) !important;
+}
+.danger-tag {
+  color: var(--danger-tag) !important;
+}
+.warning-tag {
+  color: var(--warning-tag) !important;
+}
+
+/* Status Background Tags END */
+.status-tag-bg {
+  border-radius: 4px;
+  font-size: 15px;
+  padding: 6px;
+}
+.status-tag-bg.success-tag {
+  color: var(--bs-white) !important;
+  background-color: var(--success-tag);
+}
+.status-tag-bg.danger-tag {
+  color: var(--bs-white) !important;
+  background-color: var(--danger-tag);
+}
+.status-tag-bg.warning-tag {
+  color: var(--bs-white) !important;
+  background-color: var(--danger-tag);
+}
+
+
+
+
+/* Status Tags END */
+
+
 
 /*******************
 Pages General Classes End   

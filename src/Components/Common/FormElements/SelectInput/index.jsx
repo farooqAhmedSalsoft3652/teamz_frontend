@@ -1,7 +1,10 @@
-import React from "react";
-import Form from "react-bootstrap/Form";
-import "./styles.css";
-const SelectInput = ({
+import React, { forwardRef } from 'react';
+import Form from 'react-bootstrap/Form';
+import "./styles.css"
+
+
+const SelectInput = forwardRef(({
+  // Basic props
   name,
   id,
   label,
@@ -11,45 +14,92 @@ const SelectInput = ({
   options = [],
   required = false,
   placeholder,
-  selectClass = "",
-  labelClassName = "",
+  
+  // Styling props
+  size = '',
+  className = '',
+  labelClassName = '',
+  
+  // Functionality props
+  firstIsLabel = false,
+  disabled = false,
   error,
-  touched = false,
+  touched,
+  
+  // Additional props
+  defaultValue,
   ...props
-}) => {
+}, ref) => {
+  
+  const handleSelectChange = (event) => {
+    if (onChange) {
+      // Support both direct value and event object
+      if (typeof onChange === 'function') {
+        onChange(event);
+      }
+    }
+  };
+
+  // Process options for firstIsLabel functionality
+  const selectOptions = firstIsLabel 
+    ? [{ value: '', label: options[0]?.label || placeholder, disabled: true }, ...options.slice(1)] 
+    : options;
+
   return (
-    <>
+   <>
       {/* Label */}
       {label && (
-        <label className={`form-label ${labelClassName}`} htmlFor={id || name}>
+        <label 
+          className={`form-label ${labelClassName}`} 
+          htmlFor={id || name}
+        >
           {label} {required && <span className="text-danger">*</span>}
         </label>
       )}
 
       {/* Select Dropdown */}
       <Form.Select
+        ref={ref}
         name={name}
-        id={id}
+        id={id || name}
         value={value ?? ""}
-        onChange={(e) => onChange(e.target.value)}
+        defaultValue={defaultValue}
+        onChange={handleSelectChange}
         onBlur={onBlur}
-        className={`${selectClass} ${touched && error ? "is-invalid" : ""}`}
+        size={size}
+        disabled={disabled}
+        className={`${className} ${touched && error ? "is-invalid" : ""}`}
         aria-invalid={touched && error ? true : false}
         {...props}
       >
         {/* Placeholder */}
-        {placeholder && (
-          <option value="">{placeholder || "Select an option"}</option>
-        )}
-        {options.map((opt) => (
-          <option
-            key={opt.value || opt}
-            value={opt.value}
-            disabled={opt.disabled}
-          >
-            {opt.text || opt.label}
+        {placeholder && !firstIsLabel && (
+          <option value="" disabled>
+            {placeholder}
           </option>
-        ))}
+        )}
+        
+        {/* Options */}
+        {selectOptions.map((option, index) => {
+          const optionValue = option.value || option;
+          const optionLabel = option.text || option.label || option;
+          const isDisabled = option.disabled || false;
+          
+          return (
+            <option
+              key={`${name}-${index}`}
+              value={optionValue}
+              disabled={isDisabled}
+              className={
+                optionLabel?.toLowerCase().startsWith('add new') 
+                  ? 'text-center secondary-color' 
+                  : ''
+              }
+            >
+              {optionLabel}
+            </option>
+          );
+        })}
       </Form.Select>
 
       {/* Error Message */}
@@ -59,31 +109,10 @@ const SelectInput = ({
         </div>
       )}
     </>
+   
   );
-};
+});
+
+SelectInput.displayName = 'SelectInput';
 
 export default SelectInput;
-
-/* Call as Component
-
-<Select
-  label="version_type"
-  name="version_type"
-  value={values.version_type}
-  onChange={(value) => {
-    handleChange({
-      target: { name: "version_type", value },
-    });
-    console.log(value);
-  }}
-  options={[
-    { value: "electronics", text: "Electronics" },
-    { value: "fashion", text: "Fashion" },
-    { value: "books", text: "Books" },
-  ]}
-  mainLabel="Select a category"
-  onBlur={handleBlur}
-  error={errors.version_type}
-  touched={touched.version_type} // Use Formik's touched state
-/>
-*/

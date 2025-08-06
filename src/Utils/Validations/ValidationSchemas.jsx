@@ -88,3 +88,14 @@ export const promoCodeSchema = Yup.object().shape({
     .min(1, 'Minimum 1%')
     .max(100, 'Maximum 100%'),
 });
+
+export const SubscriptionValidationSchema = Yup.object().shape({
+  subscription_title: Yup.string().required('Subscription Title is required'),
+  type: Yup.string().required('Type is required'),
+  duration: Yup.string().required('Duration is required'),
+  amount: Yup.number()
+    .typeError('Amount must be a number')
+    .required('Amount is required')
+    .positive('Amount must be greater than zero'),
+  description: Yup.string().required('Description is required'),
+});

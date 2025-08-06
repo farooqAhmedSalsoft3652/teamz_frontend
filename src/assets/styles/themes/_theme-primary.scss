@@ -60,8 +60,9 @@
 
   // Input Colors
   --input-bg-color: #fff;
-  --input-label-color: #495057;
+  --input-label-color: #000000;
   --input-focus-color: #3C5726;
+  --input-text-color: #000000;
 
   // Button Colors
   --btn-primary-color: #3C5726;
@@ -78,4 +79,15 @@
   --table-border-color: rgba(102, 102, 102, 0.10);
   --table-border-width: 1px;
   --table-hover-bg: #f8f9fa;
+
+  // Status Tags
+  --success-tag: #119200;
+  --danger-tag: #FF0000;
+  --warning-tag: #ffb818;
+  --info-tag: #17a2b8;
+  --light-tag: #f8f9fa;
+  --dark-tag: #343a40;
+  --white-tag: #ffffff;
+  --black-tag: #000000;
+  --muted-tag: #6c757d;
 }

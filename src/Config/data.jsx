@@ -376,7 +376,95 @@ export const statsData = [
     backgroundColor: '#FFF7CF',
   },
 ];
-export const userManagementData = {
+
+export const headCoachManagementData = {
+  status: true,
+  message: 'user listing',
+  detail: {
+    current_page: 1,
+    data: [
+      {
+        id: 1,
+        coach_name: 'Toms',
+        school: 'School 1',
+        email: 'darvesh@gmail.com',
+        subscription_title: 'Monthly',
+        status: 1,
+        created_at: '2024-06-25T14:29:37.000000Z', 
+      },
+      {
+        id: 2,
+        coach_name: 'Toms',
+        school: 'School 1',
+        email: 'darvesh@gmail.com',
+        subscription_title: 'Monthly',
+        status: 0,
+        created_at: '2024-06-25T14:29:37.000000Z', 
+      },
+      {
+        id: 3,
+        coach_name: 'Toms',
+        school: 'School 1',
+        email: 'darvesh@gmail.com',
+        subscription_title: 'Monthly',
+        status: 1,
+        created_at: '2024-06-25T14:29:37.000000Z', 
+      },
+      {
+        id: 4,
+        coach_name: 'Toms',
+        school: 'School 1',
+        email: 'darvesh@gmail.com',
+        subscription_title: 'Monthly',
+        status: 0,
+        created_at: '2024-06-25T14:29:37.000000Z', 
+      },
+      {
+        id: 5,
+        coach_name: 'Toms',
+        school: 'School 1',
+        email: 'darvesh@gmail.com',
+        subscription_title: 'Monthly',
+        status: 1,
+        created_at: '2024-06-25T14:29:37.000000Z', 
+      },
+    ],
+    first_page_url: 'http://localhost/food_app/admin-api/branches?page=1',
+    from: 1,
+    last_page: 2,
+    last_page_url: 'http://localhost/food_app/admin-api/branches?page=2',
+    links: [
+      {
+        url: null,
+        label: '&laquo; Previous',
+        active: false,
+      },
+      {
+        url: 'http://localhost/food_app/admin-api/branches?page=1',
+        label: '1',
+        active: true,
+      },
+      {
+        url: 'http://localhost/food_app/admin-api/branches?page=2',
+        label: '2',
+        active: false,
+      },
+      {
+        url: 'http://localhost/food_app/admin-api/branches?page=2',
+        label: 'Next &raquo;',
+        active: false,
+      },
+    ],
+    next_page_url: 'http://localhost/food_app/admin-api/branches?page=2',
+    path: 'http://localhost/food_app/admin-api/branches',
+    per_page: 10,
+    prev_page_url: null,
+    to: 10,
+    total: 11,
+  },
+};
+
+export const queryManagementData = {
   status: true,
   message: 'user listing',
   detail: {
@@ -603,11 +691,12 @@ export const subscriptionPlansData = {
     data: [
       {
         id: 1,
-        name: 'Monthly',
+        subscription_title: 'Monthly',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, numquam quis! Consequuntur id quis, doloremque accusamus voluptatibus ullam neque aperiam eligendi voluptatem esse ducimus minus voluptate? Cupiditate quisquam doloribus laudantium.',
         amount: 29.99,
-        duration: '1 Month',
-        status: 'Active',
+        duration: '1_month',
+        type: 'coach',
+        status: '1',
         features: ['Feature 1', 'Feature 2', 'Feature 3'],
         created_at: '2024-01-15T10:30:00Z',
         updated_at: '2024-01-15T10:30:00Z'
@@ -615,33 +704,36 @@ export const subscriptionPlansData = {
       },
       {
         id: 2,
-        name: 'Yearly',
+        subscription_title: 'Yearly',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, numquam quis! Consequuntur id quis, doloremque accusamus voluptatibus ullam neque aperiam eligendi voluptatem esse ducimus minus voluptate? Cupiditate quisquam doloribus laudantium.',
         amount: 49.99,
-        duration: '1 Year',
-        status: 'Active',
+        duration: '1_year',
+        type: 'assistant_coach',
+        status: '0',
         features: ['All Basic Features', 'Premium Feature 1', 'Premium Feature 2'],
         created_at: '2024-01-14T15:45:00Z',
         updated_at: '2024-01-15T10:30:00Z'
       },
       {
         id: 3,
-        name: 'Monthly',
+        subscription_title: 'Monthly',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, numquam quis! Consequuntur id quis, doloremque accusamus voluptatibus ullam neque aperiam eligendi voluptatem esse ducimus minus voluptate? Cupiditate quisquam doloribus laudantium.',
         amount: 299.99,
-        duration: '1 Month',
-        status: 'Inactive',
+        duration: '1_month',
+        type: 'coach',
+        status: '1',
         features: ['Feature 1', 'Feature 2', 'Feature 3'],
         created_at: '2024-01-13T09:20:00Z',
         updated_at: '2024-01-15T10:30:00Z'
       },
       {
         id: 4,
-        name: 'Yearly',
+        subscription_title: 'Yearly',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, numquam quis! Consequuntur id quis, doloremque accusamus voluptatibus ullam neque aperiam eligendi voluptatem esse ducimus minus voluptate? Cupiditate quisquam doloribus laudantium.',
         amount: 499.99,
-        duration: '1 Year',
-        status: 'Active',
+        duration: '1_year',
+        type: 'assistant_coach',
+        status: '0',
         features: ['All Basic Features', 'Premium Feature 1', 'Premium Feature 2'],
         created_at: '2024-01-12T14:10:00Z',
         updated_at: '2024-01-15T10:30:00Z'

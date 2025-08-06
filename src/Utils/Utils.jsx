@@ -1822,3 +1822,12 @@ export const getIcon = (type) => {
       return <FaFile size={25} />;
   }
 };
+
+export const replaceUnderscoreWithSpace = (str) => {
+  if (typeof str === "string") {
+    return str
+      .replace(/_/g, " ") // Replace underscores with spaces
+      .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize each word
+  }
+  return str;
+};
