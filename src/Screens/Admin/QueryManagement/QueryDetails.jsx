@@ -10,11 +10,7 @@ import CustomTable from '../../../Components/CustomTable/CustomTable';
 import StatusChip from '../../../Components/StatusChip/StatusChip';
 import { showToast } from '../../../Components/Toast/Toast';
 import { usePageTitle } from '../../../Hooks/usePageTitle';
-import {
-  getUserBranches,
-  updateStatus,
-  viewUser,
-} from '../../../Services/Admin/HeadCoachManagement';
+import { viewQueryManagement} from '../../../Services/Admin/QueryManagement';
 import { statusClassMap } from '../../../Utils/Constants/SelectOptions';
 import { formatDate } from '../../../Utils/Utils';
 import './styles.css';
@@ -53,27 +49,14 @@ const QueryDetails = ({ showModal, closeModal, updatePagination }) => {
     error,
   } = useQuery({
     queryKey: ['userDetails', id],
-    queryFn: () => viewUser(id),
+    queryFn: () => viewQueryManagement(id),
     refetchOnWindowFocus: false,
     retry: 1,
   });
 
-  // User Branches
-  const {
-    data: branches = [],
-    isLoading: isLoadingBranchLogs,
-    isError: isErrorBranchLogs,
-    error: errorBranchLogs,
-  } = useQuery({
-    queryKey: ['branches', id],
-    queryFn: () => getUserBranches(id),
-    refetchOnWindowFocus: false,
-    retry: 1,
-  });
 
-  const branchLogs = branches?.data ?? [];
 
-  if (isLoading && isLoadingBranchLogs) {
+  if (isLoading) {
     return (
       <>
         <div className="d-card ">

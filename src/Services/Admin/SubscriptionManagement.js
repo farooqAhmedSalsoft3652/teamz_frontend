@@ -51,6 +51,33 @@ export const viewSubscriptionPlan = async (id) => {
   }
 };
 
+export const updateSubscriptionPlanStatus = async (id) => {
+  try {
+    console.log('Updating status for ID:', id);
+    // Simulate API delay
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    console.log('Status updated successfully');
+    
+    // Return mock success response instead of making actual API call
+    return { 
+      message: 'Status updated successfully', 
+      status: 'success' 
+    };
+    
+    // Commented out actual API call
+    // const response = await axiosInstance.post(`/admin-api/users/${id}`);
+    // const {
+    //   data: { message, status },
+    // } = response;
+    // return { message, status };
+
+  } catch (error) {
+    throw error.response
+      ? error.response.data
+      : { message: 'Unknown error occurred' };
+  }
+};
+
 // UPDATE SUBSCRIPTION PLAN
 export const updateSubscriptionPlan = async (id, formData) => {
   try {

@@ -16,7 +16,7 @@ import withModal from '../../../HOC/withModal';
 import { usePageTitle } from '../../../Hooks/usePageTitle';
 import { useFetchTableData } from '../../../Hooks/useTable';
 import {
-  getSubscriptionPlansListing,
+  getSubscriptionPlansListing, updateSubscriptionPlanStatus
 } from '../../../Services/Admin/SubscriptionManagement';
 import { subscriptionStatusFilters, subscriptionTypeFilters, userStatus } from '../../../Utils/Constants/TableFilter';
 import { subscriptionPlanHeaders } from '../../../Utils/Constants/TableHeaders';
@@ -25,6 +25,7 @@ import BackButton from '../../../Components/BackButton';
 import CustomSelect from '../../../Components/Common/FormElements/SelectInput';
 
 const SubscriptionPlan = ({
+  showModal,
   filters,
   setFilters,
   pagination,
@@ -32,9 +33,9 @@ const SubscriptionPlan = ({
 }) => {
   usePageTitle('Subscription Plan');
   const navigate = useNavigate();
+  let queryClient = useQueryClient();
   const [changeStatusModal, setChangeStatusModal] = useState(false);
   const [selectedObj, setSelectedObj] = useState(null);
-  let queryClient = useQueryClient();
   const [selectValue, setSelectValue] = useState({});
 
   //GET SUBSCRIPTION LISTING
@@ -66,6 +67,7 @@ const SubscriptionPlan = ({
     // If status is 1, return true (active), if 0, return false (inactive)
     return status === 1 || status === '1';
   };
+  
 
   // Initialize selectValue when userManagement changes
   useEffect(() => {
@@ -82,49 +84,69 @@ const SubscriptionPlan = ({
   }, [subscriptionPlans]);
 
   //UPDATE STATUS
-  // const handleStatusChange = (itemId, event) => {
-  //   const newStatus = event.target.value;
-  //   const statusText = newStatus === '1' ? 'Active' : 'Inactive';
+  const handleStatusChange = (itemId, event) => {
+    const newStatus = event.target.value;
+    const statusText = newStatus === '1' ? 'Active' : 'Inactive';
     
-  //   // Update local state immediately for better UX
-  //   setSelectValue(prev => ({
-  //     ...prev,
-  //     [itemId]: newStatus
-  //   }));
+    // Update local state immediately for better UX
+    setSelectValue(prev => ({
+      ...prev,
+      [itemId]: newStatus
+    }));
 
-  //   // Show confirmation modal
-  //   setSelectedObj({ id: itemId, status: newStatus, statusText });
-  //   setChangeStatusModal(true);
-  // };
+    // Show confirmation modal using showModal
+    const actionText = statusText === 'Active' ? 'activate' : 'deactivate';
+    console.log('Showing modal for status change:', { itemId, newStatus, statusText });
+    
+    showModal(
+      ``,
+      `Are you sure you want to ${actionText} this user?`,
+      () => {
+        // This will be called when user confirms
+        console.log('Modal confirmed, calling API for itemId:', itemId);
+        updateStatusMutation(itemId);
+      },
+      'info'
+    );
+  };
 
+  // Mutation for updating status
+  const { mutate: updateStatusMutation, isPending: isStatusUpdating } =
+    useMutation({
+      mutationFn: async (id) => await updateSubscriptionPlanStatus(id),
+      onSuccess: (data, variables) => {
+        showToast('Status updated successfully', 'success');
+        // Show success modal after a short delay to avoid conflicts
+        setTimeout(() => {
+          const currentStatus = selectValue[variables] === '1' ? 'Active' : 'Inactive';
+          showModal(
+            ``,
+            `User has been ${currentStatus.toLowerCase()} successfully!`,
+            null,
+            'success'
+          );
+        }, 1000); // Increased delay to ensure confirmation modal is closed
+        queryClient.invalidateQueries(['subscriptionListing', filters]);
+      },
+      onError: (error, variables) => {
+        console.error('Error updating status:', error);
+        showToast('Failed to update status', 'error');
+        // Revert the local state change on error
+        if (selectedObj) {
+          setSelectValue(prev => ({
+            ...prev,
+            [selectedObj.id]: selectedObj.status === '1' ? '0' : '1'
+          }));
+        }
+      },
+    });
 
-
-  // const { mutate: updateStatusMutation, isPending: isStatusUpdating } =
-  //   useMutation({
-  //     mutationFn: async (id) => await updateStatus(id),
-  //     onSuccess: (data) => {
-  //       showToast('Status updated successfully', 'success');
-  //       setChangeStatusModal(false);
-  //       queryClient.invalidateQueries(['userListing', filters]);
-  //     },
-  //     onError: (error) => {
-  //       console.error('Error updating status:', error);
-  //       showToast('Failed to update status', 'error');
-  //       // Revert the local state change on error
-  //       if (selectedObj) {
-  //         setSelectValue(prev => ({
-  //           ...prev,
-  //           [selectedObj.id]: selectedObj.status === '1' ? '0' : '1'
-  //         }));
-  //       }
-  //     },
-  //   });
-
-  // const confirmStatusChange = () => {
-  //   if (selectedObj) {
-  //     updateStatusMutation(selectedObj.id);
-  //   }
-  // };
+  // Confirm status change
+  const confirmStatusChange = () => {
+    if (selectedObj) {
+      updateStatusMutation(selectedObj.id);
+    }
+  };
 
   return (
     <>
@@ -227,17 +249,6 @@ const SubscriptionPlan = ({
                               // },
                             ]}
                           />
-
-                          {/* <TableActionDropDown
-                            actions={[
-                              {
-                                name: 'View',
-                                icon: HiOutlineEye,
-                                onClick: () => navigate(`${item.id}`),
-                                className: 'view',
-                              },
-                            ]}
-                          /> */}
                         </td>
                       </tr>
                     ))}
@@ -249,15 +260,26 @@ const SubscriptionPlan = ({
         </div>
       </section>
 
+      <CustomModal
+        show={changeStatusModal}
+        close={() => setChangeStatusModal(false)}
+        disableClick={isStatusUpdating} // Disable action button during mutation
+        action={confirmStatusChange} // Perform status change on confirm
+        title={selectedObj?.statusText === 'Active' ? 'Activate' : 'Deactivate'}
+        description={`Are you sure you want to ${
+          selectedObj?.statusText === 'Active' ? 'activate' : 'deactivate'
+        } this user?`}
+      />
+
       {/* <CustomModal
         show={changeStatusModal}
         close={() => setChangeStatusModal(false)}
+        action={handleStatusChange}
         disableClick={isStatusUpdating}
-        action={confirmStatusChange}
-        title={isStatusActive(selectedObj) ? 'Deactivate' : 'Activate'}
+        title={user?.status_detail === 'Active' ? 'Deactivate' : 'Activate'}
         description={`Are you sure you want to ${
-          isStatusActive(selectedObj) ? 'deactivate' : 'activate'
-        } this subscription?`}
+          user?.status_detail === 'Active' ? 'deactivate' : 'activate'
+        } this user?`}
       /> */}
     </>
   );

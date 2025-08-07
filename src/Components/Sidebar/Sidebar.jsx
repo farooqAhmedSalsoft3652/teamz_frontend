@@ -6,7 +6,7 @@ import Support from '../../assets/images/sidebar/support.svg?react';
 import SupportLogs from '../../assets/images/sidebar/supportLog.svg?react';
 import User from '../../assets/images/sidebar/user.svg?react';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 import { HiLockOpen } from 'react-icons/hi2';
 import useUserStore from '../../Stores/UserStore';
@@ -108,10 +108,10 @@ const Sidebar = ({ sideBarClass, disable = false }) => {
           as="ul"
           className="side-nav d-block"
         >
-          {menuItems.map((item) =>
+          {menuItems.map((item,) =>
             item.roles.includes(role) ? (
-              <>
-                <Nav.Item as="li" key={item.id}>
+              <React.Fragment key={item.id}>
+                <Nav.Item as="li">
                   <NavLink to={item.link}>
                     <i className="fa">
                       {item.icon && <item.icon className={Styles.icon} />}
@@ -160,7 +160,7 @@ const Sidebar = ({ sideBarClass, disable = false }) => {
                     })}
                   </div>
                 )}
-              </>
+              </React.Fragment>
             ) : null
           )}
         </Nav>

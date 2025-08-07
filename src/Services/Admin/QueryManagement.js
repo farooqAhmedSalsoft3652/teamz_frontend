@@ -18,9 +18,9 @@ export const getQueryManagementListing = async (params) => {
 };
 
 // DETAILS
-export const viewUser = async (id) => {
+export const viewQueryManagement = async (id) => {
   try {
-    const data = userManagementData.detail.data.find(u => u.id === Number(id));
+    const data = queryManagementData.detail.data.find(u => u.id === Number(id));
     return data;
     
     // const { data } = await axiosInstance.get(`/admin-api/users/${id}`);

@@ -7,7 +7,6 @@ import {
   HiOutlineXCircle,
 } from 'react-icons/hi2';
 import { useNavigate } from 'react-router-dom';
-import CustomModal from '../../../Components/CustomModal';
 import CustomTable from '../../../Components/CustomTable/CustomTable';
 import TableActionDropDown from '../../../Components/TableActionDropDown/TableActionDropDown';
 import { showToast } from '../../../Components/Toast/Toast';
@@ -17,7 +16,7 @@ import { usePageTitle } from '../../../Hooks/usePageTitle';
 import { useFetchTableData } from '../../../Hooks/useTable';
 import {
   getHeadCoachListing,
-  updateStatus,
+  updateHeadCoachStatus,
 } from '../../../Services/Admin/HeadCoachManagement';
 import { statusClassMap } from '../../../Utils/Constants/SelectOptions';
 import { userStatus, userStatusFilters } from '../../../Utils/Constants/TableFilter';
@@ -37,10 +36,8 @@ const HeadCoachManagement = ({
 }) => {
   usePageTitle('User Management');
   const navigate = useNavigate();
-  const [changeStatusModal, setChangeStatusModal] = useState(false);
-  const [selectedObj, setSelectedObj] = useState(null);
-  const [selectValue, setSelectValue] = useState({});
   let queryClient = useQueryClient();
+  const [selectValue, setSelectValue] = useState({});
 
   //GET USERS
   const {
@@ -50,7 +47,7 @@ const HeadCoachManagement = ({
     error,
     refetch,
   } = useFetchTableData(
-    'userListing',
+    'headCoachListing',
     filters,
     updatePagination,
     getHeadCoachListing
@@ -59,11 +56,13 @@ const HeadCoachManagement = ({
   // Provide a default value for `userManagement`
   const userManagement = fetchedData?.data ?? [];
 
-  console.log(userManagement, 'Abc');
+  // console.log(userManagement, 'Abc');
 
   if (isError) {
     showErrorToast(error);
   }
+
+  // console.log(item, 'Item');
 
   const isStatusActive = (item) => {
     // Simple logic based on item?.status
@@ -89,51 +88,66 @@ const HeadCoachManagement = ({
   }, [userManagement]);
 
   //UPDATE STATUS
-  // const handleStatusChange = (itemId, event) => {
-  //   const newStatus = event.target.value;
-  //   const statusText = newStatus === '1' ? 'Active' : 'Inactive';
+  const handleStatusChange = (itemId, event) => {
+    const newStatus = event.target.value;
+    const statusText = newStatus === '1' ? 'Active' : 'Inactive';
     
-  //   // Update local state immediately for better UX
-  //   setSelectValue(prev => ({
-  //     ...prev,
-  //     [itemId]: newStatus
-  //   }));
+    // Update local state immediately for better UX
+    setSelectValue(prev => ({
+      ...prev,
+      [itemId]: newStatus
+    }));
 
-  //   // Show confirmation modal
-  //   setSelectedObj({ id: itemId, status: newStatus, statusText });
-  //   setChangeStatusModal(true);
-  // };
-
-  // Mutation for updating status
-  // const { mutate: updateStatusMutation, isPending: isStatusUpdating } =
-  //   useMutation({
-  //     mutationFn: async (id) => await updateStatus(id),
-  //     onSuccess: (data) => {
-  //       showToast('Status updated successfully', 'success');
-  //       setChangeStatusModal(false);
-  //       queryClient.invalidateQueries(['userListing', filters]);
-  //     },
-  //     onError: (error) => {
-  //       console.error('Error updating status:', error);
-  //       showToast('Failed to update status', 'error');
-  //       // Revert the local state change on error
-  //       if (selectedObj) {
-  //         setSelectValue(prev => ({
-  //           ...prev,
-  //           [selectedObj.id]: selectedObj.status === '1' ? '0' : '1'
-  //         }));
-  //       }
-  //     },
-  //   });
-
-  // Confirm status change
-  const confirmStatusChange = () => {
-    if (selectedObj) {
-      updateStatusMutation(selectedObj.id);
-    }
+    // Show confirmation modal using showModal
+    const actionText = statusText === 'Active' ? 'activate' : 'deactivate';
+    console.log('Showing modal for status change:', { itemId, newStatus, statusText });
+    
+    showModal(
+      ``,
+      `Are you sure you want to ${actionText} this user?`,
+      () => {
+        // This will be called when user confirms
+        console.log('Modal confirmed, calling API for itemId:', itemId);
+        updateStatusMutation(itemId);
+      },
+      'info'
+    );
   };
 
-
+  // Mutation for updating status
+  const { mutate: updateStatusMutation, isPending: isStatusUpdating } =
+    useMutation({
+      mutationFn: async (id) => await updateHeadCoachStatus(id),
+      onSuccess: (data, variables) => {
+        showToast('Status updated successfully', 'success');
+        // Show success modal after a short delay to avoid conflicts
+        setTimeout(() => {
+          const currentStatus = selectValue[variables] === '1' ? 'Active' : 'Inactive';
+          showModal(
+            ``,
+            `User has been ${currentStatus.toLowerCase()} successfully!`,
+            null,
+            'success'
+          );
+        }, 1000); // Increased delay to ensure confirmation modal is closed
+        queryClient.invalidateQueries(['headCoachListing', filters]);
+      },
+      onError: (error, variables) => {
+        console.error('Error updating status:', error);
+        showToast('Failed to update status', 'error');
+        // Revert the local state change on error
+        if (variables) {
+          setSelectValue(prev => {
+            const newState = { ...prev };
+            const item = userManagement.find(item => item.id === variables);
+            if (item) {
+              newState[item.id] = item.status === 1 || item.status === '1' ? '1' : '0';
+            }
+            return newState;
+          });
+        }
+      },
+    });
 
   return (
     <>
@@ -215,18 +229,7 @@ const HeadCoachManagement = ({
         </div>
       </section>
 
-      {/* <CustomModal
-        show={changeStatusModal}
-        close={() => setChangeStatusModal(false)}
-        disableClick={isStatusUpdating} // Disable action button during mutation
-        action={confirmStatusChange} // Perform status change on confirm
-        title={selectedObj?.statusText === 'Active' ? 'Activate' : 'Deactivate'}
-        description={`Are you sure you want to ${
-          selectedObj?.statusText === 'Active' ? 'activate' : 'deactivate'
-        } this user?`}
-      /> */}
-
-</>
+    </>
 
 // <div>
     //   <div className="d-flex align-items-start mb-4 justify-content-between flex-wrap">

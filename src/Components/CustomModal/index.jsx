@@ -45,13 +45,13 @@ const CustomModal = ({
       case 'info':
         return (
           <div className="rounded-circle d-flex justify-content-center">
-            <BsQuestionCircleFill size={100} color="#fdc770" />
+            <BsQuestionCircleFill size={100} color="#34B704" />
           </div>
         );
       default:
         return (
           <div className="rounded-circle d-flex justify-content-center">
-            <BsQuestionCircleFill size={100} color="#fdc770" />
+            <BsQuestionCircleFill size={100} color="#34B704" />
           </div>
         );
     }
@@ -80,7 +80,7 @@ const CustomModal = ({
         )}
       </div>
       <Modal.Body
-        className={`mb-3 ${!children && 'text-center'} `}
+        className={`${!children && 'text-center'} `}
         style={style}
       >
         {children ? (
@@ -94,65 +94,71 @@ const CustomModal = ({
             {children}
           </div>
         ) : (
-          <div className="beechMein flex-column">
-            {renderImage(variant)}
-            <div className="modalContent">
-              {title && <h4 className="modalTitle">{title}</h4>}
-              <p className="modalText">{description}</p>
-              {note && <p className="modalNote">{note}</p>}
+          <>
+          
+            <div className="modal-icon-wrapper">
+              {renderImage(variant)}
             </div>
-            {variant === 'success' ? (
-              <div
-                className={`d-flex align-content-center justify-content-center pt-3 ${
-                  variant === 'success' ? 'gap-2 flex-wrap' : ''
-                }`}
-              >
+            {title && (
+            <h3 className="modal-title">
+              {title}
+            </h3>
+            )}
+            {description && (
+              <p className="modal-text">
+                {description}
+              </p>
+            )}
+            {note && <p className="modal-note">{note}</p>}
+            </>
+        )}
+      </Modal.Body>
+      <Modal.Footer className="border-0 pt-0 pb-4 text-center d-flex justify-content-center flex-column flex-sm-row align-items-stretch gap-2">
+        {variant === 'success' ? (
+          
+            <CustomButton
+              type="button"
+              className="modal-btn"
+              text={btntext || 'Ok'}
+              onClick={action ? action : close}
+            />
+        ) : (
+          <>
+            {variant === 'error' ? (
+              <div className="beechMein gap-2 gap-sm-3 flex-wrap">
                 <CustomButton
                   type="button"
-                  className="modal-btn"
-                  text={btntext || 'Ok'}
-                  onClick={action ? action : close}
+                  variant={'primary'}
+                  text={btn1Text || 'Ok'}
+                  onClick={action ?? close}
                 />
               </div>
             ) : (
               <>
-                {variant === 'error' ? (
-                  <div className="beechMein gap-2 gap-sm-3 flex-wrap">
+                {!disableClick ? (
+                  <>
                     <CustomButton
                       type="button"
-                      text={btn1Text || 'Ok'}
-                      className="modal-btn"
-                      onClick={action ?? close}
+                      text={btn1Text || 'Yes'}
+                      variant={'primary'}
+                      onClick={action}
                     />
-                  </div>
+                    <CustomButton
+                      type="button"
+                      text={btn2Text || 'No'}
+                      variant={'outline-primary'}
+                      onClick={close}
+                    />
+                  </>
                 ) : (
-                  <div className="beechMein gap-2 gap-sm-3 flex-wrap">
-                    {!disableClick ? (
-                      <>
-                        <CustomButton
-                          type="button"
-                          text={btn1Text || 'Yes'}
-                          className="modal-btn"
-                          onClick={action}
-                        />
-                        <CustomButton
-                          type="button"
-                          text={btn2Text || 'No'}
-                          variant={'secondaryButton'}
-                          className="modal-btn text-black"
-                          onClick={close}
-                        />
-                      </>
-                    ) : (
-                      <PulseLoader size={11} className="modalLoader" />
-                    )}
-                  </div>
+                  <PulseLoader size={11} className="modalLoader" />
                 )}
               </>
             )}
-          </div>
+          </>
         )}
-      </Modal.Body>
+
+      </Modal.Footer>
     </Modal>
   );
 };

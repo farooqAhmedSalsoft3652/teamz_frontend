@@ -15,7 +15,7 @@ import withFilters from '../../../HOC/withFilters ';
 import withModal from '../../../HOC/withModal';
 import { usePageTitle } from '../../../Hooks/usePageTitle';
 import { useFetchTableData } from '../../../Hooks/useTable';
-import { getQueryManagementListing } from '../../../Services/Admin/queryManagement';
+import { getQueryManagementListing } from '../../../Services/Admin/QueryManagement';
 import { userStatusFilters } from '../../../Utils/Constants/TableFilter';
 import { queryManagementHeaders } from '../../../Utils/Constants/TableHeaders';
 import { formatDate, serialNum, showErrorToast } from '../../../Utils/Utils';
