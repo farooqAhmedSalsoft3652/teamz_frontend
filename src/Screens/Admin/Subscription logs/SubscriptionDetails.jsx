@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import {
   HiOutlineCheckCircle,
@@ -17,16 +17,20 @@ import { usePageTitle } from '../../../Hooks/usePageTitle';
 import { useFetchTableData } from '../../../Hooks/useTable';
 import {
   viewSubscriptionPlan,
+  updateSubscriptionPlanStatus,
 } from '../../../Services/Admin/SubscriptionManagement';
 
 import { formatDate, replaceUnderscoreWithSpace, showErrorToast } from '../../../Utils/Utils';
 import BackButton from '../../../Components/BackButton';
+import SelectInput from '../../../Components/Common/FormElements/SelectInput';
+import { userStatus } from '../../../Utils/Constants/TableFilter';
 
 const SubscriptionDetails = ({
   filters,
   setFilters,
   pagination,
   updatePagination,
+  showModal,
 }) => {
   usePageTitle('Subscription Plan');
   const { id } = useParams();
@@ -34,6 +38,7 @@ const SubscriptionDetails = ({
   const [changeStatusModal, setChangeStatusModal] = useState(false);
   const [selectedObj, setSelectedObj] = useState(null);
   let queryClient = useQueryClient();
+  const [selectedStatus, setSelectedStatus] = useState('');
 
   //GET SUBSCRIPTION DATA
   const {
@@ -57,6 +62,45 @@ const SubscriptionDetails = ({
   const subscriptionData = fetchedData ?? {};
 
   console.log(subscriptionData, 'subscriptionData');
+
+  // initialize local select from fetched status (maps 1/"1" to "1", 0/"0" to "0")
+  useEffect(() => {
+    if (subscriptionData && subscriptionData.status !== undefined) {
+      setSelectedStatus((prev) => {
+        if (prev === '' || prev === null || prev === undefined) {
+          return subscriptionData.status === 1 ? '1' : String(subscriptionData.status);
+        }
+        return prev;
+      });
+    }
+  }, [subscriptionData]);
+
+  // Mutation for updating status
+  const { mutate: updateStatusMutation, isPending: isStatusUpdating } =
+    useMutation({
+      mutationFn: async (planId) => await updateSubscriptionPlanStatus(planId),
+      onSuccess: () => {
+        showToast('Status updated successfully', 'success');
+        queryClient.invalidateQueries(['subscriptionDetails', id]);
+        queryClient.invalidateQueries(['subscriptionListing']);
+      },
+      onError: () => {
+        showToast('Failed to update status', 'error');
+        setSelectedStatus((prev) => (prev === '1' ? '0' : '1'));
+      },
+    });
+
+  const handleStatusChange = (event) => {
+    const newStatus = event.target.value;
+    setSelectedStatus(newStatus);
+    const actionText = newStatus === '1' ? 'activate' : 'deactivate';
+    showModal(
+      ``,
+      `Are you sure you want to ${actionText} this plan?`,
+      () => updateStatusMutation(subscriptionData.id),
+      'info'
+    );
+  };
 
   return (
     <>
@@ -101,6 +145,13 @@ const SubscriptionDetails = ({
             </Col>
             <Col xs={12} md={3} lg={4} xxl={5}>
               <div className="d-flex justify-content-end">
+                <SelectInput
+                  options={userStatus}
+                  value={selectedStatus}
+                  className={`status-select ${selectedStatus === '1' ? 'status-active' : 'status-inactive'}`}
+                  onChange={handleStatusChange}
+                  disabled={isStatusUpdating}
+                />
               </div>
             </Col>
           </Row>
