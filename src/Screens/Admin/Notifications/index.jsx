@@ -53,7 +53,7 @@ const Notifications = () => {
   const editNotificationMutation = useMutation({
     mutationFn: (id) => editNotification(id),
     onSuccess: () => {
-      queryClient.invalidateQueries('PackageDetails');
+      queryClient.invalidateQueries('getNotifications');
     },
     onError: (error) => {
       console.error('Error updating notification', error);
@@ -67,6 +67,7 @@ const Notifications = () => {
     setParams((prev) => ({ ...prev, status: value })); // Directly set the selected value
   };
 
+  console.log(notifications, 'notifications');
   return (
     <>
       <div className="mb-3">

@@ -89,11 +89,36 @@ const CustomFilters = ({
     <>
       <div className="table-filters mb-2 mb-md-2 mb-lg-4 d-flex flex-column gap-3 flex-md-row justify-content-md-between align-items-md-center">
         <div className="d-flex flex-column flex-md-row gap-2 align-items-md-center entries-length">
-          Show Entries
+        {!hideItemsPerPage ? (
+              <CustomSelect
+                className={'tableSelect'}
+                value={formData?.per_page}
+                name="per_page"
+                label="Show"
+                onChange={(e) => handleSelectChange('per_page', e.target.value)}
+                options={sortingOptions}
+              />
+            ) : null}
         </div>
         <div className="align-items-center d-md-flex justify-content-end order-xl-2 d-flex gap-2">
           <div className="flex-grow-1">
-            <div className="search-wrap">Search</div>
+            <div className="search-wrap">
+            {!hideSearch ? (
+              <CustomInput
+                inputClass={'tableInputs tableSearch'}
+                type="text"
+                placeholder="Search"
+                error={false}
+                label="Search"
+                showBorders={false}
+                borderRadius={10}
+                name="search"
+                rightIcon={FaMagnifyingGlass}
+                value={formData?.search || ''}
+                onChange={handleInputChange}
+              />
+            ) : null}
+            </div>
           </div>
 
           <Dropdown
@@ -110,51 +135,15 @@ const CustomFilters = ({
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <div className="dropdown-header">
-                <h3 className="fw-bold title mb-0">Filters</h3>
+                <h3 className="fw-bold title mb-0">Filters 123</h3>
               </div>
               <div className="dropdown-body">
                 <div className="filter-wrapper date-filter">
                   {/* {props?.dateFilterTitle && ( */}
                   <label className="w-100 mb-2">Filter By Date</label>
                   {/* )} */}
-                  <div className="mb-3"></div>
-                  <div className="pb-2"></div>
-                </div>
-              </div>
-              <div className="dropdown-footer d-flex flex-column justify-content-center gap-3 gap-lg-3 mt-0 pt-0">
-                {/* <CustomButton onClick={handleApply} type="button"> */}
-                <CustomButton  type="button">
-                  Apply
-                </CustomButton>
-                {/* <CustomButton handleClear onClick={handleClear} type="button"> */}
-                <CustomButton type="button">
-                  Clear
-                </CustomButton>
-              </div>
-            </Dropdown.Menu>
-          </Dropdown>
-        </div>
-      </div>
-
-      <div className="tableFilters mb-3">
-        <div className="d-flex justify-content-end justify-content-sm-start align-items-end flex-wrap flex-sm-nowrap gap-2 gap-lg-4">
-          <div className="filterWrapper d-flex flex-wrap align-items-end mb-0 gap-2 gap-lg-4 flex-grow-1">
-            {!hideSearch ? (
-              <CustomInput
-                inputClass={'tableInputs tableSearch'}
-                type="text"
-                placeholder="Search"
-                error={false}
-                label="Search"
-                showBorders={false}
-                borderRadius={10}
-                name="search"
-                rightIcon={FaMagnifyingGlass}
-                value={formData?.search || ''}
-                onChange={handleInputChange}
-              />
-            ) : null}
-            {selectOptions?.map((option, index) => (
+                  <div className="mb-3">
+                  {selectOptions?.map((option, index) => (
               <div key={index}>
                 {option ? (
                   <CustomSelect
@@ -265,24 +254,41 @@ const CustomFilters = ({
                 />
               </div>
             ))}
-            {useApplyButton && (
+                  </div>
+                  <div className="pb-2"></div>
+                </div>
+              </div>
+              <div className="dropdown-footer d-flex flex-column justify-content-center gap-3 gap-lg-3 mt-0 pt-0">
+                {/* <CustomButton onClick={handleApply} type="button"> */}
+                <CustomButton  type="button">
+                  Apply
+                </CustomButton>
+                {useApplyButton && (
               <CustomButton
                 text={'Apply Filters'}
                 onClick={handleApplyFilters}
               />
             )}
+
+                {/* <CustomButton handleClear onClick={handleClear} type="button"> */}
+                <CustomButton type="button">
+                  Clear
+                </CustomButton>
+              </div>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+      </div>
+
+      <div className="tableFilters mb-3">
+        <div className="d-flex justify-content-end justify-content-sm-start align-items-end flex-wrap flex-sm-nowrap gap-2 gap-lg-4">
+          <div className="filterWrapper d-flex flex-wrap align-items-end mb-0 gap-2 gap-lg-4 flex-grow-1">
+            
+            
+            
           </div>
           <div className="flex-shrink-0 mb-0 d-flex gap-2">
-            {!hideItemsPerPage ? (
-              <CustomSelect
-                className={'tableSelect'}
-                value={formData?.per_page}
-                name="per_page"
-                label="Show"
-                onChange={(e) => handleSelectChange('per_page', e.target.value)}
-                options={sortingOptions}
-              />
-            ) : null}
+            
           </div>
         </div>
       </div>

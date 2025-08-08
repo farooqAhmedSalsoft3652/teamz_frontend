@@ -77,19 +77,7 @@ const Dashboard = ({ showModal }) => {
   });
 
   // Get Charts Data based on selected type
-  const { data: userChart } = useQuery({
-    queryKey: ['userChart', userChartType],
-    queryFn: () => getUserChart(userChartType),
-    refetchOnWindowFocus: false,
-    retry: 1,
-  });
-
-  const { data: earningChart } = useQuery({
-    queryKey: ['earningChart', earningChartType],
-    queryFn: () => getEarningChart(earningChartType),
-    refetchOnWindowFocus: false,
-    retry: 1,
-  });
+  A
 
   // Reusable Chart Component
   const renderChart = (title, chartData, chartType, handleChange) => {
@@ -107,7 +95,7 @@ const Dashboard = ({ showModal }) => {
           />
         </div>
         <div style={{ height: 600 }} className="dashboardChart">
-          <Line
+          {/* <Line
             data={{
               labels: chartData?.map((item) => item[0]),
               datasets: [
@@ -127,7 +115,7 @@ const Dashboard = ({ showModal }) => {
               ],
             }}
             options={lineGraphOptions}
-          />
+          /> */}
         </div>
       </div>
     );

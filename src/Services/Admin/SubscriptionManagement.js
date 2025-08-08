@@ -39,7 +39,6 @@ export const getSubscriptionPlansListing = async (params) => {
 export const viewSubscriptionPlan = async (id) => {
   try {
     const data = subscriptionPlansData.detail.data.find(plan => plan.id === Number(id));
-    console.log(data, 'data');
     return data; // Return with data property to match your component
 
     // const { data } = await axiosInstance.get(`/admin-api/subscription-plans/${id}`);
@@ -51,12 +50,12 @@ export const viewSubscriptionPlan = async (id) => {
   }
 };
 
-export const updateSubscriptionPlanStatus = async (id) => {
+export const updateSubscriptionPlanStatus = async (id, status) => {
   try {
     console.log('Updating status for ID:', id);
     // Simulate API delay
     await new Promise((resolve) => setTimeout(resolve, 100));
-    console.log('Status updated successfully');
+    console.log('Status updated successfully', status);
     
     // Return mock success response instead of making actual API call
     return { 
@@ -65,7 +64,7 @@ export const updateSubscriptionPlanStatus = async (id) => {
     };
     
     // Commented out actual API call
-    // const response = await axiosInstance.post(`/admin-api/users/${id}`);
+    // const response = await axiosInstance.post(`/admin-api/users/${id}/status, {status}`);
     // const {
     //   data: { message, status },
     // } = response;

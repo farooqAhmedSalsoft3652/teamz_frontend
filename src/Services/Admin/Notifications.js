@@ -1,12 +1,15 @@
 import axiosInstance from '../../Config/axiosConfig';
+import { notificationsData } from '../../Config/data';
 import { buildFormData } from '../../Utils/Utils';
 
 // GET
 export const getNotifications = async (params) => {
   try {
-    const { data } = await axiosInstance.get('/admin-api/notifications', {
-      params,
-    });
+    const data = notificationsData;
+
+    // const { data } = await axiosInstance.get('/admin-api/notifications', {
+    //   params,
+    // });
     return data.detail; // Assume this returns the listing object
   } catch (error) {
     throw error.response
@@ -23,6 +26,7 @@ export const editNotification = async (id) => {
     const {
       data: { message, status },
     } = response;
+    console.log(message, status, 'message, status');
     return { message, status }; // Assume this returns the success object
   } catch (error) {
     throw error.response

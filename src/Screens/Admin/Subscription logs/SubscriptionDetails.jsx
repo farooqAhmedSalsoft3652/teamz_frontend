@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import {
   HiOutlineCheckCircle,
@@ -16,24 +16,25 @@ import withModal from '../../../HOC/withModal';
 import { usePageTitle } from '../../../Hooks/usePageTitle';
 import { useFetchTableData } from '../../../Hooks/useTable';
 import {
+  updateSubscriptionPlanStatus,
   viewSubscriptionPlan,
 } from '../../../Services/Admin/SubscriptionManagement';
 
 import { formatDate, replaceUnderscoreWithSpace, showErrorToast } from '../../../Utils/Utils';
 import BackButton from '../../../Components/BackButton';
+import { userStatus } from '../../../Utils/Constants/TableFilter';
+import SelectInput from '../../../Components/Common/FormElements/SelectInput';
 
 const SubscriptionDetails = ({
-  filters,
-  setFilters,
-  pagination,
-  updatePagination,
+  showModal
 }) => {
   usePageTitle('Subscription Plan');
+  let queryClient = useQueryClient();
   const { id } = useParams();
   const navigate = useNavigate();
   const [changeStatusModal, setChangeStatusModal] = useState(false);
   const [selectedObj, setSelectedObj] = useState(null);
-  let queryClient = useQueryClient();
+  const [selectValue, setSelectValue] = useState({});
 
   //GET SUBSCRIPTION DATA
   const {
@@ -56,7 +57,101 @@ const SubscriptionDetails = ({
   }
   const subscriptionData = fetchedData ?? {};
 
-  console.log(subscriptionData, 'subscriptionData');
+  // console.log(subscriptionData, 'subscriptionData');
+
+  const isStatusActive = (item) => {
+    // Simple logic based on item?.status
+    const status = item?.status;
+    console.log(`Item ${item.id}: status="${status}"`);
+    
+    // If status is 1, return true (active), if 0, return false (inactive)
+    return status === 1 || status === '1';
+  };
+  
+
+  // Initialize selectValue when userManagement changes
+  useEffect(() => {
+    if (subscriptionData) {
+      const isActive = subscriptionData.status === 1;
+      const initialValues = {
+        [subscriptionData.id]: isActive ? '1' : '0',
+      };
+      setSelectValue(initialValues);
+  
+      console.log(`Status: ${isActive ? 'Active' : 'Inactive'}`);
+      console.log('Initial Values:', initialValues);
+    }
+  }, [subscriptionData]);
+  
+
+    //UPDATE STATUS
+     const handleStatusChange = (itemId, event) => {
+      const newStatus = event.target.value;
+      const statusText = newStatus === '1' ? 'Active' : 'Inactive';
+      
+      // Update local state immediately for better UX
+      setSelectValue(prev => ({
+        ...prev,
+        [itemId]: newStatus
+      }));
+  
+      // Show confirmation modal using showModal
+      const actionText = statusText === 'Active' ? 'Activate' : 'Inactivate';
+      console.log('Calling mutation with:', { id: itemId, status: Number(newStatus) });
+      
+      showModal(
+        ``,
+        `Are you sure you want to ${actionText} this user?`,
+        () => {
+          // This will be called when user confirms
+          console.log('Modal confirmed, calling API for itemId:', itemId);
+          updateStatusMutation({ id: itemId, status: Number(newStatus) });
+        },
+        'info'
+      );
+     };
+     
+       // Mutation for updating status
+        const { mutate: updateStatusMutation, isPending: isStatusUpdating } =
+          useMutation({
+            mutationFn: async ({ id, status }) => {
+              return await updateSubscriptionPlanStatus(id, status);
+            },
+            onSuccess: (data, variables) => {
+              showToast('Status updated successfully', 'success');
+              // Show success modal after a short delay to avoid conflicts
+              setTimeout(() => {
+                const currentStatus = selectValue[variables.id] === '1' ? 'Active' : 'Inactive';
+
+                showModal(
+                  ``,
+                  `User has been ${currentStatus.toLowerCase()} successfully!`,
+                  null,
+                  'success'
+                );
+              }, 1000); // Increased delay to ensure confirmation modal is closed
+              queryClient.invalidateQueries(['subscriptionDetails']);
+            },
+            onError: (error, variables) => {
+              console.error('Error updating status:', error);
+              showToast('Failed to update status', 'error');
+              // Revert the local state change on error
+              if (variables?.id && variables?.status !== undefined) {
+                // Revert local state
+                setSelectValue(prev => ({
+                  ...prev,
+                  [variables.id]: variables.status === 1 ? '0' : '1'
+                }));
+              }
+            },
+          });
+
+      // // Confirm status change
+      // const confirmStatusChange = () => {
+      //   if (selectedObj) {
+      //     updateStatusMutation(selectedObj.id);
+      //   }
+      // };
 
   return (
     <>
@@ -101,6 +196,12 @@ const SubscriptionDetails = ({
             </Col>
             <Col xs={12} md={3} lg={4} xxl={5}>
               <div className="d-flex justify-content-end">
+              <SelectInput
+                            options={userStatus}
+                            value={selectValue[subscriptionData.id]}
+                            className={`status-select ${selectValue[subscriptionData.id] === '1' ? 'status-active' : 'status-inactive'}`}
+                            onChange={(event) => handleStatusChange(subscriptionData.id, event)}
+                          />
               </div>
             </Col>
           </Row>

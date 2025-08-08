@@ -62,7 +62,7 @@ const SubscriptionLogs = ({
   return (
     <>
       <section className="subscription-logs">
-        <div className="admin-content-header gap-3 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4">
+        <div className="admin-content-header gap-3 d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-4">
           <h2>Subscription Logs</h2>
           <Link className="btn btn-primary text-uppercase" to="/admin/subscription-logs/subscription-plan">
             Manage Subscription Plan

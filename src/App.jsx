@@ -32,7 +32,7 @@ const AdminProfile = lazy(() => import('./Screens/Profile/index'));
 const EditProfile = lazy(() => import('./Screens/Profile/EditProfile'));
 const ChangePassword = lazy(() => import('./Screens/Profile/ChangePassword'));
 const Profile = lazy(() => import('./Screens/Profile/Profile'));
-const Notifications = lazy(() => import('./Screens/Admin/Notifications/Notifications'));
+const Notifications = lazy(() => import('./Screens/Admin/Notifications/index'));
 const Preferences = lazy(() => import('./Screens/Theme/Preferences'));
 
 function App() {

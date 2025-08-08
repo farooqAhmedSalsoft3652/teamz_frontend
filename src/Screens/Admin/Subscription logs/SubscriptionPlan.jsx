@@ -22,7 +22,7 @@ import { subscriptionStatusFilters, subscriptionTypeFilters, userStatus } from '
 import { subscriptionPlanHeaders } from '../../../Utils/Constants/TableHeaders';
 import { formatDate, replaceUnderscoreWithSpace, serialNum, showErrorToast } from '../../../Utils/Utils';
 import BackButton from '../../../Components/BackButton';
-import CustomSelect from '../../../Components/Common/FormElements/SelectInput';
+import SelectInput from '../../../Components/Common/FormElements/SelectInput';
 
 const SubscriptionPlan = ({
   showModal,
@@ -95,7 +95,7 @@ const SubscriptionPlan = ({
     }));
 
     // Show confirmation modal using showModal
-    const actionText = statusText === 'Active' ? 'activate' : 'deactivate';
+    const actionText = statusText === 'Active' ? 'Activate' : 'Inactivate';
     console.log('Showing modal for status change:', { itemId, newStatus, statusText });
     
     showModal(
@@ -142,11 +142,11 @@ const SubscriptionPlan = ({
     });
 
   // Confirm status change
-  const confirmStatusChange = () => {
-    if (selectedObj) {
-      updateStatusMutation(selectedObj.id);
-    }
-  };
+  // const confirmStatusChange = () => {
+  //   if (selectedObj) {
+  //     updateStatusMutation(selectedObj.id);
+  //   }
+  // };
 
   return (
     <>
@@ -210,7 +210,7 @@ const SubscriptionPlan = ({
                         <td>{replaceUnderscoreWithSpace( item?.duration)}</td>
                         <td>{item?.amount}</td>
                         <td>
-                          <CustomSelect
+                          <SelectInput
                             options={userStatus}
                             value={selectValue[item.id]}
                             className={`status-select ${selectValue[item.id] === '1' ? 'status-active' : 'status-inactive'}`}
@@ -259,8 +259,7 @@ const SubscriptionPlan = ({
           </Row>
         </div>
       </section>
-
-      <CustomModal
+      {/* <CustomModal
         show={changeStatusModal}
         close={() => setChangeStatusModal(false)}
         disableClick={isStatusUpdating} // Disable action button during mutation
@@ -269,7 +268,7 @@ const SubscriptionPlan = ({
         description={`Are you sure you want to ${
           selectedObj?.statusText === 'Active' ? 'activate' : 'deactivate'
         } this user?`}
-      />
+      /> */}
 
       {/* <CustomModal
         show={changeStatusModal}

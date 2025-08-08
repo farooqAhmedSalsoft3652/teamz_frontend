@@ -33,6 +33,9 @@ const DashboardLayout = ({ disableSidebar = false, redirectPath = null }) => {
     }
   }, [redirectPath]);
 
+
+
+  
   const [expanded, setExpanded] = useState(true);
 
   function toggleSideNav(e) {

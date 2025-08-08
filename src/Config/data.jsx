@@ -696,7 +696,7 @@ export const subscriptionPlansData = {
         amount: 29.99,
         duration: '1_month',
         type: 'coach',
-        status: '1',
+        status: 1,
         features: ['Feature 1', 'Feature 2', 'Feature 3'],
         created_at: '2024-01-15T10:30:00Z',
         updated_at: '2024-01-15T10:30:00Z'
@@ -709,7 +709,7 @@ export const subscriptionPlansData = {
         amount: 49.99,
         duration: '1_year',
         type: 'assistant_coach',
-        status: '0',
+        status: 0,
         features: ['All Basic Features', 'Premium Feature 1', 'Premium Feature 2'],
         created_at: '2024-01-14T15:45:00Z',
         updated_at: '2024-01-15T10:30:00Z'

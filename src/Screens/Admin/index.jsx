@@ -4,7 +4,7 @@ import AdminLogin from './Auth/AdminLogin';
 import ForgetPassword from './Auth/ForgetPassword';
 import ForgetPassword2 from './Auth/ForgetPassword2';
 import ForgetPassword3 from './Auth/ForgetPassword3';
-import Dashboard from './Dashboard/Dashboard';
+import Dashboard from './Dashboard/index';
 import Notifications from './Notifications/Notifications';
 import QueryManagement from './QueryManagement';
 import QueryDetails from './QueryManagement/QueryDetails';
