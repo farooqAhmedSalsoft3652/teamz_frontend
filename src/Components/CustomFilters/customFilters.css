@@ -32,12 +32,12 @@
     min-width: 80px; */
   padding: 10px 45px 10px 15px;
   height: 40px !important;
-  color: #ffffff;
+  color: #666;
   box-shadow: none;
   border-radius: 7px;
   font-size: 15px;
-  background: transparent;
-  border: 1px solid var(--tableBorderClr);
+  border: var(--table-border-width, 1px) solid var(--table-border-color, var(--bs-border-color, #dee2e6));
+
   /* box-shadow: 0 0 20px 1px rgb(23 22 22 / 3%), 0 2px 9px 0 rgb(43 43 43 / 17%); */
 }
 
@@ -107,10 +107,11 @@
 .filters-dropdown .filter-btn.show {
   background: var(--bs-primary-gradient);
   color: var(--bs-white);
-  border: 1px solid  transparent;
+  border: 1px solid transparent;
 }
+
 .filters-dropdown .filter-btn.show svg path,
-.filters-dropdown .filter-btn:hover svg path{
+.filters-dropdown .filter-btn:hover svg path {
   fill: var(--bs-white);
 }
 

@@ -48,7 +48,7 @@ const QueryDetails = ({ showModal, closeModal, updatePagination }) => {
     isError,
     error,
   } = useQuery({
-    queryKey: ['userDetails', id],
+    queryKey: ['queryDetails', id],
     queryFn: () => viewQueryManagement(id),
     refetchOnWindowFocus: false,
     retry: 1,
@@ -86,7 +86,7 @@ const QueryDetails = ({ showModal, closeModal, updatePagination }) => {
     );
   }
 
-  if (isError && isErrorBranchLogs) {
+  if (isError) {
     return (
       <>
         <div className="d-card">

@@ -19,7 +19,7 @@ const Pagination = ({ pagination, setFilters }) => {
   const endItem = Math.min(currentPage * itemsPerPage, totalRecords);
 
   return (
-    <div className="customPagination mb-45">
+    <div className="customPagination">
       <div className="d-flex flex-wrap gap-md-0 gap-3 justify-content-between align-items-center">
         <div className="flex-shrink-0">
           <div className="dataTables_info pl-2">

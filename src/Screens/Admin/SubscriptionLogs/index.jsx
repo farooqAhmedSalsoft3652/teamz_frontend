@@ -32,8 +32,6 @@ const SubscriptionLogs = ({
 }) => {
   usePageTitle('Subscription Logs');
   const navigate = useNavigate();
-  const [changeStatusModal, setChangeStatusModal] = useState(false);
-  const [selectedObj, setSelectedObj] = useState(null);
   let queryClient = useQueryClient();
 
   //GET SUBSCRIPTION LISTING

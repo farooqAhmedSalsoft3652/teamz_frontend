@@ -13,14 +13,14 @@ import {
   Tooltip,
 } from 'chart.js';
 import React, { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import { useNavigate } from 'react-router-dom';
 import User from '../../../assets/images/dash-user.svg?react';
 import Receivable from '../../../assets/images/receivable.svg?react';
 import CustomSelect from '../../../Components/Common/FormElements/SelectInput';
+import StatsCard from '../../../Components/Common/StatsCard';
 import withModal from '../../../HOC/withModal';
 import { usePageTitle } from '../../../Hooks/usePageTitle';
-import { lineGraphOptions } from '../../../Mocks/MockData';
 import {
   getDashboardData,
   getEarningChart,
@@ -29,6 +29,7 @@ import {
 import useThemeStore from '../../../Stores/ThemeStore';
 import { themeDictionary } from '../../../Utils/Constants/ColorConstants';
 import { dateRangeSelectOptions } from '../../../Utils/Constants/SelectOptions';
+import { Col, Row } from 'react-bootstrap';
 
 ChartJS.register(
   ArcElement,
@@ -50,18 +51,28 @@ const Dashboard = ({ showModal }) => {
 
   const [userChartType, setUserChartType] = useState('yearly');
   const [earningChartType, setEarningChartType] = useState('yearly');
-  const [linegraphStyling, setLineGraphStyling] = useState({});
+  const [userChartData, setUserChartData] = useState(null);
+  const [earningChartData, setEarningChartData] = useState(null);
+
   useEffect(() => {
-    const graphStyling = {
-      borderColor: '',
-      pointBorderColor: '',
-      backgroundColor: '',
-    };
-    graphStyling.borderColor = themeDictionary[theme][0];
-    graphStyling.pointBorderColor = themeDictionary[theme][1];
-    graphStyling.backgroundColor = `${themeDictionary[theme][0]}55`;
-    setLineGraphStyling(graphStyling);
-  }, [theme]);
+    // Update chart colors based on theme
+    if (userChartData) {
+      const updatedUserChart = JSON.parse(JSON.stringify(userChartData));
+      updatedUserChart.datasets[0].backgroundColor = [
+        themeDictionary[theme][0],
+        themeDictionary[theme][1],
+      ];
+      setUserChartData(updatedUserChart);
+    }
+    if (earningChartData) {
+      const updatedEarningChart = JSON.parse(JSON.stringify(earningChartData));
+      updatedEarningChart.datasets[0].backgroundColor = [
+        themeDictionary[theme][0],
+        themeDictionary[theme][1],
+      ];
+      setEarningChartData(updatedEarningChart);
+    }
+  }, [theme, userChartData, earningChartData]);
 
   const handleDateRangeSelect = (graph, v) => {
     if (graph === 'totalUsers') setUserChartType(v.target.value);
@@ -91,42 +102,44 @@ const Dashboard = ({ showModal }) => {
     retry: 1,
   });
 
+  // Update chart data when it changes
+  useEffect(() => {
+    if (userChart) {
+      setUserChartData(userChart);
+    }
+  }, [userChart]);
+
+  useEffect(() => {
+    if (earningChart) {
+      setEarningChartData(earningChart);
+    }
+  }, [earningChart]);
+
   // Reusable Chart Component
   const renderChart = (title, chartData, chartType, handleChange) => {
+    if (!chartData) return null;
+    
     return (
       <div className="d-card chart-padding mt-3">
         <div className="d-flex justify-content-between mb-3">
-          <h4 className="d-card-title">{title}</h4>
-          <CustomSelect
-            name="Monthly"
-            options={dateRangeSelectOptions}
-            firstIsLabel={false}
-            className="gray"
-            onChange={(e) => handleChange(chartType, e)}
-            value={userChartType}
-          />
+          <div className="flex-grow-1">
+            <h4 className="d-card-title flex-grow-1">{title}</h4>
+          </div>
+          <div className="flex-shrink-0">
+            <CustomSelect
+              name="Monthly"
+              options={dateRangeSelectOptions}
+              firstIsLabel={false}
+              className="gray"
+              onChange={(e) => handleChange(chartType, e)}
+              value={userChartType}
+            />
+          </div>
         </div>
         <div style={{ height: 600 }} className="dashboardChart">
-          <Line
-            data={{
-              labels: chartData?.map((item) => item[0]),
-              datasets: [
-                {
-                  data: chartData?.map((item) => item[1]),
-                  borderRadius: 50,
-                  tension: 0.4,
-                  pointRadius: 0,
-                  pointHoverRadius: 6,
-                  pointBorderWidth: 5,
-                  pointHoverBorderWidth: 5,
-                  pointBackgroundColor: '#fff',
-                  borderWidth: 2,
-                  fill: { target: 'origin' },
-                  ...linegraphStyling,
-                },
-              ],
-            }}
-            options={lineGraphOptions}
+          <Bar
+            data={chartData}
+            options={chartData.options}
           />
         </div>
       </div>
@@ -136,44 +149,25 @@ const Dashboard = ({ showModal }) => {
   return (
     <div>
       <h2 className="screen-title d-inline-block">Dashboard</h2>
-      <div className="row">
-        <div className="col-12 col-sm-6 col-xxl-3 mb-4 mb-xxl-0">
-          <div className="d-card chart-padding">
-            <div className="d-flex gap-3 gap-md-3">
-              <div className="dash-icon-wrapper">
-                <User className="dash-icon user" />
-              </div>
-              <div className="glance-info-text">
-                <h6>New Users</h6>
-                <h4>{cardData?.users}</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-12 col-sm-6 col-xxl-3 mb-4 mb-xxl-0">
-          <div className="d-card chart-padding">
-            <div className="d-flex gap-3 gap-md-3">
-              <div className="dash-icon-wrapper">
-                <Receivable className="dash-icon" />
-              </div>
-              <div className="glance-info-text">
-                <h6>Total Earnings</h6>
-                <h4>${cardData?.earnings}</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
+      {/* Stats Cards using data from getDashboardData service */}
+      <Row className="mb-4">
+        {cardData?.map((card) => (
+          <Col key={card.id} xs={12} md={6} xl={4} xxl={3} className="mb-4 mb-xxl-0">
+            <StatsCard item={card} />
+          </Col>
+        ))}
+      </Row>
 
       {renderChart(
         'Total Users',
-        userChart,
+        userChartData,
         'totalUsers',
         handleDateRangeSelect
       )}
       {renderChart(
         'Total Earnings',
-        earningChart,
+        earningChartData,
         'totalEarning',
         handleDateRangeSelect
       )}

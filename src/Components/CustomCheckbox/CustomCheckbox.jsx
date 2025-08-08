@@ -11,7 +11,7 @@ const CustomCheckbox = ({
 }) => {
   return (
     <label
-      className={`checkbox-wrapper cp checkbox-component-wrapper ${
+      className={`fw-regular checkbox-wrapper cp checkbox-component-wrapper ${
         readOnly ? 'readonly' : ''
       }`}
       style={style}
@@ -27,7 +27,7 @@ const CustomCheckbox = ({
         />
         <span className="custom-checkbox"></span>
       </div>
-      <span className="checkbox-label">{label}</span>
+      <span className="checkbox-label fw-normal">{label}</span>
     </label>
   );
 };

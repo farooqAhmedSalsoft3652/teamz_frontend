@@ -259,27 +259,6 @@ const SubscriptionPlan = ({
           </Row>
         </div>
       </section>
-      {/* <CustomModal
-        show={changeStatusModal}
-        close={() => setChangeStatusModal(false)}
-        disableClick={isStatusUpdating} // Disable action button during mutation
-        action={confirmStatusChange} // Perform status change on confirm
-        title={selectedObj?.statusText === 'Active' ? 'Activate' : 'Deactivate'}
-        description={`Are you sure you want to ${
-          selectedObj?.statusText === 'Active' ? 'activate' : 'deactivate'
-        } this user?`}
-      /> */}
-
-      {/* <CustomModal
-        show={changeStatusModal}
-        close={() => setChangeStatusModal(false)}
-        action={handleStatusChange}
-        disableClick={isStatusUpdating}
-        title={user?.status_detail === 'Active' ? 'Deactivate' : 'Activate'}
-        description={`Are you sure you want to ${
-          user?.status_detail === 'Active' ? 'deactivate' : 'activate'
-        } this user?`}
-      /> */}
     </>
   );
 };

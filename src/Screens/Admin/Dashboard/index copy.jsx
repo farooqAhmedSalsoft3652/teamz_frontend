@@ -77,7 +77,7 @@ const Dashboard = ({ showModal }) => {
   });
 
   // Get Charts Data based on selected type
-  A
+  
 
   // Reusable Chart Component
   const renderChart = (title, chartData, chartType, handleChange) => {

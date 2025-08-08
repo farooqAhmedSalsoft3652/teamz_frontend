@@ -28,7 +28,7 @@ export const notificationsData = {
               },
             },
           },
-          read_at: '2024-06-14T10:42:45.000000Z',
+          read_at: '',
           created_at: '2024-06-14T10:42:45.000000Z',
           updated_at: '2024-06-14T10:42:45.000000Z',
         },
@@ -308,13 +308,135 @@ export const dashboardChartDataOne = {
   heading: 'Total Earning',
   label: 'Total Earning',
   fill: true,
-  data: [10, 30, 20, 40, 50, 60, 20, 80, 90, 50, 40, 120],
+  data: [0, 30, 20, 40, 50, 60, 20, 80, 90, 50, 40, 120],
+};
+
+// Chart data for Total Users - format: [[label, value], [label, value], ...]
+export const userChartData = [
+  ['Jan', 1200],
+  ['Feb', 1400],
+  ['Mar', 1600],
+  ['Apr', 1800],
+  ['May', 2000],
+  ['Jun', 2200],
+  ['Jul', 2400],
+  ['Aug', 2600],
+  ['Sep', 2800],
+  ['Oct', 3000],
+  ['Nov', 3200],
+  ['Dec', 3400]
+];
+
+// Chart data for Total Earnings - format: [[label, value], [label, value], ...]
+export const earningChartData = [
+  ['Jan', 15000],
+  ['Feb', 18000],
+  ['Mar', 22000],
+  ['Apr', 25000],
+  ['May', 28000],
+  ['Jun', 32000],
+  ['Jul', 35000],
+  ['Aug', 38000],
+  ['Sep', 42000],
+  ['Oct', 45000],
+  ['Nov', 48000],
+  ['Dec', 52000]
+];
+
+// User Chart Data in cashBalanceData format
+export const userChartDataFormatted = {
+  type: 'bar',
+  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  datasets: [
+    {
+      label: 'Total Users',
+      data: [1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3200, 3400],
+      backgroundColor: ['#1f4047', '#fdc770'],
+      borderWidth: 0,
+      barThickness: 20,
+    },
+  ],
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      title: {
+        display: false,
+      },
+    },
+    scales: {
+      y: {
+        ticks: {
+          maxTicksLimit: 6,
+          font: {
+            family: 'Poppins',
+          },
+        },
+        beginAtZero: true,
+      },
+      x: {
+        ticks: {
+          font: {
+            family: 'Poppins',
+          },
+        },
+      },
+    },
+  },
+};
+
+// Earnings Chart Data in cashBalanceData format
+export const earningChartDataFormatted = {
+  type: 'bar',
+  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  datasets: [
+    {
+      label: 'Total Earnings',
+      data: [15000, 18000, 22000, 25000, 28000, 32000, 35000, 38000, 42000, 45000, 48000, 52000],
+      backgroundColor: ['#1f4047', '#fdc770'],
+      borderWidth: 0,
+      barThickness: 20,
+    },
+  ],
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      title: {
+        display: false,
+      },
+    },
+    scales: {
+      y: {
+        ticks: {
+          maxTicksLimit: 6,
+          font: {
+            family: 'Poppins',
+          },
+        },
+        beginAtZero: true,
+      },
+      x: {
+        ticks: {
+          font: {
+            family: 'Poppins',
+          },
+        },
+      },
+    },
+  },
 };
 export const dashboardChartDataTwo = {
   heading: 'New Bookings Received',
   label: 'New Bookings Received',
   fill: true,
-  data: [10, 30, 20, 40, 50, 60, 20, 80, 90, 50, 40, 120],
+  data: [0, 30, 20, 40, 50, 60, 20, 80, 90, 50, 40, 120],
 };
 export const dashboardChartDataThree = {
   heading: 'New Users Registered',
@@ -333,48 +455,28 @@ export const dashboardChartDatafour = {
 export const statsData = [
   {
     id: 1,
-    // image: Stats1,
-    number: '178',
-    text: 'total earning',
-    change: '33',
-    increase: false,
-    arrowIcon: true,
-    total_post: 'Since last week',
-    backgroundColor: '#ECE7F1',
+    text: "Total Revenue",
+    number: "$40,689",
+    increase: "8.5",
+    sinceWeek: "Up from yesterday",
+    image: "faDollarSign"
   },
   {
     id: 2,
-    // image: Stats2,
-    increase: true,
-    arrowIcon: true,
-    number: '20',
-    text: 'new  bookings',
-    change: '33',
-    total_post: 'Since last week',
-    backgroundColor: '#E8F3F0',
+    text: "Subscriptions", 
+    number: "2,300",
+    increase: "-2.1",
+    sinceWeek: "Up from past week",
+    image: "faUsers"
   },
   {
     id: 3,
-    // image: Stats3,
-    number: '20',
-    text: 'new  users',
-    change: '33',
-    increase: true,
-    arrowIcon: true,
-    total_post: 'Since last week',
-    backgroundColor: '#E2F1FB',
-  },
-  {
-    id: 4,
-    // image: Stats4,
-    number: '20',
-    increase: false,
-    arrowIcon: true,
-    text: 'new  service provider',
-    change: '33',
-    total_post: 'Since last week',
-    backgroundColor: '#FFF7CF',
-  },
+    text: "Coach Engagement",
+    number: "1,234",
+    increase: "12.5",
+    sinceWeek: "Up from yesterday",
+    image: "faShoppingCart"
+  }
 ];
 
 export const headCoachManagementData = {
@@ -385,48 +487,73 @@ export const headCoachManagementData = {
     data: [
       {
         id: 1,
-        coach_name: 'Toms',
+        first_name: 'Toms',
+        last_name: 'Albert',
+        mobile: '03656558478',
         school: 'School 1',
         email: 'darvesh@gmail.com',
         subscription_title: 'Monthly',
         status: 1,
         created_at: '2024-06-25T14:29:37.000000Z', 
+        state: 'California',
+        level: 'Abc',
+        team_mascot: 'Abc',
       },
       {
         id: 2,
-        coach_name: 'Toms',
+        first_name: 'Toms',
+        last_name: 'Albert',
+        mobile: '03656558478',
         school: 'School 1',
         email: 'darvesh@gmail.com',
         subscription_title: 'Monthly',
         status: 0,
         created_at: '2024-06-25T14:29:37.000000Z', 
+        state: 'California',
+        level: 'Abc',
+        team_mascot: 'Abc',
       },
       {
         id: 3,
-        coach_name: 'Toms',
+        first_name: 'Toms',
+        last_name: 'Albert',
+        mobile: '03656558478',
         school: 'School 1',
         email: 'darvesh@gmail.com',
         subscription_title: 'Monthly',
         status: 1,
         created_at: '2024-06-25T14:29:37.000000Z', 
+        state: 'California',
+        level: 'Abc',
+        team_mascot: 'Abc',
       },
       {
         id: 4,
-        coach_name: 'Toms',
+        first_name: 'Toms',
+        last_name: 'Albert',
+        mobile: '03656558478',
         school: 'School 1',
         email: 'darvesh@gmail.com',
         subscription_title: 'Monthly',
         status: 0,
         created_at: '2024-06-25T14:29:37.000000Z', 
+        state: 'California',
+        level: 'Abc',
+        team_mascot: 'Abc',
       },
       {
         id: 5,
-        coach_name: 'Toms',
+        first_name: 'Toms',
+        last_name: 'Albert',
+        mobile: '03656558478',
         school: 'School 1',
         email: 'darvesh@gmail.com',
         subscription_title: 'Monthly',
         status: 1,
         created_at: '2024-06-25T14:29:37.000000Z', 
+        state: 'California',
+        level: 'Abc',
+        team_mascot: 'Abc',
       },
     ],
     first_page_url: 'http://localhost/food_app/admin-api/branches?page=1',
@@ -461,6 +588,316 @@ export const headCoachManagementData = {
     prev_page_url: null,
     to: 10,
     total: 11,
+  },
+};
+
+export const assistantCoachData = {
+  status: true,
+  message: 'user listing',
+  detail: {
+    current_page: 1,
+    data: [
+      {
+        id: 1,
+        first_name: 'Toms',
+        last_name: 'Albert',
+        email: 'darvesh@gmail.com',
+        subscription_title: 'Monthly',
+        created_at: '2024-06-25T14:29:37.000000Z',
+        mobile: '03656558478',
+        role: 'Assistant Coach',
+        offence: 'Abc',
+        defense: 'Abc',
+      },
+      {
+        id: 2,
+        first_name: 'Toms',
+        last_name: 'Albert',
+        email: 'darvesh@gmail.com',
+        subscription_title: 'Monthly',
+        created_at: '2024-06-25T14:29:37.000000Z',
+        mobile: '03656558478',
+        role: 'Assistant Coach',
+        offence: 'Abc',
+        defense: 'Abc',
+      },
+      {
+        id: 3,
+        first_name: 'Toms',
+        last_name: 'Albert',
+        email: 'darvesh@gmail.com',
+        subscription_title: 'Monthly',
+        created_at: '2024-06-25T14:29:37.000000Z',
+        mobile: '03656558478',
+        role: 'Assistant Coach',
+        offence: 'Abc',
+        defense: 'Abc',
+      },
+      {
+        id: 4,
+        first_name: 'Toms',
+        last_name: 'Albert',
+        email: 'darvesh@gmail.com',
+        subscription_title: 'Monthly',
+        created_at: '2024-06-25T14:29:37.000000Z',
+        mobile: '03656558478',
+        role: 'Assistant Coach',
+        offence: 'Abc',
+        defense: 'Abc',
+      },
+      {
+        id: 5,
+        first_name: 'Toms',
+        last_name: 'Albert',
+        email: 'darvesh@gmail.com',
+        subscription_title: 'Monthly',
+        created_at: '2024-06-25T14:29:37.000000Z',
+        mobile: '03656558478',
+        role: 'Assistant Coach',
+        offence: 'Abc',
+        defense: 'Abc',
+      },
+    ],
+  },
+};
+
+export const totalEventsData = {
+  status: true,
+  message: 'user listing',
+  detail: {
+    current_page: 1,
+    data: [
+      {
+        id: 1,
+        event_name: 'Basketball Tournament',
+        event_date: '2024-02-20',
+        event_start_time: '10:00',
+        event_end_time: '11:00',
+        duration: '1 Hour',
+        location: 'ABC School Gymnasium',
+        assigned_to: 'John Doe',
+        equipment: 'Basketballs, Nets, Scoreboard',
+        attendance_required: 'Yes',
+        event_focus: 'Team Building',
+      },
+      {
+        id: 2,
+        event_name: 'Basketball Tournament',
+        event_date: '2025-02-20',
+        event_start_time: '10:00',
+        event_end_time: '11:30',
+        duration: '1.5 Hours',
+        location: 'ABC School Gymnasium',
+        assigned_to: 'John Doe',
+        equipment: 'Basketballs, Nets, Scoreboard',
+        attendance_required: 'Yes',
+        event_focus: 'Team Building',
+      },
+      {
+        id: 3,
+        event_name: 'Basketball Tournament',
+        event_date: '2024-02-20',
+        event_start_time: '10:00',
+        event_end_time: '12:00',
+        duration: '2 Hours',
+        location: 'ABC School Gymnasium',
+        assigned_to: 'John Doe',
+        equipment: 'Basketballs, Nets, Scoreboard',
+        attendance_required: 'Yes',
+        event_focus: 'Team Building',
+      },
+      {
+        id: 4,
+        event_name: 'Basketball Tournament',
+        event_date: '2024-02-20',
+        event_start_time: '10:00',
+        event_end_time: '12:30',
+        duration: '2.51 Hours',
+        location: 'ABC School Gymnasium',
+        assigned_to: 'John Doe',
+        equipment: 'Basketballs, Nets, Scoreboard',
+        attendance_required: 'Yes',
+        event_focus: 'Team Building',
+      },
+      {
+        id: 5,
+        event_name: 'Basketball Tournament',
+        event_date: '2024-02-20',
+        event_start_time: '10:00',
+        event_end_time: '16:00',
+        duration: 'Full Day',
+        location: 'ABC School Gymnasium',
+        assigned_to: 'John Doe',
+        equipment: 'Basketballs, Nets, Scoreboard',
+        attendance_required: 'Yes',
+        event_focus: 'Team Building',
+      },
+    ],
+  },
+};
+
+export const subscriptionCoachData = {
+  status: true,
+  message: 'user listing',
+  detail: {
+    current_page: 1,
+    data: [
+      {
+        id: 1,
+        subscription_title: 'Monthly',
+        duration: '1 Month',
+        total_amount: '$29.99',
+        coupon: 'Abc',
+        payment_date: '2024-06-25T14:29:37.000000Z',
+        expiration: '2025-06-25T14:29:37.000000Z',
+      },
+      {
+        id: 2,
+        subscription_title: 'Monthly',
+        duration: '1 Month',
+        total_amount: '$29.99',
+        coupon: 'Abc',
+        payment_date: '2024-06-25T14:29:37.000000Z',
+        expiration: '2025-06-25T14:29:37.000000Z',
+      },
+      {
+        id: 3,
+        subscription_title: 'Monthly',
+        duration: '1 Month',
+        total_amount: '$29.99',
+        coupon: 'Abc',
+        payment_date: '2024-06-25T14:29:37.000000Z',
+        expiration: '2025-06-25T14:29:37.000000Z',
+      },
+      {
+        id: 4,
+        subscription_title: 'Monthly',
+        duration: '1 Month',
+        total_amount: '$29.99',
+        coupon: 'Abc',
+        payment_date: '2024-06-25T14:29:37.000000Z',
+        expiration: '2025-06-25T14:29:37.000000Z',
+      },
+      {
+        id: 5,
+        subscription_title: 'Monthly',
+        duration: '1 Month',
+        total_amount: '$29.99',
+        coupon: 'Abc',
+        payment_date: '2024-06-25T14:29:37.000000Z',
+        expiration: '2025-06-25T14:29:37.000000Z',
+      },
+    ],
+  },
+};
+
+export const rosterData = {
+  status: true,
+  message: 'user listing',
+  detail: {
+    current_page: 1,
+    data: [
+      {
+        id: 1,
+        first_name: 'Toms',
+        last_name: 'Albert',
+        student_name: 'Toms',
+        email: 'darvesh@gmail.com',
+        mobile: '03656558478',
+        dob: '2024-06-25T14:29:37.000000Z',
+        grad_year: '2024',
+        year: '2024',
+        jersey_number: '12',
+        Offence: 'Abc',
+        Deffence: 'Abc',
+        parent_info: {
+          first_name: 'louis',
+          last_name: 'Thomas',
+          email: 'darvesh@gmail.com',
+          mobile: '03656558478',
+        }
+      },
+      {
+        id: 2,
+        first_name: 'Toms',
+        last_name: 'Albert',
+        student_name: 'Toms',
+        email: 'darvesh@gmail.com',
+        mobile: '03656558478',
+        dob: '2024-06-25T14:29:37.000000Z',
+        grad_year: '2024',
+        year: '2024',
+        jersey_number: '12',
+        Offence: 'Abc',
+        Deffence: 'Abc',
+        parent_info: {
+          first_name: 'Toms',
+          last_name: 'Albert',
+          email: 'darvesh@gmail.com',
+          mobile: '03656558478',
+        }
+      },
+      {
+        id: 3,
+        first_name: 'Toms',
+        last_name: 'Albert',
+        student_name: 'Toms',
+        email: 'darvesh@gmail.com',
+        mobile: '03656558478',
+        dob: '2024-06-25T14:29:37.000000Z',
+        grad_year: '2024',
+        year: '2024',
+        jersey_number: '12',
+        Offence: 'Abc',
+        Deffence: 'Abc',
+        parent_info: {
+          first_name: 'Toms',
+          last_name: 'Albert',
+          email: 'darvesh@gmail.com',
+          mobile: '03656558478',
+        }
+      },
+      {
+        id: 4,
+        first_name: 'Toms',
+        last_name: 'Albert',
+        student_name: 'Toms',
+        email: 'darvesh@gmail.com',
+        mobile: '03656558478',
+        dob: '2024-06-25T14:29:37.000000Z',
+        grad_year: '2024',
+        year: '2024',
+        jersey_number: '12',
+        Offence: 'Abc',
+        Deffence: 'Abc',
+        parent_info: {
+          first_name: 'Toms',
+          last_name: 'Albert',
+          email: 'darvesh@gmail.com',
+          mobile: '03656558478',
+        }
+      },
+      {
+        id: 5,
+        first_name: 'Toms',
+        last_name: 'Albert',
+        student_name: 'Toms',
+        email: 'darvesh@gmail.com',
+        mobile: '03656558478',
+        dob: '2024-06-25T14:29:37.000000Z',
+        grad_year: '2024',
+        year: '2024',
+        jersey_number: '12',
+        Offence: 'Abc',
+        Deffence: 'Abc',
+        parent_info: {
+          first_name: 'Toms',
+          last_name: 'Albert',
+          email: 'darvesh@gmail.com',
+          mobile: '03656558478',
+        }
+      },
+    ],
   },
 };
 

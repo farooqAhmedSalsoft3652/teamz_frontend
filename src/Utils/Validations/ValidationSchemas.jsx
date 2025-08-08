@@ -99,3 +99,16 @@ export const SubscriptionValidationSchema = Yup.object().shape({
     .positive('Amount must be greater than zero'),
   description: Yup.string().required('Description is required'),
 });
+
+export const eventEditValidationSchema = Yup.object().shape({
+  event_name: Yup.string().required('Event name is required'),
+  event_date: Yup.date().required('Event date is required'),
+  event_start_time: Yup.string().required('Start time is required'),
+  event_end_time: Yup.string().required('End time is required'),
+  duration: Yup.string().required('Duration is required'),
+  location: Yup.string().required('Location is required'),
+  assigned_to: Yup.string().required('Assigned to is required'),
+  equipment: Yup.string().required('Equipment is required'),
+  attendance_required: Yup.boolean().required('Attendance required is required'),
+  event_focus: Yup.string().required('Event focus is required'),
+});

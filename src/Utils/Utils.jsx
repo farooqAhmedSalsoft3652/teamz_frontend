@@ -1831,3 +1831,8 @@ export const replaceUnderscoreWithSpace = (str) => {
   }
   return str;
 };
+export const fullName = (val) => {
+  if (val && val.first_name && val.last_name) {
+    return val.first_name + " " + val.last_name;
+  }
+};

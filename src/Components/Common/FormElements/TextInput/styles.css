@@ -17,7 +17,7 @@ label,
 
 .form-control,
 textarea {
-  font-size: 15px;
+  font-size: 16px;
   background-color: var(--input-bg-color);
   color: var(--input-text-color);
   font-weight: 400;
@@ -288,8 +288,8 @@ form .form-control.input-bottom {
   top: 50%;
   left: 20px;
   transform: translateY(-50%);
-  font-size: 14px;
-  color: #959595;
+  font-size: 16px;
+  color: var(--input-text-color);
   pointer-events: none;
 }
 
@@ -325,7 +325,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   position: absolute;
   right: 55px;
   /* Position before the time picker icon */
-  top: 55%;
+  top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;

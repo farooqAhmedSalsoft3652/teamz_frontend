@@ -14,7 +14,7 @@
   // Bootstrap Body & Border Colors
   --bs-body-bg: #3C5726;
   --bs-body-color: #212529;
-  --bs-border-color: #cbcbcb;
+
 
   // Bootstrap Text Colors
   --bs-primary-text-color: var(--primary-text-color);
@@ -63,6 +63,7 @@
   --input-label-color: #000000;
   --input-focus-color: #3C5726;
   --input-text-color: #000000;
+  --bs-border-color: #cbcbcb;
 
   // Button Colors
   --btn-primary-color: #3C5726;
@@ -76,7 +77,7 @@
   --table-body-color: #000000;
   --table-bg: transparent;
   --table-color: #000;
-  --table-border-color: rgba(102, 102, 102, 0.10);
+  --table-border-color: rgba(102, 102, 102, 0.20);
   --table-border-width: 1px;
   --table-hover-bg: #f8f9fa;
 

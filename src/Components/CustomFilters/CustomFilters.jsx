@@ -109,7 +109,7 @@ const CustomFilters = ({
                 type="text"
                 placeholder="Search"
                 error={false}
-                label="Search"
+                // label="Search"
                 showBorders={false}
                 borderRadius={10}
                 name="search"
@@ -277,19 +277,6 @@ const CustomFilters = ({
               </div>
             </Dropdown.Menu>
           </Dropdown>
-        </div>
-      </div>
-
-      <div className="tableFilters mb-3">
-        <div className="d-flex justify-content-end justify-content-sm-start align-items-end flex-wrap flex-sm-nowrap gap-2 gap-lg-4">
-          <div className="filterWrapper d-flex flex-wrap align-items-end mb-0 gap-2 gap-lg-4 flex-grow-1">
-            
-            
-            
-          </div>
-          <div className="flex-shrink-0 mb-0 d-flex gap-2">
-            
-          </div>
         </div>
       </div>
     </>

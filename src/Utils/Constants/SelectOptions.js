@@ -178,29 +178,20 @@ export const PDCProcessOpenTypeOptions = [
     label: 'Collection - Given to Bank on Collection Basis',
   },
 ];
-export const PDCProcessSettledTypeOptions = [
-  { value: 'recall', label: 'Recall a Settled Cheque' },
-  { value: 'cancel', label: 'Cancel a Settled Cheque (Mark as Open Cheque)' },
-];
-export const PDCProcessDiscountCollectionTypeOptions = [
-  { value: 'settled', label: 'Settled on due date' },
-  { value: 'cancelled', label: 'Cancelled on due date' },
-];
-export const PDCProcessCollectionTypeOptions = [
-  { value: 'settled', label: 'Settled on due date' },
-  { value: 'cancelled', label: 'Cancelled on due date' },
-  { value: 'discount', label: 'Discount Through Bank' },
-];
-export const PDCProcessCancelledTypeOptions = [
-  { value: 'recall', label: 'Recall a Cancelled Cheque' },
-];
-export const PDCProcessPayableOpenTypeOptions = [
-  { value: 'settled', label: 'Settled on due date' },
-  { value: 'cancelled', label: 'Cancelled on due date' },
-];
-export const PDCProcessPayableSettledTypeOptions = [
-  { value: 'recall', label: 'Recall a Settled Cheque' },
-];
-export const PDCProcessPayableCancelledTypeOptions = [
-  { value: 'recall', label: 'Recall a Cancelled Cheque' },
+
+
+
+
+
+export const durationOptions2 = [
+  { value: '30 minutes', label: '30 minutes' },
+  { value: '1 Hour', label: '1 Hour' },
+  { value: '1.5 Hours', label: '1.5 Hours' },
+  { value: '2 Hours', label: '2 Hours' },
+  { value: '2.5 Hours', label: '2.5 Hours' },
+  { value: '3 Hours', label: '3 Hours' },
+  { value: '4 Hours', label: '4 Hours' },
+  { value: '5 Hours', label: '5 Hours' },
+  { value: '6 Hours', label: '6 Hours' },
+  { value: 'Full Day', label: 'Full Day' },
 ];
