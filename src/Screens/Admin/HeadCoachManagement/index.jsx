@@ -151,79 +151,79 @@ const HeadCoachManagement = ({
   return (
     <>
       <section className="head-coach-management">
-      <div className="admin-content-header mb-4 d-flex gap-2">
+        <div className="admin-content-header mb-4 d-flex gap-2">
           <h2 className="screen-title mb-0">Head Coach Management</h2>
         </div>
         <div className="admin-content-body rounded-20 p-4 p-lg-4 p-xxl-4 mb-4">
-        <Row>
-          <Col xs={12}>
-            <CustomTable
-              filters={filters}
-              setFilters={setFilters}
-              headers={headCoachHeaders}
-              pagination={pagination}
-              isLoading={isLoading}
-              centerLastHeader={true}
-              selectOptions={[
-                {
-                  title: 'status',
-                  options: userStatusFilters,
-                },
-              ]}
-              dateFilters={[
-                { title: 'Registration Date', from: 'from', to: 'to' },
-              ]}
-            >
-              {(userManagement?.length || isError) && (
-                <tbody>
-                  {isError && (
-                    <tr>
-                      <td colSpan={headCoachHeaders.length}>
-                        <p className="text-danger mb-0">
-                          Unable to fetch data at this time
-                        </p>
-                      </td>
-                    </tr>
-                  )}
-                  {userManagement?.map((item, index) => (
-                    <tr key={item.id}>
-                      <td>
-                        {serialNum(
-                          (filters?.page - 1) * filters?.per_page + index + 1
-                        )}
-                      </td>
-                      <td>{fullName(item)}</td>
-                      <td>{item?.school}</td>
-                      <td>{item?.email}</td>
-                      <td>
-                        <CustomSelect
-                          options={userStatus}
-                          value={selectValue[item.id]}
-                          className={`status-select ${selectValue[item.id] === '1' ? 'status-active' : 'status-inactive'}`}
-                          onChange={(event) => handleStatusChange(item.id, event)}
-                        />
-                      </td>
-                      <td>{item?.subscription_title}</td>
-                      <td>{formatDate(item?.created_at)}</td>
-                      <td>
-                        <TableActionDropDown
-                          actions={[
-                            {
-                              name: 'View',
-                              icon: HiOutlineEye,
-                              onClick: () => navigate(`${item.id}`),
-                              className: 'view',
-                            },
-                          ]}
-                        />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              )}
-            </CustomTable>
-          </Col>
-        </Row>
+          <Row>
+            <Col xs={12}>
+              <CustomTable
+                filters={filters}
+                setFilters={setFilters}
+                headers={headCoachHeaders}
+                pagination={pagination}
+                isLoading={isLoading}
+                centerLastHeader={true}
+                selectOptions={[
+                  {
+                    title: 'status',
+                    options: userStatusFilters,
+                  },
+                ]}
+                dateFilters={[
+                  { title: 'Registration Date', from: 'from', to: 'to' },
+                ]}
+              >
+                {(userManagement?.length || isError) && (
+                  <tbody>
+                    {isError && (
+                      <tr>
+                        <td colSpan={headCoachHeaders.length}>
+                          <p className="text-danger mb-0">
+                            Unable to fetch data at this time
+                          </p>
+                        </td>
+                      </tr>
+                    )}
+                    {userManagement?.map((item, index) => (
+                      <tr key={item.id}>
+                        <td>
+                          {serialNum(
+                            (filters?.page - 1) * filters?.per_page + index + 1
+                          )}
+                        </td>
+                        <td>{fullName(item)}</td>
+                        <td>{item?.school}</td>
+                        <td>{item?.email}</td>
+                        <td>
+                          <CustomSelect
+                            options={userStatus}
+                            value={selectValue[item.id]}
+                            className={`status-select ${selectValue[item.id] === '1' ? 'status-active' : 'status-inactive'}`}
+                            onChange={(event) => handleStatusChange(item.id, event)}
+                          />
+                        </td>
+                        <td>{item?.subscription_title}</td>
+                        <td>{formatDate(item?.created_at)}</td>
+                        <td>
+                          <TableActionDropDown
+                            actions={[
+                              {
+                                name: 'View',
+                                icon: HiOutlineEye,
+                                onClick: () => navigate(`${item.id}`),
+                                className: 'view',
+                              },
+                            ]}
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                )}
+              </CustomTable>
+            </Col>
+          </Row>
         </div>
       </section>
     </>

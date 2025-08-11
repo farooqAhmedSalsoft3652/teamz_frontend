@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { PulseLoader } from 'react-spinners';
 import CustomButton from '../../../Components/Common/CustomButton';
 import CustomSelect from '../../../Components/Common/FormElements/SelectInput';
@@ -11,7 +12,9 @@ import {
 import useUserStore from '../../../Stores/UserStore';
 import { notificationOptions } from '../../../Utils/Constants/SelectOptions';
 import { formatDate, showErrorToast } from '../../../Utils/Utils';
-import './notifications.css';
+import './style.css';
+import { FaClock } from 'react-icons/fa6';
+import { FaCalendarAlt } from 'react-icons/fa';
 
 const Notifications = () => {
   usePageTitle('Notifications');
@@ -70,15 +73,17 @@ const Notifications = () => {
   console.log(notifications, 'notifications');
   return (
     <>
-      <div className="mb-3">
+    <section className="notification-page">
+      <div className="admin-content-header mb-4 d-flex gap-2">
         <h2 className="screen-title mb-0">Notifications</h2>
       </div>
-      <div className="d-card">
-        <div className="col-12">
-          <div className="d-flex align-items-center justify-content-end flex-wrap gap-sm-3 gap-0">
-            <div className="d-flex "></div>
-            <div>
+      <div className="admin-content-body rounded-20 p-4 p-lg-4 p-xxl-4 mb-4">
+        <Row>
+          <Col xs={12} className='notification-filter d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center gap-3 mb-3 mb-lg-4'>
+            <div className=" d-flex align-items-center gap-3">
               <CustomSelect
+                label="Show"
+                labelClassName="mb-0"
                 name="unread_only"
                 options={notificationOptions}
                 firstIsLabel={false}
@@ -86,65 +91,118 @@ const Notifications = () => {
                 onChange={handleFilterChange} // Updates params on selection
               />
             </div>
-          </div>
-        </div>
+            <div className="">
+              <Button
+                  className="p-2"
+                  // onClick={() => {
+                  //   console.log("mark all clicked");
+                  // }}
+                  variant={`link ${true ? "greenbtn" : "grayColor"}`}
+                  text={""}
+                >Mark All as Read</Button>
 
-        <div className="row mt-4">
+              {/* <SiteButton variant="underline" className="text-capitalize" onClick={() => setIsRead(!isRead)}>mark All as read</SiteButton> */}
+            </div>
+          </Col>
+        </Row>
+        <Row className="row mt-4">
           {load ? (
             <PulseLoader />
           ) : (
-            <>
-              {notifications?.map((notification, index) => (
-                <div
-                  className={`col-12 notification-card ${
-                    !notification.read_at ? 'unread' : ''
-                  }`}
-                  key={notification.id}
-                >
-                  <div className="notification-content">
-                    <p>{notification.data.body}</p>
-                    <div
-                      style={{ height: 26 }}
-                      className=" d-flex justify-content-between flex-wrap"
-                    >
-                      <div className="date-and-time d-flex gap-3 gap-md-4">
-                        <div>
-                          Date: <p>{formatDate(notification.created_at)}</p>
-                        </div>
-                        <div>
-                          Time:{' '}
-                          <p>{formatDate(notification.created_at, 'HH:MM')}</p>
-                        </div>
-                      </div>
-                      <div className="notification-status-button">
-                        {!notification.read_at && (
-                          <button
-                            className={'notButton text-link'}
-                            onClick={() => markAsRead(notification.id, index)}
-                          >
-                            Mark as Read
-                          </button>
+            notifications?.map((notification, index) => (
+              <Card  key={notification.id} className={`card-notifications flex-row px-3 px-md-4 py-3 py-md-4 gap-lg-2 gap-xxl-3 ${!notification.read_at ? 'unread' : ''}`}>
+                {/* <i className="noti-icon flex-shrink-0 align-self-start me-3 me-md-0">
+                  <FontAwesomeIcon icon={faBell} />
+                </i> */}
+                <Card.Body className="p-0 d-md-flex align-self-center">
+                  <div className="flex-grow-1 pe-0 px-md-3 ">
+                    <Card.Text>{notification.data.body}</Card.Text>
+                    {notification.created_at  && (
+                      <div className="meta"> 
+                        {notification.created_at && (
+                          <time className="time-meta" dateTime="">
+                             <FaClock />
+                              <span className='d-none'>Date:</span> {formatDate(notification.created_at)}</time>
+                          )
+                        }
+                        {notification.created_at && (
+                          <time className="time-meta" dateTime="">
+                            <FaCalendarAlt />
+                            <span className='d-none'>Time:</span> {formatDate(notification.created_at, 'HH:MM')}</time>
                         )}
                       </div>
+                    )}
+                  </div> 
+                  
+                  {!notification.read_at &&(
+                    <div className="flex-shrink-0 text-end d-flex align-items-center justify-content-end">
+                      <Button
+                      onClick={() => markAsRead(notification.id, index)}
+                      variant={`link fw-medium ${true ? "blueColor" : "grayColor"}`}
+                      >
+                        {/* {props.read === null ? "Mark as Read" : "Mark as Unread"} */}
+                      Mark as Read
+                      </Button>
                     </div>
-                  </div>
-                </div>
-              ))}
-            </>
+                  )}
+                </Card.Body>
+              </Card>
+            ))
           )}
-        </div>
+        </Row>
+        {loadMore && (
+          <Row>
+            <Col xs={12}>
+              <div className="beechMein mt-4">
+                <CustomButton
+                  className="secondaryBtn px-5"
+                  text="Load More"
+                  onClick={handleLoadMore}
+                />
+              </div>
+            </Col>
+          </Row>
+        )}
       </div>
-      {loadMore && (
-        <div className="beechMein mt-4">
-          <CustomButton
-            className="secondaryBtn px-5"
-            text="Load More"
-            onClick={handleLoadMore}
-          />
-        </div>
-      )}
+    </section>
     </>
   );
 };
 
 export default Notifications;
+
+
+// <div
+//   className={`col-12 notification-card ${
+//     !notification.read_at ? 'unread' : ''
+//   }`}
+//   key={notification.id}
+// >
+//   <div className="notification-content">
+//     <p>{notification.data.body}</p>
+//     <div
+//       style={{ height: 26 }}
+//       className=" d-flex justify-content-between flex-wrap"
+//     >
+//       <div className="date-and-time d-flex gap-3 gap-md-4">
+//         <div>
+//           Date: <p>{formatDate(notification.created_at)}</p>
+//         </div>
+//         <div>
+//           Time:{' '}
+//           <p>{formatDate(notification.created_at, 'HH:MM')}</p>
+//         </div>
+//       </div>
+//       <div className="notification-status-button">
+//         {!notification.read_at && (
+//           <button
+//             className={'notButton text-link'}
+//             onClick={() => markAsRead(notification.id, index)}
+//           >
+//             Mark as Read
+//           </button>
+//         )}
+//       </div>
+//     </div>
+//   </div>
+// </div>

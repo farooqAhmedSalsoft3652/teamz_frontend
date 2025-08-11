@@ -17,7 +17,7 @@ const SkeletonLoader = () => {
     <div>
       <StaticNavbar sideBarToggle={sideBarToggle} sideBarClass={sideBarClass} />
       <div>
-        <StaticSidebar sideBarClass={sideBarClass} />
+        {/* <StaticSidebar sideBarClass={sideBarClass} /> */}
         <div
           className={`screensSectionContainer ${
             sideBarClass ? 'expanded' : ''

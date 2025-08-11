@@ -28,10 +28,9 @@
 }
 
 .table-filters .entries-length select {
-  /* width: 80px;
-    min-width: 80px; */
+  min-width: 80px;
   padding: 10px 45px 10px 15px;
-  height: 40px !important;
+  height: 40px;
   color: #666;
   box-shadow: none;
   border-radius: 7px;

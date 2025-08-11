@@ -17,7 +17,7 @@ import { signUpValidationSchema } from '../../../Utils/Validations/ValidationSch
 import { AuthLayout } from '../../../Components/Layout/AdminLayout/Auth/AuthLayout';
 
 const SignUp = () => {
-  usePageTitle('Milestone | Sign Up');
+  usePageTitle('TeamzPage | Sign Up');
   const navigate = useNavigate();
 
   const signUpMutation = useMutation({

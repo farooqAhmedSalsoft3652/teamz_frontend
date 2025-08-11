@@ -31,14 +31,16 @@ const AdminScreens = lazy(() => import('./Screens/Admin/index'));
 const AdminProfile = lazy(() => import('./Screens/Profile/index'));
 const EditProfile = lazy(() => import('./Screens/Profile/EditProfile'));
 const ChangePassword = lazy(() => import('./Screens/Profile/ChangePassword'));
-const Profile = lazy(() => import('./Screens/Profile/Profile'));
+// const Profile = lazy(() => import('./Screens/Profile/Profile'));
 const Notifications = lazy(() => import('./Screens/Admin/Notifications/index'));
 const Preferences = lazy(() => import('./Screens/Theme/Preferences'));
 
 function App() {
-  const { user, role = 'guest' } = useUserStore();
+  const { user, role = 'admin' } = useUserStore();
   const isAuthenticated = !!user; // Checks if user is logged in
 
+  console.log("isAuthenticated", isAuthenticated);
+  console.log(user, role);
   return (
     <Suspense fallback={<SkeletonLoader />}>
       <Router basename="/teamz-page">
@@ -48,13 +50,13 @@ function App() {
             element={
               <PublicRoutes
                 isAuthenticated={isAuthenticated}
-                redirectTo={role === 'admin' ? (isAuthenticated ? '/admin' : '/admin/login') : isAuthenticated ? '/' : '/login'}
+                redirectTo={role === 'admin' ? (isAuthenticated ? '/admin' : '/admin/login') : isAuthenticated ? '/' : '/admin/login'}
               />
             }
           >
             {/* Home page accessible to both guests and authenticated users */}
             <Route element={<UserLayout />}>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Home/>} />
             </Route>
 
             {/* User auth routes - loaded together */}
@@ -91,7 +93,7 @@ function App() {
           {/* Authenticated Routes User - only for protected routes, not home */}
           <Route element={isAuthenticated ? <UserLayout /> : <Navigate to="/login" />}>
             <Route path="preferences" element={<Preferences />} />
-            <Route path="profile" element={<Profile />} />
+            {/* <Route path="profile" element={<Profile />} /> */}
             <Route path="notifications" element={<Notifications />} />
             <Route path="preferences" element={<Preferences />} />
           </Route>
